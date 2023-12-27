@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Education from '../../components/molecules/Education';
 import NewsList from '../../components/molecules/NewsList';
 
-const LearnWithUsPage: any = () => {
+const LearnWithUs: any = () => {
   const [selectedItem, setSelectedItem] = useState('education');
   const handleEducationClick = () => {
     setSelectedItem('education');
@@ -14,7 +14,7 @@ const LearnWithUsPage: any = () => {
   };
 
   return (
-    <div className='mx-[500px] my-[100px]'>
+    <div className='mx-[400px] my-[100px]'>
       <div className='items-center justify-center'>
         <button onClick={handleEducationClick}>금융 교육</button>
         <button onClick={handleNewsClick}>금융 뉴스</button>
@@ -33,4 +33,4 @@ const LearnWithUsPage: any = () => {
   );
 };
 
-export default LearnWithUsPage;
+export default LearnWithUs;

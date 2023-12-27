@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 
-const NewsHeadLine = () => {
+const EducationHeadLine = () => {
   const serchParams = useSearchParams();
   const title = serchParams.get('title');
   const date = serchParams.get('date');
@@ -18,4 +18,4 @@ const NewsHeadLine = () => {
   );
 };
 
-export default NewsHeadLine;
+export default EducationHeadLine;

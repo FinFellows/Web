@@ -15,9 +15,9 @@ const SearchFieldForPolicy = ({ onSearch }: { onSearch: any }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='mx-[500px] my-[40px] border-[2px] rounded-[10px]'>
+    <form onSubmit={handleSubmit} className='my-[40px] border-[2px] rounded-[10px]'>
       <input
-        className='w-[1450px] h-[73px] text-left ml-4'
+        className='w-[640px] h-[73px] text-left ml-4'
         type='text'
         placeholder='궁금한 정책을 검색해보세요'
         value={searchTerm}

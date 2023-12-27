@@ -59,13 +59,13 @@ const NewsList = () => {
         >
           <div
             key={index}
-            className='flex my-[30px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
+            className='flex my-[15px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
           >
-            <div className='px-[100px] bg-[#6C6C6C] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
-            <div className='flex-col py-[30px] gap-[100px] mx-5'>
-              <h2 className='text-[30px] font-bold mb-3'>{item.title}</h2>
-              <p className='text-[#6B6B6B] mb-3 text-[22px]'>{item.content}</p>
-              <p className='text-[#6B6B6B] text-[22px]'>{item.date}</p>
+            <div className='px-[40px] bg-[#6C6C6C] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
+            <div className='flex-col py-[10px] mx-5'>
+              <h2 className='text-[28px] font-bold mb-3'>{item.title}</h2>
+              <p className='text-[#6B6B6B] mb-3 text-[20px]'>{item.content}</p>
+              <p className='text-[#6B6B6B] text-[20px]'>{item.date}</p>
             </div>
           </div>
         </Link>

@@ -1,38 +1,50 @@
 'use client';
+import Link from 'next/link';
 // Education 컴포넌트
 import React, { useState } from 'react';
 
 const Education = () => {
   const [contents, setContents] = useState([
     {
-      title: '카드 뉴스 1',
-      content: '카드 뉴스 내용 1',
+      title: '교육 콘텐츠 1',
+      content: '교육 콘텐츠 내용 1',
     },
     {
-      title: '카드 뉴스 2',
-      content: '카드 뉴스 내용 2',
+      title: '교육 콘텐츠 2',
+      content: '교육 콘텐츠 내용 2',
     },
     {
-      title: '금융 정보 1',
-      content: '금융 정보 내용 1',
+      title: '교육 콘텐츠 3',
+      content: '교육 콘텐츠 내용 3',
     },
     {
-      title: '금융 정보 2',
-      content: '금융 정보 내용 2',
+      title: '교육 콘텐츠 4',
+      content: '교육 콘텐츠 내용 4',
     },
     {
-      title: '금융 정보 1',
-      content: '금융 정보 내용 1',
+      title: '교육 콘텐츠 5',
+      content: '교육 콘텐츠 내용 5',
     },
   ]);
 
   return (
     <div className='flex-col'>
       {contents.map((item, index) => (
-        <div key={index} className='my-[30px] border-2 border-color-[#EAEAEA] rounded-lg'>
-          <h2 className='text-l font-bold bg-[#D6D6D6] p-4 hover:bg-[#68B891]'>{item.title}</h2>
-          <p className='mb-[80px] text-l bg-[#FFFFFF]'>{item.content}</p>
-        </div>
+        <Link
+          key={index}
+          href={{
+            pathname: `/learnWithUs/education`,
+            query: {
+              title: item.title,
+              content: item.content,
+            },
+          }}
+        >
+          <div key={index} className='my-[30px] border-2 border-color-[#EAEAEA] rounded-lg'>
+            <h2 className='text-l font-bold bg-[#D6D6D6] p-4 hover:bg-[#68B891]'>{item.title}</h2>
+            <p className='mb-[80px] text-l bg-[#FFFFFF] p-4'>{item.content}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );

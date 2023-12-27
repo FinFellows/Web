@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 // Policy 컴포넌트
 import React, { useState } from 'react';
 
@@ -27,12 +28,23 @@ const Policy = () => {
   ]);
 
   return (
-    <div className='flex-col  mx-[500px] my-[30px]'>
+    <div className='flex-col my-[30px]'>
       {contents.map((item, index) => (
-        <div key={index} className='my-[30px] border-2 border-color-[#EAEAEA] rounded-lg'>
-          <h2 className='text-l font-bold bg-[#D6D6D6] p-4 hover:bg-[#68B891]'>{item.title}</h2>
-          <p className='mb-[80px] text-l bg-[#FFFFFF]'>{item.content}</p>
-        </div>
+        <Link
+          key={index}
+          href={{
+            pathname: `/ThankYou/policy`,
+            query: {
+              title: item.title,
+              content: item.content,
+            },
+          }}
+        >
+          <div key={index} className='my-[30px] border-2 border-color-[#EAEAEA] rounded-lg'>
+            <h2 className='text-l font-bold bg-[#D6D6D6] p-4 hover:bg-[#68B891]'>{item.title}</h2>
+            <p className='ml-4 mt-[10px] mb-[80px] text-l bg-[#FFFFFF]'>{item.content}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
