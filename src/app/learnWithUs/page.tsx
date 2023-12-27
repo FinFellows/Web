@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Education from '../../components/molecules/Education';
+import NewsList from '../../components/molecules/NewsList';
 
 const LearnWithUsPage: any = () => {
   const [selectedItem, setSelectedItem] = useState('education');
@@ -13,15 +14,21 @@ const LearnWithUsPage: any = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleEducationClick}>금융 교육</button>
-      <button onClick={handleNewsClick}>금융 뉴스</button>
+    <div className='mx-[500px] my-[100px]'>
+      <div className='items-center justify-center'>
+        <button onClick={handleEducationClick}>금융 교육</button>
+        <button onClick={handleNewsClick}>금융 뉴스</button>
+      </div>
       {selectedItem === 'education' && (
         <div>
           <Education />
         </div>
       )}
-      {selectedItem === 'news' && <div>{/* 금융 뉴스를 표시하는 내용 */}</div>}
+      {selectedItem === 'news' && (
+        <div>
+          <NewsList />
+        </div>
+      )}
     </div>
   );
 };

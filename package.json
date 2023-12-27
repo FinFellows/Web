@@ -14,8 +14,8 @@
     "@yoopta/editor": "^1.9.18-rc",
     "@yoopta/link-tool": "^1.9.9-rc",
     "@yoopta/paragraph": "^1.9.17-rc",
-    "next": "14.0.3",
-    "react": "^18",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
     "react-dom": "^18",
     "slate": "^0.101.4",
     "slate-react": "^0.101.3"
