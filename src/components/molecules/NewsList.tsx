@@ -9,37 +9,37 @@ const NewsList = () => {
   const [contents, setContents] = useState([
     {
       title: '뉴스 헤드라인 1',
-      content: '간단한 내용',
+      content: '간단한 내용1',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 2',
-      content: '간단한 내용',
+      content: '간단한 내용2',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 3',
-      content: '간단한 내용',
+      content: '간단한 내용3',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 4',
-      content: '간단한 내용',
+      content: '간단한 내용4',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 5',
-      content: '간단한 내용',
+      content: '간단한 내용5',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 6',
-      content: '간단한 내용',
+      content: '간단한 내용6',
       date: '뉴스 일자',
     },
     {
       title: '뉴스 헤드라인 7',
-      content: '간단한 내용',
+      content: '간단한 내용7',
       date: '뉴스 일자',
     },
   ]);
@@ -53,7 +53,7 @@ const NewsList = () => {
             query: {
               title: item.title,
               date: item.date,
-              contents: item.content,
+              content: item.content,
             },
           }}
         >

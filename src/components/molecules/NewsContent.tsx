@@ -4,10 +4,13 @@ import { useSearchParams } from 'next/navigation';
 const NewsContent = () => {
   const serchParams = useSearchParams();
   const content = serchParams.get('content');
+  console.log(content);
   return (
     <div>
       <div>
-        <div className='border-2 border-color-[#D6D6D6] rounded-[20px] py-[350px]'>{content}</div>
+        <div className='border-2 border-color-[#D6D6D6] rounded-[20px] py-[350px]'>
+          <div className='ml-5 mt-[-330px]'>{content}</div>
+        </div>
       </div>
     </div>
   );
