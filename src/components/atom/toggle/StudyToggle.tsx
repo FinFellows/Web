@@ -1,6 +1,6 @@
-import Education from '@/components/molecules/Education';
+import EducationList from '@/components/molecules/Education/EducationList';
 import React from 'react';
-import NewsList from '@/components/molecules/NewsList';
+import NewsList from '@/components/molecules/News/NewsList';
 type TStudyToggleProps = {
   activeToggle: number;
   toggleFn: (toggleId: number) => void;
