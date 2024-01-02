@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Education from '../../components/molecules/Education';
-import NewsList from '../../components/molecules/NewsList';
+import Education from '../../../components/molecules/Education';
+import NewsList from '../../../components/molecules/NewsList';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 const LearnWithUs: any = () => {
-  const [activeToggle, setActiveToggle] = useState(1);
+  const [activeToggle, setActiveToggle] = useState(2);
   const handleToggleChange = (toggleId: number) => {
     setActiveToggle(toggleId); // activeToggle 값 업데이트
   };

@@ -4,7 +4,7 @@ import NewsHeadLine from '@/components/molecules/NewsHeadLine';
 import NewsContent from '@/components/molecules/NewsContent';
 const News = () => {
   return (
-    <div className='mx-[400px] my-[150px] flex-col'>
+    <div className='mx-[400px] my-[100px] flex-col'>
       <div>
         <NewsHeadLine />
       </div>

@@ -5,8 +5,7 @@ import Heartdefault from '../../public/icons/grayheart.svg';
 import Glasses_goldtorihalf from '../../public/icons/glasses_goldtorihalf.svg';
 import Heartclick from '@/public/icons/heartclick.svg';
 import { useState } from 'react';
-
-const PolicyHeadLine = () => {
+const EducationHeadLine = () => {
   const serchParams = useSearchParams();
   const title = serchParams.get('title');
   const [isHeartClick, setIsHeartClick] = useState(false);
@@ -14,22 +13,24 @@ const PolicyHeadLine = () => {
     setIsHeartClick(!isHeartClick);
   };
   return (
-    <div>
-      <div>
+    <div className=''>
+      <div className=''>
         <div className='w-[160px] h-[200px] ml-[570px] absolute my-[-103px]'>
           <Glasses_goldtorihalf />
         </div>
         <div className='flex my-[30px] border-2 border-color-[#D6D6D6] rounded-[20px] py-[50px] z-0'>
-          <div className='px-[20px] text-3xl  z-5 font-bold w-[650px]'>
-            {title}
-            <p className='z-10 absolute mt-[-40px] ml-[620px]'>
-              {isHeartClick ? <Heartclick onClick={handleClick} /> : <Heartdefault onClick={handleClick} />}
-            </p>
-          </div>
+          <div className='px-[20px] text-3xl  z-5 font-bold w-[650px]'>{title}</div>
+          {/* isHeartClick 상태에 따라 보여줄 아이콘 선택 */}
+          <p className='z-10'>
+            {isHeartClick ? <Heartclick onClick={handleClick} /> : <Heartdefault onClick={handleClick} />}
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default PolicyHeadLine;
+export default EducationHeadLine;
+
+// ml-[40px] mr-[200px]
+// ml-[70px]

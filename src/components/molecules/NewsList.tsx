@@ -2,13 +2,14 @@
 'use client';
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-
+import Heartdefault from '../../public/icons/grayheart.svg';
+import Heartclick from '@/public/icons/heartclick.svg';
 import Link from 'next/link';
 
 const NewsList = () => {
   const [contents, setContents] = useState([
     {
-      title: '뉴스 헤드라인 1',
+      title: '자유 입출금 통장 알찬사용법',
       content: '간단한 내용1',
       date: '뉴스 일자',
     },
@@ -43,32 +44,56 @@ const NewsList = () => {
       date: '뉴스 일자',
     },
   ]);
+  const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
+  const handleHeartClick = (index: number) => {
+    setHeartStates({
+      ...heartStates,
+      [index]: !heartStates[index],
+    });
+  };
   return (
     <div>
       {contents.map((item, index) => (
-        <Link
+        <div
           key={index}
-          href={{
-            pathname: `/learnWithUs/news`,
-            query: {
-              title: item.title,
-              date: item.date,
-              content: item.content,
-            },
-          }}
+          className='flex items-start w-[700px] h-[130px] my-[20px] ml-[-200px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
         >
-          <div
+          <Link
             key={index}
-            className='flex my-[15px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
+            href={{
+              pathname: `/learnWithUs/news`,
+              query: {
+                title: item.title,
+                date: item.date,
+                content: item.content,
+              },
+            }}
           >
-            <div className='px-[40px] bg-[#6C6C6C] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
-            <div className='flex-col py-[10px] mx-5'>
-              <h2 className='text-[28px] font-bold mb-3'>{item.title}</h2>
-              <p className='text-[#6B6B6B] mb-3 text-[20px]'>{item.content}</p>
-              <p className='text-[#6B6B6B] text-[20px]'>{item.date}</p>
-            </div>
+            <div className=' bg-[#6C6C6C] w-[150px] h-[130px] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
+          </Link>
+          <div>
+            <Link
+              key={index}
+              href={{
+                pathname: `/learnWithUs/news`,
+                query: {
+                  title: item.title,
+                  date: item.date,
+                  content: item.content,
+                },
+              }}
+            >
+              <div className='flex-col'>
+                <h2 className='text-[28px] font-bold px-[20px] mt-[10px]'>{item.title}</h2>
+                <p className='text-[#6B6B6B] text-[20px] px-[20px]'>{item.content}</p>
+                <p className='text-[#6B6B6B] text-[20px] px-[20px]'>{item.date}</p>
+              </div>
+            </Link>
+            <p className='z-10 mt-[-65px] ml-[480px]' onClick={() => handleHeartClick(index)}>
+              {heartStates[index] ? <Heartclick /> : <Heartdefault />}
+            </p>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

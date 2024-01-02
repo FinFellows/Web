@@ -1,10 +1,10 @@
 'use client';
 
-import EducationHeadLine from '@/components/molecules/EducationPage';
+import EducationHeadLine from '@/components/molecules/EducationHeadLine';
 import EducationContent from '@/components/molecules/EducationContent';
 const Education = () => {
   return (
-    <div className='mx-[400px] my-[100px] flex-col'>
+    <div className='mx-[400px] my-[150px] flex-col'>
       <div>
         <EducationHeadLine />
       </div>

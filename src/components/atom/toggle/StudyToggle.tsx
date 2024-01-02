@@ -1,5 +1,6 @@
+import Education from '@/components/molecules/Education';
 import React from 'react';
-
+import NewsList from '@/components/molecules/NewsList';
 type TStudyToggleProps = {
   activeToggle: number;
   toggleFn: (toggleId: number) => void;
@@ -7,8 +8,8 @@ type TStudyToggleProps = {
 
 const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) => {
   const toggleOptions = [
-    { label: 'text', value: 1 },
-    { label: 'text', value: 2 },
+    { label: '금융교육', value: 1 },
+    { label: '금융뉴스', value: 2 },
   ];
 
   const getBackgroundPositionClass = (active: number) => {
@@ -22,8 +23,12 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
     }
   };
 
+  const handleToggleClick = (value: number) => {
+    toggleFn(value); // 클릭된 토글의 값을 전달
+  };
+
   return (
-    <div className='flex relative items-center w-307 h-50 bg-border01 rounded-[43.346px]'>
+    <div className='mb-[40px] flex relative items-center ml-[-20px] w-307 h-50 bg-border01 rounded-[43.346px]'>
       <div
         className={`absolute  w-158 h-54 bg-main rounded-[43.346px] transition-all ${getBackgroundPositionClass(
           activeToggle,
@@ -35,7 +40,7 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
           className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
-          onClick={() => toggleFn(value)}
+          onClick={() => handleToggleClick(value)} // 클릭 이벤트 핸들러 수정
         >
           {label}
         </button>
