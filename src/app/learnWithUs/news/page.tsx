@@ -1,7 +1,7 @@
 'use client';
 
-import NewsHeadLine from '@/components/molecules/NewsHeadLine';
-import NewsContent from '@/components/molecules/NewsContent';
+import NewsHeadLine from '@/components/molecules/News/NewsHeadLine';
+import NewsContent from '@/components/molecules/News/NewsContent';
 const News = () => {
   return (
     <div className='mx-[400px] my-[150px] flex-col'>
