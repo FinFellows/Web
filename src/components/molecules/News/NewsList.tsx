@@ -10,7 +10,7 @@ const NewsList = () => {
   const [contents, setContents] = useState([
     {
       title: '자유 입출금 통장 알찬사용법',
-      content: '간단한 내용1',
+      content: '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
       date: '뉴스 일자',
     },
     {
@@ -51,12 +51,19 @@ const NewsList = () => {
       [index]: !heartStates[index],
     });
   };
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '....';
+    } else {
+      return text;
+    }
+  };
   return (
     <div>
       {contents.map((item, index) => (
         <div
           key={index}
-          className='flex items-start w-[700px] h-[130px] my-[20px] ml-[-200px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
+          className='flex items-start w-[800px] h-[130px] my-[20px] ml-[-250px] border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-[#048848] hover:border-2 '
         >
           <Link
             key={index}
@@ -69,7 +76,7 @@ const NewsList = () => {
               },
             }}
           >
-            <div className=' bg-[#6C6C6C] w-[150px] h-[130px] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
+            <div className=' bg-[#6C6C6C] w-[150px] h-[128px] bordercolor-[#-D6D6D6] rounded-l-[10px]'>이미지칸</div>
           </Link>
           <div>
             <Link
@@ -85,11 +92,11 @@ const NewsList = () => {
             >
               <div className='flex-col'>
                 <h2 className='text-[28px] font-bold px-[20px] mt-[10px]'>{item.title}</h2>
-                <p className='text-[#6B6B6B] text-[20px] px-[20px]'>{item.content}</p>
+                <p className='text-[#6B6B6B] text-[20px] px-[20px]'> {truncateText(item.content, 28)}</p>
                 <p className='text-[#6B6B6B] text-[20px] px-[20px]'>{item.date}</p>
               </div>
             </Link>
-            <p className='z-10 mt-[-65px] ml-[480px]' onClick={() => handleHeartClick(index)}>
+            <p className='z-10 mt-[-65px] ml-[580px]' onClick={() => handleHeartClick(index)}>
               {heartStates[index] ? <Heartclick /> : <Heartdefault />}
             </p>
           </div>
