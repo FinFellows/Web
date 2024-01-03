@@ -1,8 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Education from '../../../components/molecules/Education';
-import NewsList from '../../../components/molecules/NewsList';
+import Education from '../../../components/molecules/Education/EducationList';
+import NewsList from '../../../components/molecules/News/NewsList';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 const LearnWithUs: any = () => {
   const [activeToggle, setActiveToggle] = useState(2);
