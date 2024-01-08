@@ -18,8 +18,8 @@ const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ title, content }) => {
   return (
     <div>
       <div>
-        <div className='w-[195px] h-[144px] ml-[570px] absolute my-[-103px]'>
-          <Default_goldtoriv2 />
+        <div className='ml-[630px] my-[-32px]'>
+          <Default_goldtoriv2 width='197' hight='144'/>
         </div>
         <div className='flex my-[30px] mx-[-50px] border-2 border-color-[#D6D6D6] rounded-[20px] py-[50px] w-[885px] z-0'>
           <div className='flex-col'>
@@ -29,7 +29,7 @@ const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ title, content }) => {
                 {formattedContent}
               </div>
             </div>
-            <p className='z-10 absolute mt-[-70px] ml-[650px]'>
+            <p className='z-10 absolute mt-[-70px] ml-[760px]'>
               {isHeartClick ? <Heartclick onClick={handleClick} /> : <Heartdefault onClick={handleClick} />}
             </p>
           </div>
