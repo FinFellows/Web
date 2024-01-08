@@ -1,6 +1,5 @@
-import EducationList from '@/components/molecules/Education/EducationList';
 import React from 'react';
-import NewsList from '@/components/molecules/News/NewsList';
+
 import Link from 'next/link';
 type TStudyToggleProps = {
   activeToggle: number;
@@ -34,18 +33,19 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
         className={`absolute  w-158 h-54 bg-main rounded-[43.346px] transition-all ${getBackgroundPositionClass(
           activeToggle,
         )}`}
-      ></div>
-      {toggleOptions.map(({ label, value, href }) => (
-        <button
-          key={value}
-          className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
-            activeToggle === value ? 'text-typoTertiary' : ''
-          }`}
-          onClick={() => handleToggleClick(value)} // 클릭 이벤트 핸들러 수정
-        >
-          <Link href={href}>{label}</Link>
-        </button>
-      ))}
+      >
+        {toggleOptions.map(({ label, value, href }) => (
+          <button
+            key={value}
+            className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
+              activeToggle === value ? 'text-typoTertiary' : ''
+            }`}
+            onClick={() => handleToggleClick(value)} // 클릭 이벤트 핸들러 수정
+          >
+            <Link href={href}>{label}</Link>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
