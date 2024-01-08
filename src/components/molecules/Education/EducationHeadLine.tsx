@@ -15,18 +15,16 @@ const EducationHeadLine: React.FC<TEducationHeadLineProps> = ({ title }) => {
   };
   return (
     <div className=''>
-      <div className=''>
-        <div className='w-[160px] h-[200px] ml-[570px] absolute my-[-103px]'>
-          <Glasses_goldtorihalf />
+        <div className='ml-[675px] my-[-32px]'>
+          <Glasses_goldtorihalf width='178' hight='153'/>
         </div>
-        <div className='flex my-[30px] border-2 border-color-[#D6D6D6] rounded-[20px] py-[50px] z-0'>
-          <div className='px-[20px] heading-xl  z-5 font-bold w-[750px]'>{title}</div>
+        <div className='flex my-[30px] border-2 w-[855px] border-color-[#D6D6D6] rounded-[20px] py-[50px] z-0'>
+          <div className='px-[20px] heading-xl  z-5 font-bold w-[730px]'>{title}</div>
           {/* isHeartClick 상태에 따라 보여줄 아이콘 선택 */}
-          <p className='z-10'>
+          <p className='z-5 ml-50'>
             {isHeartClick ? <Heartclick onClick={handleClick} /> : <Heartdefault onClick={handleClick} />}
           </p>
         </div>
-      </div>
     </div>
   );
 };

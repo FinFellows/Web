@@ -39,8 +39,8 @@ const Education = () => {
           >
             <div className='flex-wrap flex h-[210px] bg-mainLevel300 hover:bg-mainLevel500'>
               <h2 className='text-[34px] text-typoTertiary font-bold p-[15px] flex-wrap mr-[170px]'>{data.title}</h2>
-              <div className='absolute ml-[204px] mt-[40px]'>
-                <ModifiedGlasses_goldtori width='240' hight='240' />
+              <div className='absolute ml-[204px] mt-[57.5px]'>
+                <ModifiedGlasses_goldtori width='216' hight='173' />
               </div>
             </div>
           </Link>
