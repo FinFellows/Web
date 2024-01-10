@@ -192,3 +192,9 @@ input {
 .modal-open {
   overflow: hidden;
 }
+
+.post-box {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 10px 10px 20px 2px rgb(0 0 0 / 5%);
+}
