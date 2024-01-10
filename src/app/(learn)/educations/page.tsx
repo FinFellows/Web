@@ -4,24 +4,30 @@ import Link from 'next/link';
 import Education from '@/components/molecules/Education/EducationList';
 import NewsList from '@/components/molecules/News/NewsList';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
-const LearnWithUs: any = () => {
+
+const Educations: any = () => {
   const [activeToggle, setActiveToggle] = useState(1);
+
   const handleToggleChange = (toggleId: number) => {
     setActiveToggle(toggleId); // activeToggle 값 업데이트
   };
 
   return (
-    <div className='mx-[600px] my-[130px]'>
-      <StudyToggle activeToggle={activeToggle} toggleFn={handleToggleChange} />
-      {activeToggle === 1 ? (
-        <div className='flex-flow'>
-          <Education />
+    <div className='w-auto h-full flex items-center justify-center'>
+      <div className='flex flex-col items-center justify-center  tablet:bg-lime-500  desktop:bg-slate-900 '>
+        <div className=''>
+          <StudyToggle activeToggle={activeToggle} toggleFn={handleToggleChange} />
         </div>
-      ) : (
-        <NewsList />
-      )}
+        {activeToggle === 1 ? (
+          <div className=''>
+            <Education />
+          </div>
+        ) : (
+          <NewsList />
+        )}
+      </div>
     </div>
   );
 };
 
-export default LearnWithUs;
+export default Educations;

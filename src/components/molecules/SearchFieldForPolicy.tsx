@@ -14,16 +14,22 @@ const SearchFieldForPolicy = ({
   };
 
   return (
-    <form onSubmit={handleSearchSubmit} className='w-884 mx-[5px] my-[40px] bg-[#FCFCFC] border-[2px] rounded-[10px]'>
+    <form
+      onSubmit={handleSearchSubmit}
+      className='w-342 h-38 tablet:w-790 tablet:h-88 desktop:w  pt-5 desktop:w-854 desktop:h-88 my-[40px] border-[2px] rounded-[10px]'
+    >
       <div className='flex items-center'>
         <input
-          className='w-[800px] text-label-large px-[10px] h-[73px] text-left ml-4 bg-[#FCFCFC]  outline-none'
+          className='w-280 h-17 tablet:w-[680px] tablet:h-39 tablet:text-28   tablet:p-15 heading-small desktop:w-[800px] desktop:text-label-large px-[10px] desktop:h-[32px] text-left ml-4  outline-none'
           type='text'
           placeholder='궁금한 정책을 검색해보세요'
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className='w-[37px] h-[37px]' type='submit'>
+        <button
+          className='w-[20px] h-[20px] tablet:w-47 tablet:h-47 desktop:w-37 desktop:h-37 desktop:mr-20'
+          type='submit'
+        >
           <Search />
         </button>
       </div>

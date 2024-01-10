@@ -7,9 +7,8 @@ const ThankYouPage = () => {
     alert(`검색어: ${searchTerm}`);
   };
   return (
-    <div className=' mx-[300px] my-[130px]'>
-      <div className=''></div>
-      <div>
+    <div className='w-auto h-full flex flex-col items-center justify-center '>
+      <div className='flex flex-col justify-center items-center'>
         <Policy></Policy>
       </div>
     </div>

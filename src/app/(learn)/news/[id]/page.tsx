@@ -14,8 +14,8 @@ const News = () => {
   const serchParams = useSearchParams();
   const id = serchParams.get('id');
   return (
-    <div className='mx-[300px] my-[150px] flex-col'>
-      <div>
+    <div className='w-auto h-full flex flex-col items-center justify-center'>
+      <div className=''>
         <NewsHeadLine title={News.title} date={News.date} />
       </div>
       <div>

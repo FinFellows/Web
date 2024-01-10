@@ -11,7 +11,7 @@ const LearnWithUs: any = () => {
   };
 
   return (
-    <div className='mx-[600px] my-[130px]'>
+    <div className='w-auto h-full flex flex-col items-center justify-center'>
       <StudyToggle activeToggle={activeToggle} toggleFn={handleToggleChange} />
       {activeToggle === 1 ? (
         <div className='flex-flow'>

@@ -1,7 +1,5 @@
-import EducationList from '@/components/molecules/Education/EducationList';
 import React from 'react';
-import NewsList from '@/components/molecules/News/NewsList';
-import Link from 'next/link';
+
 type TStudyToggleProps = {
   activeToggle: number;
   toggleFn: (toggleId: number) => void;
@@ -9,8 +7,8 @@ type TStudyToggleProps = {
 
 const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) => {
   const toggleOptions = [
-    { label: '금융교육', value: 1, href: 'educations' },
-    { label: '금융뉴스', value: 2, href: 'news' },
+    { label: '즐겨찾기', value: 0 },
+    { label: '계정설정', value: 1 },
   ];
 
   const getBackgroundPositionClass = (active: number) => {
@@ -24,10 +22,6 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
     }
   };
 
-  const handleToggleClick = (value: number) => {
-    toggleFn(value); // 클릭된 토글의 값을 전달
-  };
-
   return (
     <div className='flex relative items-center  bg-border01 w-201 h-38 rounded-[32.5px] tablet:w-307 tablet:h-50 tablet:rounded-[43.346px]'>
       <div
@@ -35,15 +29,15 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
           activeToggle,
         )}`}
       ></div>
-      {toggleOptions.map(({ label, value, href }) => (
+      {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
           className={`flex-1  text-typoSecondary z-toggle h-50 font-teneda text-19 tablet:text-26 font-extrabold pt-6 transition-all duration-300 ease-in-out ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
-          onClick={() => handleToggleClick(value)} // 클릭 이벤트 핸들러 수정
+          onClick={() => toggleFn(value)}
         >
-          <Link href={href}>{label}</Link>
+          {label}
         </button>
       ))}
     </div>

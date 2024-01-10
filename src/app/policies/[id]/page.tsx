@@ -32,7 +32,7 @@ const Policy = () => {
   const serchParams = useSearchParams();
   const id = serchParams.get('id');
   return (
-    <div className='mx-[400px] my-[150px] flex-col'>
+    <div className='w-auto h-full flex flex-col items-center justify-center'>
       <div>
         <PolicyHeadLine title={policy.title} content={policy.content} />
       </div>
@@ -56,7 +56,10 @@ const Policy = () => {
           document={policy.document}
         />
       </div>
-      <p className=''>해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다. 자세한 정보는 신청 사이트를 참고해주세요.</p>
+      <p className='desktop:block hidden text-center w-500 whitespace-normal   mb-200'>
+        해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다. 자세한 정보는 신청 사이트를
+        참고해주세요.
+      </p>
     </div>
   );
 };
