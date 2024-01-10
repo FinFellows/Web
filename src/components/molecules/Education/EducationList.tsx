@@ -30,7 +30,7 @@ const Education = () => {
   };
 
   return (
-    <div className=''>
+    <div className='desktop:py-39 tablet:py-46 py-20'>
       <div className='tablet:flex tablet:flex-wrap tablet:w-[789px] desktop:w-[890px] desktop:flex-wrap desktop:flex '>
         {datas.map((data: any, id: number) => (
           <div

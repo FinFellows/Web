@@ -14,7 +14,7 @@ const Educations: any = () => {
 
   return (
     <div className='w-auto h-full flex items-center justify-center'>
-      <div className='flex flex-col items-center justify-center  tablet:bg-lime-500  desktop:bg-slate-900 '>
+      <div className='flex flex-col items-center justify-center '>
         <div className=''>
           <StudyToggle activeToggle={activeToggle} toggleFn={handleToggleChange} />
         </div>

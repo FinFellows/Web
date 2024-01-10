@@ -18,7 +18,7 @@ const EducationHeadLine: React.FC<TEducationHeadLineProps> = ({ title }) => {
   };
 
   return (
-    <div className='flex-col flex pb-10'>
+    <div className='flex-col flex py-10'>
       <div className='w-68 h-81 ml-[260px] mt-[-5px] tablet:w-153 tablet:h-183 tablet:ml-[600px] desktop:w-178 desktop:h-153 desktop:ml-[680px]'>
         <Glasses_goldtorihalf />
       </div>

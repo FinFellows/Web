@@ -17,7 +17,7 @@ const NewsList = () => {
   };
 
   return (
-    <div className='w-342 tablet:w-[771px] desktop:w-[855px]'>
+    <div className='desktop:py-39 tablet:py-46 py-20 w-342 tablet:w-[771px] desktop:w-[855px]'>
       {datas?.map((data: any, id: number) => (
         <div
           key={id}
