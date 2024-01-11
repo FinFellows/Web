@@ -121,10 +121,10 @@ const config: Config = {
         modal: '500',
       },
       screens: {
-        tablet: '900px',
+        tablet: '1135px',
         // => @media(min-width: 900px) {...}
         desktop: '1680px',
-        mobile: '390px',
+        mobile: '599px',
       },
     },
   },
