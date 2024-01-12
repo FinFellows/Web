@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='ko'>
       <body className='bg-bg dark:bg-dark-bg'>
         <Header />
-        <main className='min-h-screen px-24 tablet:px-0 box-border'>{children}</main>
+        <main className='mt-100 min-h-screen px-24 tablet:px-0 box-border'>{children}</main>
         <Chatbot />
         <footer className='relative  w-full mt-200'>
           <Footer />

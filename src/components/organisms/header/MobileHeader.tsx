@@ -60,7 +60,7 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
       <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
 
       {isOpened && (
-        <div className='fixed w-full h-full left-0 top-0 flex  z-modal bg-bgBlind'>
+        <div className='   flex  z-modal bg-bgBlind'>
           <div
             ref={mobileHeaderRef}
             className={cls(

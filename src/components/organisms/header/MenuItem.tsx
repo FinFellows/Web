@@ -13,7 +13,7 @@ const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, path
     <div
       {...props}
       className={
-        'mb-27 desktop:mb-7 desktop:p-10 tablet:mr-10 text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main z-header'
+        ' tablet:mr-10 text-center text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main z-header'
       }
       onMouseEnter={() => handleMenuHover && handleMenuHover(menuItem.name)}
       onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
@@ -26,7 +26,7 @@ const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, path
       </Link>
       {/* 서브 메뉴 */}
       {activeMenu === menuItem.name && menuItem.subMenu && (
-        <ul className='hidden desktop:block shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
+        <ul className='hidden tablet:block shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
           {menuItem.subMenu.map((subItem) => (
             <li
               className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
