@@ -7,7 +7,7 @@ import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 const Section2 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
   return (
-    <div className='tablet:min-h-screen flex items-center justify-center flex-col label-small tablet:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
+    <div className='tablet:min-h-screen flex items-center justify-center flex-col label-small tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
       <div className='mb-22'>
         <Image className='w-188 h-63 0 tablet:w-438 tablet:h-148' src={logoLight} priority alt='logoLight' />
       </div>

@@ -7,15 +7,20 @@ import section4Logo from '@/public/icons/main/section4Logo.png';
 import section4MockM from '@/public/icons/main/section4MockM.png';
 import section4LogoM from '@/public/icons/main/section4LogoM.png';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useThemeCheck from '@/hooks/custom/useThemeCheck';
+import section4MockD from '@/public/icons/main/section4MockD.png';
 
 const Section4 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
+  const isDarkMode = useThemeCheck();
+
+  const mockImage = isDarkMode ? section4MockD : section4Mock;
 
   return (
-    <div className='mt-100 tablet:mt-[450px] flex flex-col items-center justify-center min-h-screen label-small tablet:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
+    <div className='mt-200 tablet:mt-[450px] min-h-screen label-small  tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
       <div>
         {isMobile ? (
-          <div className='mr-121 w-full flex flex-col '>
+          <div className='mr-70 w-full  '>
             <div className=' text-left'>
               <div className=' font-teneda flex mb-30'>
                 <h1 className=' text-40 '>금융, 뭐하지</h1>
@@ -23,29 +28,34 @@ const Section4 = () => {
               </div>
               <h1 className='text-12'>안전 자산에 속하는 예금, 적금, CMA를 조건별로</h1>
               <h1 className='text-12'>쉽게 이율을 비교할 수 있습니다</h1>
-              <Image className='mt-36' src={section4MockM} alt='section4MockM' priority />
+              <Image
+                className='mt-36 w-[162px] h-[338px] object-contain '
+                src={mockImage}
+                alt='section4MockM'
+                priority
+              />
             </div>
-            <Image className='ml-auto object-cover ' src={section4LogoM} alt='section4LogoM' priority />
+            <Image className='ml-auto w-220 h-220 object-cover ' src={section4LogoM} alt='section4LogoM' priority />
           </div>
         ) : (
-          <div className='mx-24 flex justify-center box-border items-end'>
-            <div className=' flex flex-col items-start justify-end'>
-              <div className=' font-teneda flex mb-30'>
-                <h1 className=' text-90 '>금융, 뭐하지</h1>
-                <h1 className=' text-160 text-main rotate-12 '>?</h1>
-              </div>
-              <h1 className='label-xl'>안전 자산에 속하는 예금, 적금, CMA를 조건별로</h1>
-              <h1 className='label-xl'>쉽게 이율을 비교할 수 있습니다.</h1>
-              <Image className='mt-95' src={section4Mock} alt='section4Mock' priority />
+          <div className=' flex flex-col items-start box-border text-left  '>
+            <div className='font-teneda flex mb-30'>
+              <h1 className='tablet:text-70 desktop:text-90 '>금융, 뭐하지</h1>
+              <h1 className=' tablet:text-140 desktop:text-160 text-main rotate-12 '>?</h1>
             </div>
-            <Image
-              width={900}
-              height={800}
-              className='object-contain '
-              src={section4Logo}
-              alt='section4Text'
-              priority
-            />
+            <h1>안전 자산에 속하는 예금, 적금, CMA를 조건별로</h1>
+            <h1>쉽게 이율을 비교할 수 있습니다.</h1>
+            <div className='flex items-end justify-between object-contain'>
+              <Image className='desktop:mr-150 w-auto h-auto' src={mockImage} alt='section4Mock' priority />
+              <Image
+                width={800}
+                height={700}
+                className='w-auto h-auto'
+                src={section4Logo}
+                alt='section4Text'
+                priority
+              />
+            </div>
           </div>
         )}
       </div>

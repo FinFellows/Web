@@ -9,7 +9,7 @@ import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 const Section3 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
   return (
-    <div className=' tablet:mt-0 min-h-screen flex items-center justify-center flex-col label-small tablet:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
+    <div className=' tablet:mt-0 min-h-screen flex items-center justify-center flex-col label-small  tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
       <div className='mb-140 tablet:mb-0'>
         <Image className=' w-157 h-180 tablet:w-374 tablet:h-429 ' src={doto} alt='doto' />
       </div>
@@ -17,7 +17,7 @@ const Section3 = () => {
         {isMobile ? (
           <>
             <h1>금융에 대한 기초 지식부터 차근차근 쌓아가다보면 </h1>
-            <h1>언젠가 금융마스터가 되어 안전하고 건강한 금융생활을 정복할 수 있지 않을까요?</h1>
+            <h1>언젠가 금융마스터가 되어 안전하고 </h1>
             <h1>건강한 금융생활을 정복할 수 있지 않을까요?</h1>
           </>
         ) : (
