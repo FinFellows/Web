@@ -54,21 +54,29 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
   const handleMenuLeave = () => {
     setActiveMenu(null);
   };
-
+  const toggleTheme = () => {
+    // 이벤트 발생
+    window.dispatchEvent(new Event('darkModeToggle'));
+    // 나머지 코드는 그대로
+    setIsOpened((prevIsOpened) => {
+      setIsOpened(!prevIsOpened);
+      return !prevIsOpened;
+    });
+  };
   return (
     <div className='z-mobileHeader'>
       <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
 
       {isOpened && (
-        <div className='   flex  z-modal bg-bgBlind'>
+        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind'>
           <div
             ref={mobileHeaderRef}
             className={cls(
-              'flex flex-col justify-between transition-all translate-x-10 fixed right-0 top-0  w-200 bg-secondary  min-h-screen pt-11 pl-20',
+              'flex flex-col justify-between transition-all translate-x-10 fixed right-0 top-0  w-200 tablet:w-256 bg-secondary  min-h-screen pt-11 pl-20',
               isOpened ? 'block ' : 'hidden',
             )}
           >
-            <div className='bg-red-100 flex flex-col justify-start'>
+            <div className='flex flex-col justify-start'>
               <Close stroke='#000000' className='w-25 h-25 mb-21 ' onClick={handleMenuOpen} />
               <Image className='mb-21 pb-[5.13]  border-b-1 border-black' src={Logo} alt='logo' />
 
@@ -82,15 +90,15 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
                   pathname={pathname}
                 />
               ))}
-              <li className='text-22 hover:text-main'>
+              <div className='text-22 tablet:text-28 hover:text-main'>
                 <Link href='/mypage' className='text-center '>
                   MY
                 </Link>
-              </li>
+              </div>
             </div>
 
             <div className='pb-15'>
-              <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+              <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} onClick={toggleTheme} />
             </div>
           </div>
         </div>

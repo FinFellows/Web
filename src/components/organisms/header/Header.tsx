@@ -46,18 +46,16 @@ const Header = () => {
 
   return (
     <nav
-      className={cls(
-        'z-header fixed top-0 left-0 right-0 font-teneda py-12 px-24 bg-white dark:bg-dark-bg tablet:px-20  box-border',
-      )}
+      className={cls('z-header fixed top-0 left-0 right-0 font-teneda py-12 px-24 bg-white dark:bg-dark-bg box-border')}
     >
-      <ul className='flex justify-between items-center  tablet:px-64 '>
+      <ul className='flex justify-between items-center tablet:px-40 desktop:px-64 '>
         <div className='flex items-center justify-center '>
-          <li className='mr-258  tablet:mr-64'>
+          <li className='mr-258 tablet:mr-10  desktop:mr-64'>
             <Link href='/'>
               <Image priority src={logoLight} alt='Logo Light' />
             </Link>
           </li>
-          <div className='hidden tablet:flex '>
+          <div className='hidden desktop:flex '>
             {menuItems.map((menuItem) => (
               <MenuItem
                 key={menuItem.name}
@@ -71,7 +69,7 @@ const Header = () => {
           </div>
         </div>
         <div className='flex  items-center'>
-          <li className='hidden tablet:flex mr-26'>
+          <li className='hidden desktop:flex mr-26'>
             <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
           <li className='mr-12 text-main text-22 pt-10  '>
@@ -79,7 +77,7 @@ const Header = () => {
               MY
             </Link>
           </li>
-          <li className='w-full h-full  flex tablet:hidden '>
+          <li className='w-full h-full  flex desktop:hidden '>
             <MobileHeader darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
         </div>
