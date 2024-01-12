@@ -9,8 +9,6 @@ import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
-import BubbleP from '@/public/icons/bubble-p.svg';
-import BubbleT from '@/public/icons/bubble-t.svg';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
@@ -209,15 +207,11 @@ const WhatToDoPage = () => {
     <div className='flex flex-col justify-center items-center'>
       <FinanceToggle activeToggle={1} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
-        <div className='mt-16 relative tablet:mt-21 desktop:mt-45'>
+        <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
           <span className='absolute top-14 left-25 text-main label-small w-185 tablet:top-17 tablet:left-26 tablet:label-medium tablet:w-237 desktop:top-20 desktop:left-70 desktop:w-600 desktop:heading-medium'>
             예금은 처음 한 번에 돈을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
           </span>
-          {isDesktop ? (
-            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          ) : (
-            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          )}
+          <div className='h-63 w-228 tablet:w-291 tablet:h-80 desktop:w-616 desktop:h-62 rounded-100 fill-secondary border-2 border-border01 dark:fill-dark-border01 dark:border-dark-border01'></div>
         </div>
         <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
       </div>

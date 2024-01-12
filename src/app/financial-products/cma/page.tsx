@@ -8,8 +8,6 @@ import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
-import BubbleP from '@/public/icons/bubble-p.svg';
-import BubbleT from '@/public/icons/bubble-t.svg';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
@@ -140,15 +138,11 @@ const WhatToDoPage = () => {
     <div className='flex flex-col justify-center items-center'>
       <FinanceToggle activeToggle={3} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
-        <div className='mt-16 relative tablet:mt-21 desktop:mt-45'>
+        <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
           <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-17 tablet:left-19 tablet:label-medium tablet:w-250 desktop:top-20 desktop:left-55 desktop:w-600 desktop:heading-medium'>
             CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
           </span>
-          {isDesktop ? (
-            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          ) : (
-            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          )}
+          <div className='h-63 w-228 tablet:w-291 tablet:h-80 desktop:w-616 desktop:h-62 rounded-100 fill-secondary border-2 border-border01 dark:fill-dark-border01 dark:border-dark-border01'></div>
         </div>
         <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
       </div>
