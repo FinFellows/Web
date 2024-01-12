@@ -197,7 +197,11 @@ const WhatToDoPage = () => {
           <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-17 tablet:left-18 tablet:label-medium tablet:w-255 desktop:top-20 desktop:left-60 desktop:w-600 desktop:heading-medium'>
             적금은 월 단위로 일정 금액을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
           </span>
-          {isDesktop ? <BubbleP /> : <BubbleT className='h-63 tablet:h-80' />}
+          {isDesktop ? (
+            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          ) : (
+            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          )}
         </div>
         <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
       </div>
@@ -229,14 +233,14 @@ const WhatToDoPage = () => {
             <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
               최고 금리 순
             </span>
-            <ArrowDown className='w-19 tablet:w-24' />
+            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
           </button>
         ) : (
           <button className='flex' onClick={() => setSort(!sort)}>
             <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
               기본 금리 순
             </span>
-            <ArrowDown className='w-19 tablet:w-24' />
+            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
           </button>
         )}
       </div>

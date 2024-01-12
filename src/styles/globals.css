@@ -204,9 +204,9 @@ body {
   scrollbar-width: none;
 }
 
-input {
+/* input {
   all: unset;
-}
+} */
 
 * {
   box-sizing: border-box;

@@ -81,14 +81,16 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
   };
 
   return (
-    <div className='relative w-full h-full bg-secondary flex flex-col items-center overflow-y-auto overflow-x-hidden scrollbar-hide desktop:w-855 desktop:h-546 desktop:rounded-10'>
-      <h1 className='heading-large text-typoPrimary mt-39 tablet:mt-56 desktop:mt-23'>은행 선택</h1>
+    <div className='relative w-full h-full bg-secondary dark:bg-dark-secondary flex flex-col items-center overflow-y-auto overflow-x-hidden scrollbar-hide desktop:w-855 desktop:h-546 desktop:rounded-10'>
+      <h1 className='heading-large text-typoPrimary dark:text-dark-typoPrimary mt-39 tablet:mt-56 desktop:mt-23'>
+        은행 선택
+      </h1>
       <div className='w-358 desktop:w-712'>
         <div className='flex mt-44 tablet:mt-41 desktop:mt-42'>
           <SubBtn text='1금융권' mr='mr-10 desktop:mr-15' isOn={isOn} onClick={() => setIsOn(!isOn)} />
           <SubBtn text='저축은행' isOn={!isOn} onClick={() => setIsOn(!isOn)} />
         </div>
-        <hr className='mt-16 mb-21 border-border01 desktop:mb-15' />
+        <hr className='mt-16 mb-21 border-border01 dark:border-dark-border01 desktop:mb-15' />
         {isOn ? (
           <>
             <SelectBtn
@@ -148,7 +150,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
         isOn={!(selectedBank.length === 0 && selectedBank2.length === 0)}
       />
       <Close
-        className='absolute top-39 right-15 w-19 h-19 cursor-pointer tablet:top-56 tablet:right-53 desktop:top-21 desktop:right-20'
+        className='absolute stroke-typoPrimary dark:stroke-dark-typoPrimary top-39 right-15 w-19 h-19 cursor-pointer tablet:top-56 tablet:right-53 desktop:top-21 desktop:right-20'
         onClick={() => closeModal()}
       />
     </div>

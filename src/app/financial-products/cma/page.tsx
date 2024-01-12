@@ -144,7 +144,11 @@ const WhatToDoPage = () => {
           <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-17 tablet:left-19 tablet:label-medium tablet:w-250 desktop:top-20 desktop:left-55 desktop:w-600 desktop:heading-medium'>
             CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
           </span>
-          {isDesktop ? <BubbleP /> : <BubbleT className='h-63 tablet:h-80' />}
+          {isDesktop ? (
+            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          ) : (
+            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          )}
         </div>
         <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
       </div>

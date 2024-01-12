@@ -11,8 +11,8 @@ const BankAllBtn: React.FC<TBankAllBtnProps & React.HTMLAttributes<HTMLDivElemen
     <div
       {...props}
       className={cls(
-        'flex flex-col items-center w-68 h-68 bg-secondary rounded-11 border cursor-pointer tablet:w-87 tablet:h-87 tablet:rounded-14 desktop:w-91 desktop:h-91 desktop:rounded-15',
-        isOn ? 'border-main' : 'border-border04',
+        'flex flex-col items-center w-68 h-68 bg-secondary dark:bg-dark-secondary rounded-11 border cursor-pointer tablet:w-87 tablet:h-87 tablet:rounded-14 desktop:w-91 desktop:h-91 desktop:rounded-15',
+        isOn ? 'border-main' : 'border-border04 dark:border-dark-border04',
       )}
     >
       <All

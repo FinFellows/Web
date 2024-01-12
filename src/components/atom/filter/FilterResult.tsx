@@ -22,11 +22,11 @@ const FilterResult: React.FC<TFilterResultProps & React.HTMLAttributes<HTMLDivEl
         styles ? styles : '',
       )}
     >
-      <span className='text-secondary mr-4 paragraph-small tablet:paragraph-medium tablet:mr-5 desktop:mr-6 desktop:paragraph-medium'>
+      <span className='text-secondary dark:text-dark-secondary mr-4 paragraph-small tablet:paragraph-medium tablet:mr-5 desktop:mr-6 desktop:paragraph-medium'>
         {text}
       </span>
       <Close
-        className='cursor-pointer stroke-2 stroke-secondary w-14 h-14 tablet:w-16 tablet:h-16 desktop:w-18 desktop:h-18'
+        className='cursor-pointer stroke-secondary dark:stroke-dark-secondary w-12 h-12 tablet:w-15 tablet:h-15 desktop:w-16 desktop:h-16'
         onClick={toggleFn}
       />
     </div>

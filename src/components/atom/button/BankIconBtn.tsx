@@ -17,8 +17,8 @@ const BankIconBtn: React.FC<TBankIconBtnProps & React.HTMLAttributes<HTMLDivElem
     <div
       {...props}
       className={cls(
-        'flex flex-col items-center min-w-68 min-h-68 bg-secondary rounded-11 border cursor-pointer tablet:min-w-87 tablet:min-h-87 tablet:rounded-14 desktop:min-w-91 desktop:min-h-91 desktop:rounded-15',
-        isOn ? 'border-main' : 'border-border04',
+        'flex flex-col items-center min-w-68 min-h-68 bg-secondary dark:bg-dark-secondary rounded-11 border cursor-pointer tablet:min-w-87 tablet:min-h-87 tablet:rounded-14 desktop:min-w-91 desktop:min-h-91 desktop:rounded-15',
+        isOn ? 'border-main' : 'border-border04 dark:border-dark-border04',
         styles ? styles : '',
       )}
     >
@@ -29,7 +29,7 @@ const BankIconBtn: React.FC<TBankIconBtnProps & React.HTMLAttributes<HTMLDivElem
         }}
         className={cls(
           'mt-3 w-65 text-center overflow-hidden text-overflow-ellipsis whitespace-nowrap label-small tablet:mt-3 tablet:w-83 tablet:label-medium desktop:mt-5 desktop:w-87 desktop:label-medium',
-          isOn ? 'text-main' : 'text-typoPrimary',
+          isOn ? 'text-main' : 'text-typoPrimary dark:text-dark-typoPrimary',
         )}
       >
         {text}

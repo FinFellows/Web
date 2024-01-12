@@ -36,7 +36,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
     <div
       {...props}
       className={cls(
-        'w-342 bg-secondary border-2 border-border01 rounded-20 mt-10 tablet:w-438 tablet:rounded-25 tablet:mt-12 desktop:w-855 desktop:rounded-10 desktop:mt-10',
+        'w-342 bg-secondary dark:bg-dark-secondary border-2 border-border01 dark:border-dark-border01 rounded-20 mt-10 tablet:w-438 tablet:rounded-25 tablet:mt-12 desktop:w-855 desktop:rounded-10 desktop:mt-10',
         subIsOn.length === 0 ? 'py-20 tablet:py-25 desktop:py-20' : 'pt-20 tablet:pt-25 desktop:pt-20',
       )}
     >
@@ -96,7 +96,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
       )}
       {!(subIsOn.length === 0) && (
         <>
-          <hr className='border-b-1 border-border01' />
+          <hr className='border-b-1 border-border01 dark:border-dark-border01' />
           <div className='mt-8 pl-17 tablet:pl-21 tablet:mt-10 desktop:mt-8 desktop:pl-17'>
             {subIsOn.map((data, index) => {
               return (

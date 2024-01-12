@@ -12,8 +12,8 @@ const SelectBtn: React.FC<TSelectBtnProps & React.HTMLAttributes<HTMLButtonEleme
     <button
       {...props}
       className={cls(
-        'inline-flex justify-center items-center px-10 py-4 bg-secondary border rounded-100',
-        isOn ? 'border-main' : 'border-border01',
+        'inline-flex justify-center items-center px-10 py-4 bg-secondary dark:bg-dark-secondary border rounded-100',
+        isOn ? 'border-main' : 'border-border01 dark:border-dark-border04',
       )}
     >
       {isOn ? <CheckSquare className='w-15' /> : <Square className='w-15' />}
