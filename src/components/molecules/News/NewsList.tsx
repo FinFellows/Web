@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Heartdefault from '../../../public/icons/grayheart2.svg';
 import Heartclick from '@/public/icons/clickheart2.svg';
 import Link from 'next/link';
+import fetchNewsListData from '@/api/newslistapi/newslistapi';
 
 const NewsList = () => {
-  const datas = require('@/public/data/dummydata.json');
+  const [NewsData, setNewsData] = useState([]);
 
   const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
   const handleHeartClick = (id: number) => {
@@ -15,10 +16,17 @@ const NewsList = () => {
       [id]: !heartStates[id],
     });
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchNewsListData();
+      setNewsData(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className='desktop:py-39 tablet:py-46 py-20 w-342 tablet:w-[438px] desktop:w-[855px] '>
-      {datas?.map((data: any, id: number) => (
+      {NewsData?.map((data: any, id: number) => (
         <div
           key={id}
           className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838]'

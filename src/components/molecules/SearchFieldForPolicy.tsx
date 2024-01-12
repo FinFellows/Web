@@ -20,7 +20,7 @@ const SearchFieldForPolicy = ({
     >
       <div className='flex items-center  '>
         <input
-          className='w-full px-20 py-18 placeholder:text-border04 heading-small tablet:heading-medium desktop:label-large text-left outline-none dark:placeholder:text-[#6B6B6B] '
+          className='w-full px-20 py-18 placeholder:text-border04 heading-small tablet:heading-medium desktop:label-large text-left outline-none dark:placeholder:text-[#6B6B6B] dark:bg-[#343434] '
           type='text'
           placeholder='궁금한 정책을 검색해보세요'
           value={searchQuery}

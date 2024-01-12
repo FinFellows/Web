@@ -3,6 +3,8 @@
 import PolicyHeadLine from '@/components/molecules/Policy/PolicyHeadLine';
 import PolicyContent from '@/components/molecules/Policy/PolicyContent';
 import { useSearchParams } from 'next/navigation';
+import fetchPolicyDetail from '@/api/policylistapi/policydetail';
+
 const Policy = () => {
   const policy = {
     id: 0,
@@ -29,10 +31,11 @@ const Policy = () => {
     site: 'https://www.bokjiro.go.kr',
     document: '제출 서류',
   };
+
   const serchParams = useSearchParams();
   const id = serchParams.get('id');
   return (
-    <div className='w-auto h-full flex flex-col items-center justify-center'>
+    <div className='w-auto h-full flex flex-col items-center justify-center desktop:mt-[-70px]'>
       <div>
         <PolicyHeadLine title={policy.title} content={policy.content} />
       </div>

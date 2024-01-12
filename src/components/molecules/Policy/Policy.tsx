@@ -7,6 +7,28 @@ import Heartclick from '@/public/icons/clickheart2.svg';
 import SearchFieldForPolicy from '../SearchFieldForPolicy';
 import Default_goldtoriv1 from '@/public/icons/default_goldtoriv1.svg';
 import fetchPolicyData from '@/api/policylistapi/policylistapi';
+import fetchPolicyDetail from '@/api/policylistapi/policydetail';
+type TPolicy = {
+  isLiked: Boolean;
+  polyBizSjNm: string;
+  polyItcnCn: string;
+  sporCn: string;
+  bizPrdCn: string;
+  rqutPrdCn: string;
+  sporScvl: string;
+  ageInfo: string;
+  prcpCn: string;
+  accrRqisCn: string;
+  majrRquisCn: string;
+  empmSttsCn: string;
+  spizRlmRqisCn: string;
+  aditRscn: string;
+  prcpLmttTrgtCn: string;
+  rqutProcCn: string;
+  jdgnPresCn: string;
+  rqutUrla: string;
+  pstnPaprCn: string;
+};
 const Policy = () => {
   const [policyData, setPolicyData] = useState([]);
   const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
@@ -16,6 +38,10 @@ const Policy = () => {
       ...heartStates,
       [index]: !heartStates[index],
     });
+  };
+  const handleClick = (policyInfoId: number) => {
+    // 클릭한 콘테이너의 policyInfoId 값을 fetchPolicyDetail 함수에 전달합니다.
+    fetchPolicyDetail(policyInfoId);
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +74,7 @@ const Policy = () => {
                   id: item.policyInfoId,
                 },
               }}
+              onClick={() => handleClick(item.policyInfoId)}
             >
               <div className='flex-wrap flex w-full rounded-t-lg h-166  tablet:h-212 desktop:h-[208px] bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838] '>
                 <h2 className='heading-xl desktop:text-[34px] tablet:text-34 tablet:w-220 desktop:w-230 text-typoTertiary font-bold p-[15px] flex-wrap w-190'>
