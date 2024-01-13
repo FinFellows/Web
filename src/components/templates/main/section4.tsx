@@ -6,9 +6,10 @@ import section4Mock from '@/public/icons/main/section4Mock.png';
 import section4Logo from '@/public/icons/main/section4Logo.png';
 import section4MockM from '@/public/icons/main/section4MockM.png';
 import section4LogoM from '@/public/icons/main/section4LogoM.png';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
-import useThemeCheck from '@/hooks/custom/useThemeCheck';
+
 import section4MockD from '@/public/icons/main/section4MockD.png';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
+import useThemeCheck from '@/hooks/useThemeCheck';
 
 const Section4 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();

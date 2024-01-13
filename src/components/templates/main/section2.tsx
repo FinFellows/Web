@@ -2,7 +2,7 @@
 import React from 'react';
 import logoLight from '@/public/logos/logo_lightB.png';
 import Image from 'next/image';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
 const Section2 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();

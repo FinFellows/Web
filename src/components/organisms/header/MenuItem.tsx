@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
 const MenuItem = ({
   menuItem,
@@ -42,8 +42,8 @@ const MenuItem = ({
           onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
         >
           <Link
-            className={`text-18 min-w-max whitespace-nowrap dark:text-dark-primary ${
-              isCurrentPage ? 'text-main dark:text-dark-main' : ''
+            className={`text-18 min-w-max whitespace-nowrap  ${
+              isCurrentPage ? 'text-main dark:text-dark-main' : 'dark:text-dark-primary'
             }`}
             href={menuItem.href}
           >

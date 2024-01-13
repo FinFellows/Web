@@ -6,9 +6,10 @@ import section6Mock from '@/public/icons/main/section6Mock.png';
 import section6Logo from '@/public/icons/main/section6Logo.png';
 import section6MockM from '@/public/icons/main/section6MockM.png';
 import section6LogoM from '@/public/icons/main/section6LogoM.png';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
-import useThemeCheck from '@/hooks/custom/useThemeCheck';
+
 import section6MockD from '@/public/icons/main/section6MockD.png';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
+import useThemeCheck from '@/hooks/useThemeCheck';
 
 const Section6 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();

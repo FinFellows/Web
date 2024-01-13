@@ -5,14 +5,16 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getNoticeListApi } from '@/api/noticeApi';
 import { TNoticeProps } from '@/types/noticeTypes';
+import Pagination from '@/components/molecules/pagination/Pagination';
 
 const Notice = () => {
   const [notices, setNotices] = useState<TNoticeProps[] | undefined>([]);
   const [totalElements, setTotalElements] = useState<number | undefined>(0);
   const [totalPages, setTotalPages] = useState<number | undefined>(0);
+  const [pageNum, setPageNum] = useState(0);
   const fetchData = async () => {
     try {
-      const data = await getNoticeListApi({ pageNum: 0, size: 8 });
+      const data = await getNoticeListApi({ pageNum: pageNum, size: 8 });
       setNotices(data?.content);
       setTotalElements(data?.totalElements);
       setTotalPages(data?.totalPages);
@@ -24,6 +26,9 @@ const Notice = () => {
     fetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    fetchData();
+  }, [pageNum]);
 
   useEffect(() => {
     console.log('Notices:', notices);
@@ -48,6 +53,7 @@ const Notice = () => {
           );
         })}
       </div>
+      {totalPages && <Pagination pageNum={pageNum} pageTotalNum={totalPages} setPageNum={setPageNum} />}
     </>
   );
 };

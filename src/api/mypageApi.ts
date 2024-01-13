@@ -1,11 +1,11 @@
+import { user } from '@/class/user';
 import {
   TEducationBookmarkApiResponse,
   TFinancialProductsBookmarkApiResponse,
   TPoliciesBookmarkApiResponse,
 } from '@/types/mypageTypes';
 
-const accessToken =
-  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
+const accessToken = user.getAccessToken();
 
 export const getFinancialProductsBookmarkApi = async (): Promise<TFinancialProductsBookmarkApiResponse | undefined> => {
   const apiEndpoint = 'https://api.finfellows.co.kr/users/financial-products';

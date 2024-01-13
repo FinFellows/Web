@@ -4,7 +4,7 @@ import doto from '@/public/icons/main/doto.png';
 import dotos from '@/public/icons/main/dotos.png';
 import dotosM from '@/public/icons/main/dotosM.png';
 import Image from 'next/image';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
 const Section3 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();

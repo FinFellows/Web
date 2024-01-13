@@ -6,7 +6,7 @@ import section7Mock from '@/public/icons/main/section7Mock.png';
 import section7Logo from '@/public/icons/main/section7Logo.png';
 import section7MockM from '@/public/icons/main/section7MockM.png';
 import section7LogoM from '@/public/icons/main/section7LogoM.png';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
 const Section7 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();

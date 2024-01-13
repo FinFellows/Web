@@ -4,9 +4,10 @@ import Image from 'next/image';
 
 import section8Logo from '@/public/icons/main/section8Logo.png';
 import section8LogoM from '@/public/icons/main/section8LogoM.png';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+
 import section8LogoD from '@/public/icons/main/section8LogoD.png';
-import useThemeCheck from '@/hooks/custom/useThemeCheck';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
+import useThemeCheck from '@/hooks/useThemeCheck';
 
 const Section8 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
