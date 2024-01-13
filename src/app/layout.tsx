@@ -31,7 +31,8 @@ const renderMobileHeaderDiv = () => {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
-      <body className='bg-bg dark:bg-dark-bg'>
+      {/* h-full -> scroll to top */}
+      <body className='h-full bg-bg dark:bg-dark-bg'>
         <QueryProvider>
           <Header />
           <main className='mt-100 tablet:mt-110 desktop:mt-200 min-h-screen px-24 tablet:px-0 box-border'>
