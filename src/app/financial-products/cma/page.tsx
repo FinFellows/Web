@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
 import BubbleP from '@/public/icons/bubble-p.svg';
 import BubbleT from '@/public/icons/bubble-t.svg';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
 
