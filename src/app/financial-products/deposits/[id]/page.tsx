@@ -28,6 +28,7 @@ const Des = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     depositFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

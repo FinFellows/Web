@@ -49,7 +49,7 @@ const WhatToDoPage = () => {
       filter: '상품 유형',
       sub: [
         { text: 'RP형', value: '&cmaTypes=RP' },
-        { text: '종금어음형', value: '&cmaTypes=BALHAENG' },
+        { text: '발행어음형', value: '&cmaTypes=BALHAENG' },
         { text: '종금형', value: '&cmaTypes=JONGGEUM' },
       ],
     },
@@ -66,6 +66,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     bankInfoFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const bankListFetchData = async () => {
@@ -83,6 +84,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     bankListFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNum, cmaValueFilter, cmaSel]);
 
   const DepSelect = () => {
@@ -93,6 +95,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaSelFin]);
 
   const onClickBank = (bank: string) => {
@@ -139,6 +142,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     CmaValueFilter();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaFilter]);
 
   const toggleFn = (number: number) => {

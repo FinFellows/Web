@@ -1,6 +1,7 @@
 import React from 'react';
 import Heart from '@/public/icons/heart.svg';
 import HeartClick from '@/public/icons/heart_click.svg';
+import Image from 'next/image';
 
 type TDepositSavingGuideProps = {
   isLiked: boolean;
@@ -24,7 +25,7 @@ const DepositSavingGuide: React.FC<TDepositSavingGuideProps> = ({
   return (
     <div className='flex justify-between items-center border-border02 dark:border-dark-border02 bg-secondary dark:bg-dark-secondary w-342 px-13 py-17 rounded-8 border tablet:w-438 tablet:px-16 tablet:py-22 tablet:rounded-10 desktop:w-855 desktop:px-33 desktop:py-40 desktop:rounded-20 desktop:border-2'>
       <div className='flex flex-row items-center'>
-        <img
+        <Image
           className='w-35 h-35 rounded-4 tablet:w-44 tablet:h-44 tablet:rounded-5 desktop:w-70 desktop:h-70 desktop:rounded-13'
           src={bankLogoUrl}
           alt={bankName}

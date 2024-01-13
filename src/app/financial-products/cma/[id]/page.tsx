@@ -25,6 +25,7 @@ const Des = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     cmaFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onHeartClick = async (id: number, isLiked: boolean) => {

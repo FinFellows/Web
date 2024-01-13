@@ -110,6 +110,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     bankListFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNum, savValueFilter, savSel]);
 
   const DepSelect = () => {
@@ -122,6 +123,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savSelFin, savSelSave]);
 
   const onAllClickBank = () => {
@@ -195,6 +197,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     SavValueFilter();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savFilter]);
 
   const toggleFn = (number: number) => {
