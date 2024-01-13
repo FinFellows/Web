@@ -9,6 +9,12 @@ import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
+<<<<<<< HEAD
+import BubbleP from '@/public/icons/bubble-p.svg';
+import BubbleT from '@/public/icons/bubble-t.svg';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
+=======
+>>>>>>> 476ca88997ad1e9c7609e5274a264587b12b81b1
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
 import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
