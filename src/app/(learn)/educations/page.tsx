@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Education from '@/components/molecules/Education/EducationList';
 import NewsList from '@/components/molecules/News/NewsList';
-import StudyToggle from '@/components/atom/toggle/StudyToggle';
+import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
 
 const Educations: any = () => {
   const [activeToggle, setActiveToggle] = useState(1);
@@ -16,9 +16,9 @@ const Educations: any = () => {
     <div className='w-auto h-full flex items-center justify-center'>
       <div className='flex flex-col items-center justify-center '>
         <div className=''>
-          <StudyToggle activeToggle={activeToggle} toggleFn={handleToggleChange} />
+          <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
         </div>
-        {activeToggle === 1 ? (
+        {activeToggle === 0 ? (
           <div className=''>
             <Education />
           </div>
