@@ -22,7 +22,7 @@ export default function ContentsEditBtn({
           title={title}
           content={content}
           closeEditor={() => setShowEditor(false)}
-          handleUpload={editFn}
+          uploadFn={editFn}
         />
       )}
     </>
