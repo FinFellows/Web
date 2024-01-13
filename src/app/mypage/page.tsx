@@ -9,11 +9,12 @@ import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
 import Login from '@/components/organisms/modal/Login';
 import Script from 'next/script';
+import useUser from '@/hooks/useUser';
 
 const Page = () => {
   const [toggle, setToggle] = useState(0);
 
-  const user = false; // 로그인 여부
+  const { user, isLoading: isUserLoading, isError: isUserError } = useUser();
 
   const loginFn = () => {
     window.Kakao.Auth.authorize({
@@ -26,36 +27,32 @@ const Page = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-start min-h-screen min-w-full'>
-      <div className=''>
-        <StudyToggle activeToggle={toggle} toggleFn={toggleFn} />
-      </div>
-      <div className='mt-63'>{toggle === 0 ? <Favorites /> : <Setting />}</div>
-    </div>
+    <>
+      {user && (
+        <div className='flex flex-col items-center justify-start min-h-screen min-w-full'>
+          <div className=''>
+            <StudyToggle activeToggle={toggle} toggleFn={toggleFn} />
+          </div>
+          <div className='mt-63'>{toggle === 0 ? <Favorites /> : <Setting />}</div>
+        </div>
+      )}
+      {isUserError && (
+        <>
+          <BackDrop>
+            <ModalView>
+              <Login loginFn={loginFn} closeFn={() => {}} />
+            </ModalView>
+          </BackDrop>
+          <Script
+            src='https://developers.kakao.com/sdk/js/kakao.js'
+            onLoad={() => {
+              window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
+            }}
+          />
+        </>
+      )}
+    </>
   );
-
-  // return user ? (
-  //   <div className='flex flex-col items-center justify-start min-h-screen min-w-full'>
-  //     <div className=''>
-  //       <StudyToggle activeToggle={toggle} toggleFn={toggleFn} />
-  //     </div>
-  //     <div className='mt-63'>{toggle === 0 ? <Favorites /> : <Setting />}</div>
-  //   </div>
-  // ) : (
-  //   <>
-  //     <BackDrop>
-  //       <ModalView>
-  //         <Login loginFn={loginFn} closeFn={() => {}} />
-  //       </ModalView>
-  //     </BackDrop>
-  //     <Script
-  //       src='https://developers.kakao.com/sdk/js/kakao.js'
-  //       onLoad={() => {
-  //         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
-  //       }}
-  //     />
-  //   </>
-  // );
 };
 
 export default Page;
