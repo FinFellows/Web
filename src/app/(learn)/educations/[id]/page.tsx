@@ -15,8 +15,9 @@ const Education = () => {
   return showEditor ? (
     <Editor />
   ) : (
-    <div className='w-auto h-full flex items-center justify-center'>
+    <div className='w-auto h-full flex items-center justify-center desktop:mt-[-70px]'>
       <div className='flex-col flex'>
+
         <div>
           <EducationHeadLine title={education.title} />
         </div>

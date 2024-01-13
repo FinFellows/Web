@@ -2,19 +2,17 @@ import React from 'react';
 import BankAllBtn from '@/components/atom/button/BankAllBtn';
 import BankIconBtn from '@/components/atom/button/BankIconBtn';
 import Plus from '@/public/icons/plus.svg';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import { TgetBankApiResponse } from '@/types/financial-productsTypes';
 
 type TRopeProps = {
-  size: 'Large' | 'Small';
   allBtnClick: boolean;
   onAllClickBank: () => void;
   selectedBanks: string[];
-  bankInfo: string[];
+  bankInfo: TgetBankApiResponse[] | undefined;
   onClickBank: (bank: string) => void;
 };
 
 const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
-  size,
   allBtnClick,
   onAllClickBank,
   selectedBanks,
@@ -22,50 +20,28 @@ const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
   onClickBank,
   ...props
 }) => {
-  const { isTablet } = useFinMediaQuery();
-
-  return size === 'Large' ? (
-    <div className='flex items-center px-16 py-20 bg-secondary border-2 rounded-20 border-border01'>
-      <BankAllBtn isOn={allBtnClick} size={size} onClick={onAllClickBank} />
-      <div className='h-100 border-l-2 border-border04 ml-16 mr-6'></div>
-      <div className='flex w-590 overflow-x-scroll scrollbar-hide ml-10'>
-        {bankInfo.map((bank, index) => (
+  return (
+    <div className='flex items-center w-342 px-12 py-15 bg-secondary dark:bg-dark-secondary border-2 rounded-10 border-border01 dark:border-dark-border01 tablet:w-438 tablet:px-15 tablet:py-18 tablet:rounded-12 desktop:w-855 desktop:px-16 desktop:py-20 desktop:rounded-20'>
+      <BankAllBtn isOn={allBtnClick} onClick={() => onAllClickBank()} />
+      <div className='h-75 border-l-2 border-border04 dark:border-dark-border04 ml-16 mr-4 tablet:h-96 tablet:ml-15 tablet:mr-5 desktop:h-100 desktop:ml-16 desktop:mr-6'></div>
+      <div className='flex overflow-x-scroll scrollbar-hide w-140 ml-10 tablet:ml-12 tablet:w-183 desktop:w-590 desktop:ml-10'>
+        {bankInfo?.map((bank, index) => (
           <BankIconBtn
             key={index}
-            style={{ marginRight: 10 }}
-            isOn={selectedBanks.includes(bank)}
-            text={bank}
-            size={size}
-            onClick={() => onClickBank(bank)}
+            styles='mr-10 tablet:mr-12 desktop:mr-10'
+            isOn={selectedBanks.includes(bank.bankName)}
+            img={bank.bankLogoUrl}
+            text={bank.bankName}
+            onClick={() => onClickBank(bank.bankName)}
           />
         ))}
       </div>
-      <div className='h-100 border-l-2 border-border04'></div>
-      <button {...props} className='pl-35 pr-26'>
-        <Plus className='w-39 h-39' />
-        <div className='text-border04 label-medium'>더보기</div>
-      </button>
-    </div>
-  ) : (
-    <div className='flex items-center px-12 py-15 bg-secondary border-2 rounded-10 border-border01 tablet:px-27 tablet:py-33 tablet:border-4 tablet:rounded-23'>
-      <BankAllBtn isOn={allBtnClick} size={size} onClick={() => onAllClickBank()} />
-      <div className='h-75 border-l-2 border-border04 ml-16 mr-4 tablet:h-173 tablet:ml-27'></div>
-      <div className='flex w-140 overflow-x-scroll scrollbar-hide ml-10 tablet:ml-23 tablet:w-325'>
-        {bankInfo.map((bank, index) => (
-          <BankIconBtn
-            key={index}
-            style={{ marginRight: isTablet ? '23px' : '10px' }}
-            isOn={selectedBanks.includes(bank)}
-            text={bank}
-            size={size}
-            onClick={() => onClickBank(bank)}
-          />
-        ))}
-      </div>
-      <div className='h-75 border-l-2 border-border04 tablet:h-173'></div>
-      <button {...props} className='pl-18 pr-13 flex flex-col justify-center items-center tablet:pl-59 tablet:pr-32'>
-        <Plus className='w-29 h-29 tablet:w-68 tablet:h-68' />
-        <div className='text-border04 label-medium tablet:label-xxl'>더보기</div>
+      <div className='h-75 border-l-2 border-border04 dark:border-dark-border04 tablet:h-96 desktop:h-100'></div>
+      <button {...props} className='flex flex-col justify-center items-center pl-19 tablet:pl-28 desktop:pl-38'>
+        <Plus className='stroke-border04 dark:stroke-dark-border04 w-29 h-29 tablet:w-37 tablet:h-37 desktop:w-39 desktop:h-39' />
+        <div className='text-border04 dark:text-dark-border04 label-medium tablet:label-large desktop:label-medium'>
+          더보기
+        </div>
       </button>
     </div>
   );

@@ -116,14 +116,15 @@ const config: Config = {
       },
       zIndex: {
         toggle: '1',
+        chatbot: '49',
         header: '50',
         mobileHeader: '100',
         modal: '500',
       },
       screens: {
-        tablet: '900px',
-        // => @media(min-width: 900px) {...}
-        desktop: '1680px',
+        tablet: '500px',
+        // => @media(min-width: 500px) {...}
+        desktop: '1000px',
         mobile: '390px',
       },
     },
