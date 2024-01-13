@@ -16,6 +16,7 @@ const Section5 = () => {
   const isDarkMode = useThemeCheck();
 
   const mockImage = isDarkMode ? section5MockD : section5Mock;
+  const mobileMockImage = isDarkMode ? section5MockD : section5MockM;
   return (
     <div className='object-contain mt-80  tablet:mt-190 min-h-screen label-small tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
       <div>
@@ -30,7 +31,7 @@ const Section5 = () => {
               <h1 className='text-12'>각종 금융 기초 상식과 최신 금융 뉴스를 제공합니다</h1>
               <Image
                 className='mt-36  w-[162px] h-[338px] object-contain'
-                src={mockImage}
+                src={mobileMockImage}
                 alt='section5MockM'
                 priority
               />

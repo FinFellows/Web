@@ -30,7 +30,7 @@ const Section3 = () => {
       <div>
         {isMobile ? (
           <>
-            <Image className='absolute w-full left-0 scale-125 ' src={dotosM} alt='dotosM' />
+            <Image className='absolute w-full left-0 scale-110' src={dotosM} alt='dotosM' />
           </>
         ) : (
           <>

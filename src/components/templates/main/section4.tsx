@@ -16,6 +16,7 @@ const Section4 = () => {
   const isDarkMode = useThemeCheck();
 
   const mockImage = isDarkMode ? section4MockD : section4Mock;
+  const mobileMockImage = isDarkMode ? section4MockD : section4MockM;
 
   return (
     <div className='mt-200 tablet:mt-[450px] min-h-screen label-small  tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
@@ -30,8 +31,8 @@ const Section4 = () => {
               <h1 className='text-12'>안전 자산에 속하는 예금, 적금, CMA를 조건별로</h1>
               <h1 className='text-12'>쉽게 이율을 비교할 수 있습니다</h1>
               <Image
-                className='mt-36 w-[162px] h-[338px] object-contain '
-                src={mockImage}
+                className='mt-36 w-[162px] h-[351px] object-contain '
+                src={mobileMockImage}
                 alt='section4MockM'
                 priority
               />

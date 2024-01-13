@@ -16,6 +16,7 @@ const Section6 = () => {
   const isDarkMode = useThemeCheck();
 
   const mockImage = isDarkMode ? section6MockD : section6Mock;
+  const mobileMockImage = isDarkMode ? section6MockD : section6MockM;
   return (
     <div className='object-contain mt-80 tablet:mt-190 min-h-screen label-small tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
       <div>
@@ -30,7 +31,7 @@ const Section6 = () => {
               <h1 className='text-12'>여러분에게 꼭 맞는 정책을 찾아 도움을 받아보실 수 있습니다</h1>
               <Image
                 className='mt-36 w-[162px] h-[338px] object-contain  '
-                src={mockImage}
+                src={mobileMockImage}
                 alt='section6MockM'
                 priority
               />
