@@ -1,6 +1,10 @@
 async function withApi<T>(
   fn: () => Promise<T>,
-  { onSuccess, onError }: { onSuccess?: (response: T) => void; onError?: (error: unknown) => void },
+  {
+    onSuccess,
+    onError,
+    onFinished,
+  }: { onSuccess?: (response: T) => void; onError?: (error: unknown) => void; onFinished?: () => void },
 ) {
   try {
     const response = await fn();
@@ -8,6 +12,7 @@ async function withApi<T>(
   } catch (error) {
     onError && onError(error);
   }
+  onFinished && onFinished();
 }
 
 export default withApi;

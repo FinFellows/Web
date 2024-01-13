@@ -116,6 +116,7 @@ const config: Config = {
       },
       zIndex: {
         toggle: '1',
+        chatbot: '49',
         header: '50',
         mobileHeader: '100',
         modal: '500',
