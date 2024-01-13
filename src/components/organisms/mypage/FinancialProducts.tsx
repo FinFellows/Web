@@ -3,48 +3,27 @@
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 import React, { useEffect, useState } from 'react';
 import Accordian from '@/components/organisms/mypage/accordian';
-import { getFinancialProductsApi } from '@/api/mypageApi';
+import { getFinancialProductsBookmarkApi } from '@/api/mypageApi';
+import { TCmaBookmark, TFinancialProductBookmark, TFinancialProductsBookmarkApiResponse } from '@/types/mypageTypes';
+import Link from 'next/link';
 
-type TFinancialProductBookmark = {
-  financialProductType: 'SAVING' | 'DEPOSIT';
-  companyName: string;
-  productName: string;
-  interestRate: string;
-  maximumPreferredInterestRate: string;
-};
-
-type TCmaBookmark = {
-  companyName: string;
-  productName: string;
-  cmaType: string;
-  maximumPreferredInterestRate: string;
-  specialCondition: string;
-};
-
-export type TFinancialProductsApiResponse = {
-  financialProductBookmarks: TFinancialProductBookmark[];
-  cmaBookmarks: TCmaBookmark[];
+type TBookmarks = {
+  cma: TCmaBookmark[];
+  deposit: TFinancialProductBookmark[];
+  saving: TFinancialProductBookmark[];
 };
 
 const FinancialProducts = () => {
-  const [cmaBookmark, setCmaBookmark] = useState<TCmaBookmark[] | undefined>([]);
-  const [financialBookmark, setFinancialBookmark] = useState<TFinancialProductBookmark[] | undefined>([]);
-  const [depositCount, setDepositCount] = useState<number>(0);
-  const [cmaCount, setCmaCount] = useState<number>(0);
-  const [savingCount, setSavingCount] = useState<number>(0);
+  const [bookmarks, setBookmarks] = useState<TBookmarks>({ cma: [], deposit: [], saving: [] });
 
   const fetchData = async () => {
     try {
-      const data = await getFinancialProductsApi();
-      setFinancialBookmark(data?.financialProductBookmarks);
-      setCmaBookmark(data?.cmaBookmarks);
-      setDepositCount(
-        data?.financialProductBookmarks.filter((item) => item.financialProductType === 'DEPOSIT').length || 0,
-      );
-      setSavingCount(
-        data?.financialProductBookmarks.filter((item) => item.financialProductType === 'SAVING').length || 0,
-      );
-      setCmaCount(data?.cmaBookmarks.length || 0);
+      const data = (await getFinancialProductsBookmarkApi()) as TFinancialProductsBookmarkApiResponse;
+      const cma = data?.cmaBookmarks || [];
+      const deposit = data?.financialProductBookmarks.filter((item) => item.financialProductType === 'DEPOSIT') || [];
+      const saving = data?.financialProductBookmarks.filter((item) => item.financialProductType === 'SAVING') || [];
+
+      setBookmarks({ cma, deposit, saving });
     } catch (error) {
       console.error('Error fetching Financial Products:', error);
     }
@@ -55,55 +34,52 @@ const FinancialProducts = () => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const renderPolicyItems = (
+    items: TFinancialProductBookmark[] | TCmaBookmark[],
+    productType: 'DEPOSIT' | 'SAVING' | 'CMA',
+  ) =>
+    items.map((item, index) => {
+      let id: number;
+      let link: string;
+      if ('cmaId' in item) {
+        id = item.cmaId;
+        link = 'cma';
+      } else {
+        id = item.financialProductId;
+        item.financialProductType === 'DEPOSIT' ? (link = 'deposits') : (link = 'savings');
+      }
+      return (
+        <Link key={index} href={`/financial-products/${link}/${id}`}>
+          <PolicyItem
+            img={''}
+            name={item.productName}
+            description={item.companyName}
+            like={true}
+            maxInterestRate={item.maximumPreferredInterestRate}
+            interestRate={
+              productType === 'CMA'
+                ? (item as TCmaBookmark).specialCondition
+                : (item as TFinancialProductBookmark).interestRate
+            }
+          />
+        </Link>
+      );
+    });
   return (
     <div>
       <ul className='mb-23 tablet:mb-39 '>
-        <Accordian title='예금' count={depositCount}>
-          {financialBookmark?.map((i, index) =>
-            i.financialProductType === 'DEPOSIT' ? (
-              <PolicyItem
-                key={index}
-                img={''}
-                name={i.productName}
-                description={i.companyName}
-                like={true}
-                maxInterestRate={i.maximumPreferredInterestRate}
-                interestRate={i.interestRate}
-              />
-            ) : null,
-          )}
+        <Accordian title='예금' count={bookmarks.deposit.length}>
+          {renderPolicyItems(bookmarks.deposit, 'DEPOSIT')}
         </Accordian>
       </ul>
       <ul className='mb-23 tablet:mb-39'>
-        <Accordian title='적금' count={savingCount}>
-          {financialBookmark?.map((i, index) =>
-            i.financialProductType === 'SAVING' ? (
-              <PolicyItem
-                key={index}
-                img={''}
-                name={i.productName}
-                description={i.companyName}
-                like={true}
-                maxInterestRate={i.maximumPreferredInterestRate}
-                interestRate={i.interestRate}
-              />
-            ) : null,
-          )}
+        <Accordian title='적금' count={bookmarks.saving.length}>
+          {renderPolicyItems(bookmarks.saving, 'SAVING')}
         </Accordian>
       </ul>
       <ul className='mb-23 tablet:mb-39'>
-        <Accordian title='CMA' count={cmaCount}>
-          {cmaBookmark?.map((i, index) => (
-            <PolicyItem
-              key={index}
-              img={''}
-              name={i.productName}
-              description={i.companyName}
-              like={true}
-              maxInterestRate={i.maximumPreferredInterestRate}
-              interestRate={i.specialCondition}
-            />
-          ))}
+        <Accordian title='CMA' count={bookmarks.cma.length}>
+          {renderPolicyItems(bookmarks.cma, 'CMA')}
         </Accordian>
       </ul>
     </div>
