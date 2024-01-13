@@ -1,5 +1,5 @@
 'use client';
-import { getFinancialProducts } from '@/api/mypage/getFinancialProducts';
+import { getFinancialProducts } from '@/api/mypage/getFinancialProductsApi';
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 import React, { useEffect, useState } from 'react';
 import Accordian from '@/components/organisms/mypage/accordian';

@@ -1,13 +1,8 @@
+import { TNoticeProps } from '@/components/templates/notice';
 import Link from 'next/link';
 import React from 'react';
 
-export type TNoticeListProps = {
-  id: string;
-  title: string;
-  date: string;
-};
-
-const NoticeList = ({ title, date }: TNoticeListProps) => {
+const NoticeList = ({ title, created_at }: TNoticeProps) => {
   return (
     <div className='dark:bg-dark-secondary dark:border-dark-secondary w-[342px] tablet:w-[438px] desktop:w-[855px] h-53  tablet:[h-67px] desktop:h-[98px]  flex rounded-10 items-center justify-between  border-1 border-border02 bg-secondary  box-border py-[10.61px] px-[5px] tablet:py-[17.49px] tablet:px-[15.38px] desktop:py-25 desktop:px-16'>
       <div className='flex items-center w-3/4'>
@@ -24,7 +19,7 @@ const NoticeList = ({ title, date }: TNoticeListProps) => {
         </div>
       </div>
       <div className='dark:text-dark-typoPrimary whitespace-nowrap paragraph-small tablet:font-pretendard tablet:font-regular tablet:text-[15.39px] text-primary desktop:paragraph-small'>
-        {date}
+        {created_at}
       </div>
     </div>
   );
