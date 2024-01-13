@@ -24,12 +24,15 @@
     "@yoopta/marks": "^1.9.15-rc",
     "@yoopta/paragraph": "^1.9.17-rc",
     "@yoopta/toolbar": "^1.9.15-rc",
+    "escape-html": "^1.0.3",
     "has-flag": "^5.0.1",
+    "highlight.js": "^11.9.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "slate": "^0.101.4",
-    "slate-react": "^0.101.3"
+    "slate": "^0.101.5",
+    "slate-history": "^0.100.0",
+    "slate-react": "^0.101.5"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.6",
@@ -53,6 +56,8 @@
     "storybook": "^7.6.6",
     "style-dictionary": "^3.9.1",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@types/escape-html": "^1.0.4",
+    "@types/is-hotkey": "^0.1.10"
   }
 }

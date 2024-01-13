@@ -45,7 +45,7 @@ const Header = () => {
   };
 
   return (
-    <nav className={cls('z-header w-auto font-teneda py-12 px-24 bg-white dark:bg-dark-bg tablet:px-200 mb-130')}>
+    <nav className={cls('z-header w-auto h-70 font-teneda py-12 px-24 bg-white dark:bg-dark-bg tablet:px-200 mb-130')}>
       <ul className='flex justify-between items-center  desktop:px-64 '>
         <div className='flex items-center justify-center '>
           <li className='mr-258  tablet:mr-64'>
