@@ -1,8 +1,9 @@
 'use client';
-import { getFinancialProducts } from '@/api/mypage/getFinancialProductsApi';
+
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 import React, { useEffect, useState } from 'react';
 import Accordian from '@/components/organisms/mypage/accordian';
+import { getFinancialProductsApi } from '@/api/mypageApi';
 
 type TFinancialProductBookmark = {
   financialProductType: 'SAVING' | 'DEPOSIT';
@@ -34,7 +35,7 @@ const FinancialProducts = () => {
 
   const fetchData = async () => {
     try {
-      const data = await getFinancialProducts();
+      const data = await getFinancialProductsApi();
       setFinancialBookmark(data?.financialProductBookmarks);
       setCmaBookmark(data?.cmaBookmarks);
       setDepositCount(
@@ -43,6 +44,7 @@ const FinancialProducts = () => {
       setSavingCount(
         data?.financialProductBookmarks.filter((item) => item.financialProductType === 'SAVING').length || 0,
       );
+      setCmaCount(data?.cmaBookmarks.length || 0);
     } catch (error) {
       console.error('Error fetching Financial Products:', error);
     }
@@ -90,7 +92,19 @@ const FinancialProducts = () => {
         </Accordian>
       </ul>
       <ul className='mb-23 tablet:mb-39'>
-        <Accordian title='CMA' count={1} />
+        <Accordian title='CMA' count={cmaCount}>
+          {cmaBookmark?.map((i, index) => (
+            <PolicyItem
+              key={index}
+              img={''}
+              name={i.productName}
+              description={i.companyName}
+              like={true}
+              maxInterestRate={i.maximumPreferredInterestRate}
+              interestRate={i.specialCondition}
+            />
+          ))}
+        </Accordian>
       </ul>
     </div>
   );

@@ -25,9 +25,7 @@ const Accordian = ({ title, children, count }: TAccordianProps) => {
       >
         {title}
         <div>
-          <ArrowDown
-            className={cls('transition-all duration-300 ease-in-out fill-dark-primary', isOpend ? 'rotate-180' : '')}
-          />
+          <ArrowDown className={cls('transition-all duration-300 ease-in-out ', isOpend ? 'rotate-180' : '')} />
         </div>
       </div>
       <div className={cls('', isOpend ? 'block' : 'hidden')}>{children}</div>

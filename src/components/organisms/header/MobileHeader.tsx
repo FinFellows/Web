@@ -54,15 +54,13 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
   const handleMenuLeave = () => {
     setActiveMenu(null);
   };
-  const toggleTheme = () => {
-    // 이벤트 발생
-    window.dispatchEvent(new Event('darkModeToggle'));
-    // 나머지 코드는 그대로
-    setIsOpened((prevIsOpened) => {
-      setIsOpened(!prevIsOpened);
-      return !prevIsOpened;
-    });
-  };
+  // const toggleTheme = () => {
+  //   window.dispatchEvent(new Event('darkModeToggle'));
+  //   setIsOpened((prevIsOpened) => {
+  //     setIsOpened(!prevIsOpened);
+  //     return !prevIsOpened;
+  //   });
+  // };
   return (
     <div className='z-mobileHeader'>
       <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
@@ -97,8 +95,8 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
               </div>
             </div>
 
-            <div className='pb-15'>
-              <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} onClick={toggleTheme} />
+            <div className='pb-30 tablet:pb-25 desktop:pb-15'>
+              <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
             </div>
           </div>
         </div>

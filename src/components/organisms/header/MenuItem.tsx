@@ -42,7 +42,9 @@ const MenuItem = ({
           onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
         >
           <Link
-            className={`text-18 min-w-max whitespace-nowrap ${isCurrentPage ? 'text-main' : ''}`}
+            className={`text-18 min-w-max whitespace-nowrap dark:text-dark-primary ${
+              isCurrentPage ? 'text-main dark:text-dark-main' : ''
+            }`}
             href={menuItem.href}
           >
             {menuItem.name}
