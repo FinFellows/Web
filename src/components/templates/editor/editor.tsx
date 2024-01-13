@@ -12,26 +12,26 @@ import { TPluginFormat } from '@/types/editor/editorType';
 import Preview from './plugins/preview';
 import Tools from './tools';
 import BackDrop from '@/components/organisms/modal/backdrop';
-import WithStopPropagation from '@/components/utils/withStopPropagation';
 import ModalView from '@/components/organisms/modal/modalView';
+import SlateCompiler from '@/libs/editor/slateCompiler';
 
 export default function Editor({
   mode,
   title,
   content,
   closeEditor,
-  handleUpload,
+  uploadFn,
 }: {
   mode: 'edit' | 'create';
   title?: string;
   content?: string;
   closeEditor: () => void;
-  handleUpload: (title: string, content: string) => void;
+  uploadFn: (title: string, content: string) => void;
 }) {
   const initialValue: Descendant[] = [
     {
       type: 'paragraph',
-      children: [{ text: mode === 'edit' ? content : '오늘의 이야기...' }],
+      children: [{ text: (mode === 'edit' ? content : '오늘의 이야기...') as string }],
     },
   ];
   const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
@@ -40,10 +40,17 @@ export default function Editor({
   const [editorValue, setEditorValue] = useState<Descendant[]>(initialValue);
   const [activatedPlugin, setActivatedPlugin] = useState<TPluginFormat | null>(null);
   const titleRef = React.useRef<HTMLInputElement>(null);
-  console.log(editorValue);
 
   function handleChangeEditorValue(value: Descendant[]) {
-    // setEditorValue([...value, { type: 'paragraph', children: [{ text: 'ㄴㄴㄴ' }] }]);
+    setEditorValue(value);
+  }
+
+  function handleUpload() {
+    const title = titleRef.current!.value;
+    const content = JSON.stringify(editorValue);
+    uploadFn(title, content);
+    console.log('title', title);
+    console.log('content', content);
   }
 
   function handleCloseEditor() {
@@ -64,7 +71,10 @@ export default function Editor({
           <button className='flex justify-center items-center px-20 py-8 text-16 text-main font-bold rounded-4 border-1 border-main'>
             임시 저장
           </button>
-          <button className='flex justify-center items-center px-20 py-8 text-16 text-white bg-main font-bold rounded-4 border-1 border-main'>
+          <button
+            onClick={handleUpload}
+            className='flex justify-center items-center px-20 py-8 text-16 text-white bg-main font-bold rounded-4 border-1 border-main'
+          >
             업로드
           </button>
         </div>
