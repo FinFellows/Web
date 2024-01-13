@@ -55,7 +55,7 @@ export default function BaseBtn({
       {...props}
       className={cls(
         props.className ?? '',
-        active ? 'bg-black text-white' : 'bg-page1 text-black',
+        active ? 'bg-black text-white' : 'bg-gray text-black',
         'w-30 h-30 rounded-4 flex justify-center items-center',
       )}
     >

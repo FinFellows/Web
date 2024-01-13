@@ -9,11 +9,12 @@ import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
 import Login from '@/components/organisms/modal/Login';
 import Script from 'next/script';
+import useUser from '@/hooks/useUser';
 
 const Page = () => {
   const [toggle, setToggle] = useState(0);
 
-  const user = false;
+  const { user, isLoading: isUserLoading, isError: isUserError } = useUser();
 
   const loginFn = () => {
     window.Kakao.Auth.authorize({
@@ -35,7 +36,7 @@ const Page = () => {
           <div className='mt-63'>{toggle === 0 ? <Favorites /> : <Setting />}</div>
         </div>
       )}
-      {!user && (
+      {isUserError && (
         <>
           <BackDrop>
             <ModalView>
