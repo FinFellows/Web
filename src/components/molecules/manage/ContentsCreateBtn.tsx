@@ -8,7 +8,7 @@ export default function ContentsCreateBtn({ createFn }: { createFn: (title: stri
   return (
     <>
       <MainBtn text='작성' isOn onClick={() => setShowEditor(true)} />
-      {showEditor && <Editor mode='create' closeEditor={() => setShowEditor(false)} handleUpload={createFn} />}
+      {showEditor && <Editor mode='create' closeEditor={() => setShowEditor(false)} uploadFn={createFn} />}
     </>
   );
 }

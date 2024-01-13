@@ -18,6 +18,7 @@ const Education = () => {
         <EducationContent content={education.content} />
         <ManageBtns>
           {/* TODO: 글 수정/삭제하는 api 연결 (editFn, deleteFn) */}
+          {/* TODO: title, content 실제 값으로 수정 */}
 
           <ContentsEditBtn title={education.title} content={education.content} editFn={(title, content) => {}} />
           <ContentsDeleteBtn deleteFn={() => {}} />
