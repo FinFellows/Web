@@ -56,6 +56,7 @@ const config: Config = {
         mainFooter: 'var(--main-footer)',
         imageBase: 'var(--image-base)',
         bg: 'var(--bg)',
+        gray: '#F0F0F5',
         dark: {
           primary: 'var(--dark-primary)',
           secondary: 'var(--dark-secondary)',
@@ -130,7 +131,7 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [require('tailwindcss'), require('autoprefixer')],
+  plugins: [require('tailwindcss'), require('autoprefixer'), require('@tailwindcss/typography')],
 };
 
 export default config;
