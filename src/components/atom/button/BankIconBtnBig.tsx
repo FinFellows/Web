@@ -4,11 +4,13 @@ import { cls } from '@/utils/cls';
 type TBankIconBtnBigProps = {
   isOn: boolean;
   text: string;
+  img: string;
 };
 
 const BankIconBtnBig: React.FC<TBankIconBtnBigProps & React.HTMLAttributes<HTMLDivElement>> = ({
   isOn,
   text,
+  img,
   ...props
 }) => {
   return (
@@ -19,7 +21,7 @@ const BankIconBtnBig: React.FC<TBankIconBtnBigProps & React.HTMLAttributes<HTMLD
         isOn ? 'border-main' : 'border-border04 dark:border-dark-border04',
       )}
     >
-      <div className='w-44 h-44 rounded-7 mt-10 bg-imageBase'></div>
+      <img className='w-44 h-44 rounded-7 mt-10' src={img} alt={text} />
       <p
         style={{
           textOverflow: 'ellipsis',

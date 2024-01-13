@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import RopeCma from '@/components/molecules/rope/RopeCma';
 import MoreCmaModal from '@/components/organisms/whattodo/MoreCmaModal';
@@ -8,97 +8,92 @@ import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-
-type TCma = {
-  id: number;
-  productName: string;
-  description: string;
-  rate: string;
-  isLiked: boolean;
-};
+import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { getCmasApi } from '@/api/cmaApi';
+import { TgetBankApiResponse, TgetCmaResponse } from '@/types/financial-productsTypes';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const { isDesktop } = useFinMediaQuery();
-
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
-  const [pageTotalNum, setPageTotalNum] = useState(13); //총 페이지 수
+  const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
+
+  //은행 정보
+  const [bankCmaInfo, setBankCmaInfo] = useState<TgetBankApiResponse[]>(); //증권사
 
   //CMA
   const [cmaAllFin, setCmaAllFin] = useState(false);
   const [cmaSelFin, setCmaSelFin] = useState<string[]>([]);
+  const [cmaSel, setCmaSel] = useState<string>();
 
   //CMA 목록
-  const [bankDataCma, setBankDataCma] = useState<TCma[]>([]);
-  const [totalElements, setTotalElements] = useState(0); //예금 결과 개수
+  const [bankDataCma, setBankDataCma] = useState<TgetCmaResponse[] | undefined>([]);
+  const [totalElements, setTotalElements] = useState<number | null>(null); //예금 결과 개수
 
   //검색 필터
   const [cmaFilterIndex, setCmaFilterIndex] = useState<number | undefined>(undefined);
-  const [cmaFilter, setCmaFilter] = useState<string[]>([]); //CMA 필터 데이터
+  const [cmaFilter, setCmaFilter] = useState<
+    {
+      text: string;
+      value: string;
+    }[]
+  >([]); //CMA 텍스트 필터 데이터
+  const [cmaValueFilter, setCmaValueFilter] = useState<string>(); //CMA 값 필터 데이터
 
   const CMA_FILTER = [
-    { filter: '상품 유형', sub: ['RP형', '종금어음형', '종금형'] },
-    { filter: '우대조건', sub: ['비대면 가입', '예금자 보호', '주식 거래 가능', '체크카드 발급', '수수료 해택'] },
+    {
+      filter: '상품 유형',
+      sub: [
+        { text: 'RP형', value: '&cmaTypes=RP' },
+        { text: '종금어음형', value: '&cmaTypes=BALHAENG' },
+        { text: '종금형', value: '&cmaTypes=JONGGEUM' },
+      ],
+    },
   ];
 
-  const DUMMY_BANK1 = [
-    '증권사1',
-    '증권사2',
-    '증권사3',
-    '증권사4',
-    '증권사5',
-    '증권사6',
-    '증권사7',
-    '증권사8',
-    '증권사9',
-    '증권사10',
-    '증권사11',
-    '증권사12',
-  ];
-
-  const DUMMY_CMA = useMemo(
-    () => [
-      {
-        id: 0,
-        productName: 'CMA1',
-        description: '간단한 설명',
-        rate: '3.54',
-        isLiked: true,
-      },
-      {
-        id: 1,
-        productName: 'CMA2',
-        description: '간단한 설명',
-        rate: '5.45',
-        isLiked: true,
-      },
-      {
-        id: 2,
-        productName: 'CMA3',
-        description: '간단한 설명',
-        rate: '2.43',
-        isLiked: false,
-      },
-      {
-        id: 3,
-        productName: 'CMA4',
-        description: '간단한 설명',
-        rate: '6.43',
-        isLiked: false,
-      },
-    ],
-    [],
-  );
+  const bankInfoFetchData = async () => {
+    try {
+      const data = await getBankApi('020000'); //040000으로 수정 필요
+      setBankCmaInfo(data);
+    } catch (error) {
+      console.error('Error fetching bankInfoFetchData:', error);
+    }
+  };
 
   useEffect(() => {
-    setBankDataCma(DUMMY_CMA);
-  }, [DUMMY_CMA]);
+    bankInfoFetchData();
+  }, []);
+
+  const bankListFetchData = async () => {
+    try {
+      const data = await getCmasApi(`size=10&page=${pageNum}${cmaValueFilter}${cmaSel}`);
+      if (data) {
+        setBankDataCma(data.content);
+        setPageTotalNum(data.totalPages);
+        setTotalElements(data.totalElements);
+      }
+    } catch (error) {
+      console.error('Error fetching bankListFetchData:', error);
+    }
+  };
+
+  useEffect(() => {
+    bankListFetchData();
+  }, [pageNum, cmaValueFilter, cmaSel]);
+
+  const DepSelect = () => {
+    const queryStringArray = cmaSelFin.map((bankName) => `&bankNames=${bankName}`);
+    const queryString = queryStringArray.join('');
+    setCmaSel(queryString);
+  };
+
+  useEffect(() => {
+    DepSelect();
+  }, [cmaSelFin]);
 
   const onClickBank = (bank: string) => {
     if (cmaAllFin) {
@@ -111,18 +106,40 @@ const WhatToDoPage = () => {
     }
   };
 
-  const onHeartClick = (id: number) => {
-    //id로 즐겨찾기
-    console.log(id);
-  };
-
-  const PlusSubBtn = (data: string) => {
-    if (cmaFilter?.includes(data)) {
-      setCmaFilter(cmaFilter.filter((item) => item !== data));
-    } else {
-      setCmaFilter([...cmaFilter, data]);
+  const onHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      if (isLiked) {
+        await deleteBankBookmarkApi(id);
+      } else {
+        await postBankBookmarkApi(id);
+      }
+      setBankDataCma(bankDataCma?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
     }
   };
+
+  const PlusSubBtn = (text: string, value: string) => {
+    setCmaFilter((prevCmaFilter) => {
+      const existingFilter = prevCmaFilter.find((filter) => filter.text === text);
+
+      if (existingFilter) {
+        return prevCmaFilter.filter((filter) => filter.text !== text);
+      } else {
+        return [...prevCmaFilter, { text, value }];
+      }
+    });
+  };
+
+  const CmaValueFilter = () => {
+    const valuesArray = cmaFilter.map((filter) => filter.value);
+    const combinedValues = valuesArray.join('');
+    setCmaValueFilter(combinedValues);
+  };
+
+  useEffect(() => {
+    CmaValueFilter();
+  }, [cmaFilter]);
 
   const toggleFn = (number: number) => {
     if (number === 2) {
@@ -149,32 +166,34 @@ const WhatToDoPage = () => {
       <RopeCma
         onClick={() => setIsOpen(!isOpen)}
         selectedBanks={cmaSelFin}
-        bankInfo={DUMMY_BANK1}
+        bankInfo={bankCmaInfo}
         onClickBank={onClickBank}
       />
       <Filter
         activeFilterIndex={cmaFilterIndex}
         setActiveFilterIndex={setCmaFilterIndex}
         subIsOn={cmaFilter}
-        setSubIsOn={setCmaFilter}
         filterTerms={CMA_FILTER}
         PlusSubBtn={PlusSubBtn}
         onInputOn={false}
       />
-      <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
-        <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
-          {totalElements}개
+      {totalElements && (
+        <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
+          <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
+            {totalElements}개
+          </div>
         </div>
-      </div>
-      {bankDataCma.map((data, index) => {
+      )}
+      {bankDataCma?.map((data, index) => {
         return (
           <Cma
             key={index}
             isLiked={data.isLiked}
+            bankLogoUrl={data.bankLogoUrl}
             productName={data.productName}
-            description={data.description}
-            rate={data.rate}
-            onHeartClick={() => onHeartClick(data.id)}
+            description={data.bankName}
+            rate={data.maturityInterestRate}
+            onHeartClick={() => onHeartClick(data.id, data.isLiked)}
             onClick={() => router.push(`/financial-products/cma/${data.id}`)}
           />
         );
@@ -184,7 +203,7 @@ const WhatToDoPage = () => {
         <BackDrop>
           <MoreCmaModal
             closeModal={() => setIsOpen(!isOpen)}
-            bankInfo={DUMMY_BANK1}
+            bankInfo={bankCmaInfo}
             bankAllCma={cmaAllFin}
             setBankAllCma={setCmaAllFin}
             bankSelCma={cmaSelFin}
