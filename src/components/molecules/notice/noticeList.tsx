@@ -1,4 +1,4 @@
-import { TNoticeProps } from '@/components/templates/notice';
+import { TNoticeProps } from '@/types/noticeTypes';
 import Link from 'next/link';
 import React from 'react';
 

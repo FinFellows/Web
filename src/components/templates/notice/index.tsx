@@ -3,50 +3,11 @@ import NoticeList from '@/components/molecules/notice/noticeList';
 import React, { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { getNoticeListApi } from '@/api/notice/getNoticeListApi';
-
-export type TGetNoticeListApiProps = {
-  pageNum: number;
-  size: number;
-};
-export type TNoticeProps = {
-  id: number;
-  title: string;
-  created_at: string;
-  content: string;
-};
-
-type TSort = {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
-};
-
-type TPageable = {
-  pageNumber: number;
-  pageSize: number;
-  sort: TSort;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
-};
-
-export type TNoticeApiResponse = {
-  content: TNoticeProps[];
-  pageable: TPageable;
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
-  size: number;
-  number: number;
-  sort: TSort;
-  numberOfElements: number;
-  first: boolean;
-  empty: boolean;
-};
+import { getNoticeListApi } from '@/api/noticeApi';
+import { TNoticeProps } from '@/types/noticeTypes';
 
 const Notice = () => {
-  const [notices, setNotices] = useState<TNoticeProps[] | undefined>(undefined);
+  const [notices, setNotices] = useState<TNoticeProps[] | undefined>([]);
   const [totalElements, setTotalElements] = useState<number | undefined>(0);
   const [totalPages, setTotalPages] = useState<number | undefined>(0);
   const fetchData = async () => {
@@ -61,7 +22,6 @@ const Notice = () => {
   };
   useEffect(() => {
     fetchData();
-
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,21 +36,17 @@ const Notice = () => {
         <div className='heading-large border-b-2 border-black pb-10  mb-10 dark:text-dark-primary dark:border-white '>
           공지사항
         </div>
-        {/* <Link href={`/notice/${id}`}> */}
-        {/* <Link href={`/notice/1`}>
-        <NoticeList
-          id={1}
-          title='안녕하세요! 금융원정대의 첫 이야기를 시작함니둥'
-          date='2023-01-23'
-          content={''}
-          totalElements={0}
-          totalPages={0}
-        />
-      </Link> */}
-
-        {notices?.map((i) => (
-          <NoticeList key={i.id} id={i.id} title={i.title} created_at={i.created_at} content={i.content} />
-        ))}
+        {notices?.map((i) => {
+          let date = new Date(i.created_at);
+          let dateOnly = date.toISOString().split('T')[0];
+          return (
+            <ul key={i.id} className='mb-8 tablet:mb-10 desktop:mb-20'>
+              <Link href={`/notice/${i.id}`}>
+                <NoticeList id={i.id} title={i.title} created_at={dateOnly} content={i.content} />
+              </Link>
+            </ul>
+          );
+        })}
       </div>
     </>
   );
