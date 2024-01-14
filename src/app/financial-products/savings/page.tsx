@@ -11,9 +11,10 @@ import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { getBankApi } from '@/api/financial-productsApi';
 import { getSavingsApi } from '@/api/savingsApi';
 import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();

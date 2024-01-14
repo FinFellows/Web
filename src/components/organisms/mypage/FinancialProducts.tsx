@@ -6,6 +6,12 @@ import Accordian from '@/components/organisms/mypage/accordian';
 import { getFinancialProductsBookmarkApi } from '@/api/mypageApi';
 import { TCmaBookmark, TFinancialProductBookmark, TFinancialProductsBookmarkApiResponse } from '@/types/mypageTypes';
 import Link from 'next/link';
+import {
+  deleteBankBookmarkApi,
+  deleteCmaBookmarkApi,
+  postBankBookmarkApi,
+  postCmaBookmarkApi,
+} from '@/api/bookmarkApi';
 
 type TBookmarks = {
   cma: TCmaBookmark[];
@@ -15,6 +21,33 @@ type TBookmarks = {
 
 const FinancialProducts = () => {
   const [bookmarks, setBookmarks] = useState<TBookmarks>({ cma: [], deposit: [], saving: [] });
+  const [isLiked, setIsLiked] = useState(true);
+
+  const onBankHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      if (isLiked) {
+        await deleteBankBookmarkApi(id);
+      } else {
+        await postBankBookmarkApi(id);
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
+    }
+  };
+
+  const onCmaHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      if (isLiked) {
+        await deleteCmaBookmarkApi(id);
+      } else {
+        await postCmaBookmarkApi(id);
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -41,28 +74,33 @@ const FinancialProducts = () => {
     items.map((item, index) => {
       let id: number;
       let link: string;
+      let onHeartClick: () => void;
       if ('cmaId' in item) {
         id = item.cmaId;
         link = 'cma';
+        onHeartClick = () => onCmaHeartClick(id, isLiked);
       } else {
         id = item.financialProductId;
         item.financialProductType === 'DEPOSIT' ? (link = 'deposits') : (link = 'savings');
+        onHeartClick = () => onBankHeartClick(id, isLiked);
       }
       return (
-        <Link key={index} href={`/financial-products/${link}/${id}`}>
-          <PolicyItem
-            img={''}
-            name={item.productName}
-            description={item.companyName}
-            like={true}
-            maxInterestRate={item.maximumPreferredInterestRate}
-            interestRate={
-              productType === 'CMA'
-                ? (item as TCmaBookmark).specialCondition
-                : (item as TFinancialProductBookmark).interestRate
-            }
-          />
-        </Link>
+        <PolicyItem
+          key={index}
+          img={''}
+          name={item.productName}
+          id={id}
+          link={link}
+          description={item.companyName}
+          onClick={onHeartClick}
+          like={isLiked}
+          maxInterestRate={item.maximumPreferredInterestRate}
+          interestRate={
+            productType === 'CMA'
+              ? (item as TCmaBookmark).specialCondition
+              : (item as TFinancialProductBookmark).interestRate
+          }
+        />
       );
     });
   return (
