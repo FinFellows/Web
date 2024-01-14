@@ -14,7 +14,7 @@ type TPolicyItemProps = {
   like: boolean;
   maxInterestRate?: string;
   interestRate?: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const PolicyItem = ({

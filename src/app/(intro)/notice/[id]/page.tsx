@@ -7,7 +7,7 @@ import { TNoticeProps } from '@/types/noticeTypes';
 import { useRouter } from 'next/router';
 import { getNoticeApi } from '@/api/noticeApi';
 
-const page = ({ params }: { params: { id: number } }) => {
+const Page = ({ params }: { params: { id: number } }) => {
   const [notice, setNotice] = useState<TNoticeProps | undefined>();
   const fetchData = async () => {
     try {
@@ -42,4 +42,4 @@ const page = ({ params }: { params: { id: number } }) => {
   );
 };
 
-export default page;
+export default Page;

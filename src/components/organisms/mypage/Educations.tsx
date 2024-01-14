@@ -54,7 +54,7 @@ const Educations = () => {
                     : `/news/${i.educationInfoId}`
                 }
               >
-                <PolicyItem key={index} img={''} name={i.title} description={i.content} like={true} />
+                <PolicyItem key={index} img={''} name={i.title} description={i.content} like={true} id={0} link={''} />
               </Link>
             ))}
           </Accordian>

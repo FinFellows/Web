@@ -28,7 +28,7 @@ const Policies = () => {
       <h1 className='label-medium text-typoSecondary mb-10'>전체 {policyBookmarks?.length || 0}</h1>
       {policyBookmarks?.map((i, index) => (
         <Link key={index} href={`/policies/${i.policyInfoId}`}>
-          <PolicyItem img={''} name={i.contentName} description={i.content} like={true} />
+          <PolicyItem img={''} name={i.contentName} description={i.content} like={true} id={0} link={''} />
         </Link>
       ))}
     </div>
