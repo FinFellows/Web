@@ -26,6 +26,7 @@ const Page = () => {
     setToggle(toggleId);
   };
 
+  console.log(user);
   return (
     <>
       {user && (
