@@ -1,8 +1,9 @@
 import { TgetDepositSavingApiResponse, TgetDepositSavingIdApiResponse } from '@/types/financial-productsTypes';
+import { user } from '@/class/user';
+
+const accessToken = user.getAccessToken();
 
 export const getDepositsApi = async (params: string): Promise<TgetDepositSavingApiResponse | undefined> => {
-  const accessToken =
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
   const url = `https://api.finfellows.co.kr/financial-products/deposit?${params}`;
 
   try {
@@ -29,8 +30,6 @@ export const getDepositsApi = async (params: string): Promise<TgetDepositSavingA
 };
 
 export const getDepositIdApi = async (id: number): Promise<TgetDepositSavingIdApiResponse | undefined> => {
-  const accessToken =
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
   const url = `https://api.finfellows.co.kr/financial-products/deposit/${id}`;
 
   try {
