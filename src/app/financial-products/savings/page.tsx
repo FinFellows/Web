@@ -159,12 +159,17 @@ const WhatToDoPage = () => {
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
+      let apiResult;
       if (isLiked) {
-        await deleteBankBookmarkApi(id);
+        apiResult = await deleteBankBookmarkApi(id);
       } else {
-        await postBankBookmarkApi(id);
+        apiResult = await postBankBookmarkApi(id);
       }
-      setBankDataSaving(bankDataSaving?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      if (apiResult !== undefined) {
+        setBankDataSaving(bankDataSaving?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }

@@ -1,8 +1,9 @@
 import { TgetBankApiResponse } from '@/types/financial-productsTypes';
+import { user } from '@/class/user';
+
+const accessToken = user.getAccessToken();
 
 export const getBankApi = async (bankGroupNo: string): Promise<TgetBankApiResponse[] | undefined> => {
-  const accessToken =
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
   const url = `https://api.finfellows.co.kr/financial-products/bank?bankGroupNo=${bankGroupNo}`;
 
   try {
@@ -10,7 +11,6 @@ export const getBankApi = async (bankGroupNo: string): Promise<TgetBankApiRespon
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
       },
     });
 
