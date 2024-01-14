@@ -10,9 +10,10 @@ import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { getBankApi } from '@/api/financial-productsApi';
 import { getCmasApi } from '@/api/cmaApi';
 import { TgetBankApiResponse, TgetCmaResponse } from '@/types/financial-productsTypes';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();
