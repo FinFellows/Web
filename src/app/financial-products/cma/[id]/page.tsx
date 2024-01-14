@@ -5,7 +5,7 @@ import CmaGuide from '../../_components/CmaGuide';
 import CmaInfoGuide from '../../_components/CmaInfoGuide';
 import { TgetCmaIdApiResponse } from '@/types/financial-productsTypes';
 import { getCmaIdApi } from '@/api/cmaApi';
-import { postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [cmaInfo, setCmaInfo] = useState<TgetCmaIdApiResponse | undefined>();
