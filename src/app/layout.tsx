@@ -38,10 +38,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <QueryProvider>
           <Header />
           <main className='min-h-screen px-24 tablet:px-0 box-border'>{children}</main>
-          <Chatbot />
+
           <footer className='relative  w-full mt-200'>
             <Footer />
           </footer>
+          <Chatbot />
         </QueryProvider>
       </body>
     </html>

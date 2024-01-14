@@ -9,6 +9,8 @@ import GoldToriIcon from '@/public/icons/glasses_goldtori.svg';
 import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 import { TChatData } from '.';
 import WithStopPropagation from '@/components/utils/withStopPropagation';
+import { useQueryClient } from 'react-query';
+import QUERY_KEYS from '@/constants/queryKeys';
 
 export default function ChatbotUI({
   chatData,
@@ -17,6 +19,7 @@ export default function ChatbotUI({
   chatData: TChatData[];
   setChatData: React.Dispatch<React.SetStateAction<TChatData[]>>;
 }) {
+  const queryClient = useQueryClient();
   const [textareaValue, setTextareaValue] = useState('');
   const [isSubmitLoading, setIsSubmitLoading] = useState(false); // 전송 버튼 로딩
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -52,6 +55,7 @@ export default function ChatbotUI({
     await withApi(() => postChatbotNotAdmin(question), {
       onSuccess: ({ answer }) => {
         splitRenderChatbotAnswer(answer);
+        queryClient.invalidateQueries(QUERY_KEYS.GET_CHATBOT_MEMORY);
       },
       onError: (error) => {
         // TODO: 에러 처리
@@ -60,7 +64,7 @@ export default function ChatbotUI({
     setIsSubmitLoading(false);
   }
   return (
-    <div className='absolute z-chatbot right-25 bottom-100 w-275 max-h-450 h-full rounded-12 overflow-hidden desktop:w-430 desktop:max-h-600'>
+    <div className='fixed z-chatbot right-25 bottom-100 w-275 max-h-450 h-full rounded-12 overflow-hidden desktop:w-430 desktop:max-h-600'>
       {/* header */}
       <div className=' w-full flex justify-center items-center text-white text-13 font-bold py-10 bg-mainLevel400 desktop:text-21'>
         금토리에게 물어봐
