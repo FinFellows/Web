@@ -128,6 +128,8 @@ export default function Editor({
                 placeholder='오늘의 이야기...'
                 autoFocus
                 onKeyDown={(event) => {
+                  // 단축키 기능
+                  // ex. ctrl + b => 볼드체
                   for (const hotkey in HOTKEYS) {
                     if (isHotkey(hotkey, event as any)) {
                       event.preventDefault();
