@@ -5,6 +5,7 @@ import EducationContent from '@/components/molecules/Education/EducationContent'
 import ContentsEditBtn from '@/components/molecules/manage/ContentsEditBtn';
 import ContentsDeleteBtn from '@/components/molecules/manage/ContentsDeleteBtn';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
+import { testApi, testApiEditor } from '@/api/testApi';
 const Education = () => {
   const education = {
     title: '자유 입출금 통장 알찬사용법',
@@ -20,8 +21,8 @@ const Education = () => {
           {/* TODO: 글 수정/삭제하는 api 연결 (editFn, deleteFn) */}
           {/* TODO: title, content 실제 값으로 수정 */}
 
-          <ContentsEditBtn title={education.title} content={education.content} editFn={(title, content) => {}} />
-          <ContentsDeleteBtn deleteFn={() => {}} />
+          <ContentsEditBtn title={education.title} content={education.content} editFn={testApiEditor} />
+          <ContentsDeleteBtn deleteFn={testApi} />
         </ManageBtns>
       </div>
     </div>
