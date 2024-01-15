@@ -96,6 +96,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaSelFin]);
 
@@ -148,6 +149,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     CmaValueFilter();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaFilter]);
 

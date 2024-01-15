@@ -125,6 +125,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [depSelFin, depSelSave]);
 
@@ -205,6 +206,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepValueFilter();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [depFilter]);
 
