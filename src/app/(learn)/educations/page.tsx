@@ -6,6 +6,7 @@ import NewsList from '@/components/molecules/News/NewsList';
 import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
+import { testApiEditor } from '@/api/testApi';
 
 const Educations: any = () => {
   const [activeToggle, setActiveToggle] = useState(true);
@@ -21,7 +22,7 @@ const Educations: any = () => {
         {!activeToggle ? <Education /> : <NewsList />}
         <ManageBtns>
           {/* TODO: 글 작성하는 api 연결 (createFn) */}
-          <ContentsCreateBtn createFn={(title, content) => {}} />
+          <ContentsCreateBtn createFn={testApiEditor} />
         </ManageBtns>
       </div>
     </div>
