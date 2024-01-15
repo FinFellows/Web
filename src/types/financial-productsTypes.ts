@@ -105,5 +105,4 @@ export type TgetCmaIdApiResponse = {
   joinWay: string;
   depositProtection: string;
   etcNote: string;
-  productUrl: string;
 };

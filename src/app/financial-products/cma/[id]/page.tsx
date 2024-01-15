@@ -6,10 +6,12 @@ import CmaInfoGuide from '../../_components/CmaInfoGuide';
 import { TgetCmaIdApiResponse } from '@/types/financial-productsTypes';
 import { getCmaIdApi } from '@/api/cmaApi';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import OnlyUser from '@/components/templates/login/OnlyUser';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [cmaInfo, setCmaInfo] = useState<TgetCmaIdApiResponse | undefined>();
   const [isLiked, setIsLiked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const cmaFetchData = async () => {
     try {
@@ -39,7 +41,7 @@ const Des = ({ params }: { params: { id: number } }) => {
       if (apiResult !== undefined) {
         setIsLiked(!isLiked);
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
@@ -48,6 +50,13 @@ const Des = ({ params }: { params: { id: number } }) => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
+      {showModal && (
+        <OnlyUser
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       {cmaInfo && (
         <>
           <CmaGuide
@@ -66,7 +75,6 @@ const Des = ({ params }: { params: { id: number } }) => {
               joinWay={cmaInfo.joinWay}
               depositProtection={cmaInfo.depositProtection}
               etcNote={cmaInfo.etcNote}
-              productUrl={cmaInfo.productUrl}
             />
           </div>
         </>

@@ -15,12 +15,14 @@ import { getBankApi } from '@/api/financial-productsApi';
 import { getDepositsApi } from '@/api/depositsApi';
 import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import OnlyUser from '@/components/templates/login/OnlyUser';
 
 const WhatToDoPage = () => {
   const router = useRouter();
   const [amount, setAmount] = useState(0);
   const [amountStr, setAmoutStr] = useState('');
 
+  const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [sort, setSort] = useState('MAX'); //MAX:최고금리순 DEFAULT:기본금리순
 
@@ -165,7 +167,7 @@ const WhatToDoPage = () => {
       if (apiResult !== undefined) {
         setBankDataDeposit(bankDataDeposit?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
@@ -216,6 +218,13 @@ const WhatToDoPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
+      {showModal && (
+        <OnlyUser
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       <FinanceToggle activeToggle={1} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
         <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
