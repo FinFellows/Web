@@ -186,7 +186,7 @@ const WhatToDoPage = () => {
         setActiveFilterIndex={setCmaFilterIndex}
         subIsOn={cmaFilter}
         filterTerms={CMA_FILTER}
-        PlusSubBtn={PlusSubBtn}
+        plusSubBtn={PlusSubBtn}
         onInputOn={false}
       />
       {totalElements && (

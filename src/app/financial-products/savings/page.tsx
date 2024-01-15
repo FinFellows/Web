@@ -70,14 +70,11 @@ const WhatToDoPage = () => {
       filter: '상품 유형',
       sub: [
         { text: '누구나 가입', value: '&types=누구나 가입' },
-        { text: '특판', value: '&types=특판' },
         { text: '방문없이 가입', value: '&types=방문없이 가입' },
         { text: '청년적금', value: '&types=청년적금' },
-        { text: '군인적금', value: '&types=군인적금' },
         { text: '주택청약', value: '&types=주택청약' },
         { text: '자유적금', value: '&types=자유적금' },
         { text: '정기적금', value: '&types=정기적금' },
-        { text: '청년도약계좌', value: '&types=청년도약계좌' },
       ],
     },
   ];
@@ -247,7 +244,7 @@ const WhatToDoPage = () => {
         setActiveFilterIndex={setSavFilterIndex}
         subIsOn={savFilter}
         filterTerms={SAVINGS_FILTER}
-        PlusSubBtn={PlusSubBtn}
+        plusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
       {totalElements && (
