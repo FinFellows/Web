@@ -21,7 +21,7 @@ const WhatToDoPage = () => {
   const [amount, setAmount] = useState('');
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
+  const [sort, setSort] = useState('MAX'); //MAX:최고금리순 DEFAULT:기본금리순
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
@@ -98,7 +98,7 @@ const WhatToDoPage = () => {
 
   const bankListFetchData = async () => {
     try {
-      const data = await getSavingsApi(`size=10&page=${pageNum}${savValueFilter}${savSel}`);
+      const data = await getSavingsApi(`size=10&page=${pageNum}&interestRateType=${sort}${savValueFilter}${savSel}`);
       if (data) {
         setBankDataSaving(data.content);
         setPageTotalNum(data.totalPages);
@@ -112,7 +112,7 @@ const WhatToDoPage = () => {
   useEffect(() => {
     bankListFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNum, savValueFilter, savSel]);
+  }, [pageNum, sort, savValueFilter, savSel]);
 
   const DepSelect = () => {
     const queryStringArray = savSelFin.map((bankName) => `&bankNames=${bankName}`);
@@ -251,15 +251,15 @@ const WhatToDoPage = () => {
           <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
             {totalElements}개
           </div>
-          {sort ? (
-            <button className='flex' onClick={() => setSort(!sort)}>
+          {sort === 'MAX' ? (
+            <button className='flex' onClick={() => setSort('DEFAULT')}>
               <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
                 최고 금리 순
               </span>
               <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
             </button>
           ) : (
-            <button className='flex' onClick={() => setSort(!sort)}>
+            <button className='flex' onClick={() => setSort('MAX')}>
               <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
                 기본 금리 순
               </span>

@@ -58,7 +58,7 @@ const WhatToDoPage = () => {
 
   const bankInfoFetchData = async () => {
     try {
-      const data = await getBankApi('020000'); //040000으로 수정 필요
+      const data = await getBankApi('040000');
       setBankCmaInfo(data);
     } catch (error) {
       console.error('Error fetching bankInfoFetchData:', error);
