@@ -3,13 +3,6 @@ import React, { useState } from 'react';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 import Setting from '@/components/templates/mypage/setting';
 import Favorites from '@/components/templates/mypage/favorites';
-
-import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
-import BackDrop from '@/components/organisms/modal/backdrop';
-import ModalView from '@/components/organisms/modal/modalView';
-import Login from '@/components/organisms/modal/Login';
-import Script from 'next/script';
-import useUser from '@/hooks/useUser';
 import OnlyUser from '@/components/templates/login/OnlyUser';
 
 const Page = () => {

@@ -8,16 +8,23 @@ import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/con
 import useUser from '@/hooks/useUser';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function OnlyUser({ children }: { children: React.ReactNode }) {
+// 로그인이 필요한 페이지에 사용
+export default function OnlyUser({ children, closeFn }: { children?: React.ReactNode; closeFn?: () => void }) {
   const { user, isLoading, isError } = useUser();
+  const [showModal, setShowModal] = useState(true);
   const pathname = usePathname();
 
   const loginFn = () => {
     window.Kakao.Auth.authorize({
       redirectUri: process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY,
     });
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    closeFn && closeFn();
   };
 
   useEffect(() => {
@@ -28,12 +35,12 @@ export default function OnlyUser({ children }: { children: React.ReactNode }) {
 
   if (user) return children;
 
-  if (isError)
+  if (isError && showModal) {
     return (
       <>
         <BackDrop>
           <ModalView>
-            <Login loginFn={loginFn} closeFn={() => {}} />
+            <Login loginFn={loginFn} closeFn={handleClose} />
           </ModalView>
         </BackDrop>
         <Script
@@ -44,4 +51,5 @@ export default function OnlyUser({ children }: { children: React.ReactNode }) {
         />
       </>
     );
+  }
 }
