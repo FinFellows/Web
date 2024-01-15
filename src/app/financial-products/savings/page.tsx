@@ -18,7 +18,8 @@ import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [amountStr, setAmoutStr] = useState('');
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [sort, setSort] = useState('MAX'); //MAX:최고금리순 DEFAULT:기본금리순
@@ -149,11 +150,12 @@ const WhatToDoPage = () => {
   };
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(Number(event.target.value));
     const regex = /^[0-9\b]+$/;
     let inputValue = event.target.value.replace(/,/g, '');
     if (inputValue === '' || regex.test(inputValue)) {
       inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmount(inputValue);
+      setAmoutStr(inputValue);
     }
   };
 
@@ -237,7 +239,7 @@ const WhatToDoPage = () => {
         onClickBank={onClickBank}
       />
       <Filter
-        amount={amount}
+        amount={amountStr}
         onInputAmountHandler={onInputAmountHandler}
         activeFilterIndex={savFilterIndex}
         setActiveFilterIndex={setSavFilterIndex}

@@ -99,6 +99,7 @@ export type TgetCmaIdApiResponse = {
   productName: string;
   bankName: string;
   bankLogoUrl: string;
+  bankHomepageUrl: string;
   maturityInterestRate: string;
   specialCondition: string;
   joinWay: string;
