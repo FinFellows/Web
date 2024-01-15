@@ -5,18 +5,19 @@ import Heartclick from '@/public/icons/clickheart2.svg';
 import { useState } from 'react';
 
 type TPolicyHeadLineProps = {
-  title: string;
-  content: string;
+  polyBizSjNm: string;
+  polyItcnCn: string;
 };
 
-const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ title, content }) => {
+const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ polyBizSjNm, polyItcnCn }) => {
   const [isHeartClick, setIsHeartClick] = useState(false);
 
   const handleClick = () => {
     setIsHeartClick(!isHeartClick);
   };
 
-  const formattedContent = content && content.length > 52 ? `${content.slice(0, 52)}\n${content.slice(52)}` : content;
+  const formattedContent =
+    polyItcnCn && polyItcnCn.length > 52 ? `${polyItcnCn.slice(0, 52)}\n${polyItcnCn.slice(52)}` : polyItcnCn;
 
   return (
     <div className='w-[342px] tablet:w-[438px] desktop:w-855 '>
@@ -27,7 +28,7 @@ const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ title, content }) => {
         <div className='w-full flex border-2 mb-10 mt-[-7px] py-18 tablet:mt-[-10px] border-02 rounded desktop:mt-[-17px] z-0 dark:bg-[#343434] dark:border-[#343434]'>
           <div className='flex-col tablet:py-23 desktop:py-35 '>
             <div className='heading-medium px-[20px] tablet:heading-large  desktop:heading-xl  z-5 font-bold pb-10 desktop:mt-[-30px] dark:text-[#D6D6D6]'>
-              {title}
+              {polyBizSjNm}
               <div className='label-small tablet:label-medium text-justify desktop:label-medium tablet:w-220 font-bold desktop:w-700 desktop:mt-5'>
                 {formattedContent}
               </div>

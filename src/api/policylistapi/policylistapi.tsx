@@ -1,13 +1,85 @@
-const fetchPolicyData = async () => {
+import { TPolicyApiResponse } from '@/components/molecules/Policy/Policy';
+
+export const getPolicysApi = async (): Promise<TPolicyApiResponse | undefined> => {
+  const accessToken =
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
+  const url = `https://api.finfellows.co.kr/policy-info`;
+
   try {
-    const response = await fetch('https://api.finfellows.co.kr/policy-info?page=0&size=100&sort=string');
-    const data = await response.json();
-    const policyData = data.data.content;
-    return policyData;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log('[✅getPolicyssApi API Data]', data);
+      return data.data as TPolicyApiResponse;
+    } else {
+      console.error('[💥getPolicyssApi API Error]', res.status, res.statusText);
+      return undefined;
+    }
   } catch (error) {
-    console.error('정책 데이터를 가져오는 중 오류가 발생했습니다:', error);
-    return [];
+    console.error('[💥getPolicyssApi Error]', error);
+    return undefined;
   }
 };
 
-export default fetchPolicyData;
+export const postPolicyBookmarkApi = async (financial_product_id: number) => {
+  const accessToken =
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
+  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${financial_product_id}`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log('[✅postPolicyBookmarkApi API Data]', data);
+      return data.data;
+    } else {
+      console.error('[💥postPolicyBookmarkApi API Error]', res.status, res.statusText);
+      return undefined;
+    }
+  } catch (error) {
+    console.error('[💥postPolicyBookmarkApi Error]', error);
+    return undefined;
+  }
+};
+
+export const deletePolicyBookmarkApi = async (financial_product_id: number) => {
+  const accessToken =
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
+  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${financial_product_id}`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log('[✅deletePolicyBookmarkApi API Data]', data);
+      return data.data;
+    } else {
+      console.error('[💥deletePolicyBookmarkApi API Error]', res.status, res.statusText);
+      return undefined;
+    }
+  } catch (error) {
+    console.error('[💥deletePolicyBookmarkApi Error]', error);
+    return undefined;
+  }
+};
