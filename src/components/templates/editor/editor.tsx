@@ -30,16 +30,19 @@ export default function Editor({
   closeEditor: () => void;
   uploadFn: TEditorUploadFn;
 }) {
+  if (mode === 'edit' && (!title || !content)) {
+    throw new Error('edit 모드에서는 title, content를 필수로 넘겨주세요');
+  }
   const initialValue: Descendant[] = [
     {
       type: 'paragraph',
-      children: [{ text: (mode === 'edit' ? content : '오늘의 이야기...') as string }],
+      children: [{ text: '오늘의 이야기...' as string }],
     },
   ];
   const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
   const renderLeaf = useCallback((props: any) => <SlateLeaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [editorValue, setEditorValue] = useState<Descendant[]>(initialValue);
+  const [editorValue, setEditorValue] = useState<Descendant[]>(initialValue ?? JSON.parse(content as string));
   const [activatedPlugin, setActivatedPlugin] = useState<TPluginFormat | null>(null);
   const titleRef = React.useRef<HTMLInputElement>(null);
   const uploadMutation = useMutation(uploadFn);
