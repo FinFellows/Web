@@ -12,10 +12,11 @@ import { useEffect, useState } from 'react';
 
 // 로그인이 필요한 페이지에 사용
 export default function WithLoginModal({ children, closeFn }: { children?: React.ReactNode; closeFn?: () => void }) {
-  const { user, isLoading, isError } = useUser();
-  const [showModal, setShowModal] = useState(true);
+  const { user, isLoading, isError } = useUser(); // 유저 정보 가져오기 (isError: 로그인이 안되어있는 경우)
+  const [showModal, setShowModal] = useState(true); // 모달 띄우기 여부
   const pathname = usePathname();
 
+  // 카카오 로그인 띄우기
   const loginFn = () => {
     window.Kakao.Auth.authorize({
       redirectUri: process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY,
