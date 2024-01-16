@@ -1,12 +1,4 @@
 import MainBtn from '@/components/atom/button/MainBtn';
-<<<<<<< Updated upstream
-import useUser from '@/hooks/useUser';
-
-export default function ContentsDeleteBtn({ deleteFn }: { deleteFn: () => void }) {
-  function handleDelete() {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      deleteFn();
-=======
 import withApi from '@/utils/withApi';
 import { useRouter } from 'next/navigation';
 
@@ -30,7 +22,6 @@ export default function ContentsDeleteBtn({
         },
         onPending,
       });
->>>>>>> Stashed changes
     }
   }
 
