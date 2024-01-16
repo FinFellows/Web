@@ -1,4 +1,5 @@
 import SlateCompiler from '@/libs/editor/slateCompiler';
+import { cls } from '@/utils/cls';
 import { Descendant } from 'slate';
 
 export default function EditorRenderer({
@@ -8,7 +9,11 @@ export default function EditorRenderer({
   const slateCompiler = new SlateCompiler();
   const html = slateCompiler.toHtml(JSON.parse(contents) as Descendant[]);
   return (
-    <div dangerouslySetInnerHTML={{ __html: html }} {...props}>
+    <div
+      dangerouslySetInnerHTML={{ __html: html }}
+      {...props}
+      className={cls(props.className ?? '', 'prose max-w-full')}
+    >
       {props.children}
     </div>
   );
