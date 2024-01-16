@@ -7,7 +7,7 @@ import InterestRateGuide from '../../_components/InterestRateGuide';
 import { TgetDepositSavingIdApiResponse } from '@/types/financial-productsTypes';
 import { getSavingIdApi } from '@/api/savingsApi';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
-import OnlyUser from '@/components/templates/login/OnlyUser';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [savingInfo, setSavingInfo] = useState<TgetDepositSavingIdApiResponse | undefined>();
@@ -68,7 +68,7 @@ const Des = ({ params }: { params: { id: number } }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       {showModal && (
-        <OnlyUser
+        <WithLoginModal
           closeFn={() => {
             setShowModal(false);
           }}

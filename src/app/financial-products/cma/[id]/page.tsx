@@ -6,7 +6,7 @@ import CmaInfoGuide from '../../_components/CmaInfoGuide';
 import { TgetCmaIdApiResponse } from '@/types/financial-productsTypes';
 import { getCmaIdApi } from '@/api/cmaApi';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
-import OnlyUser from '@/components/templates/login/OnlyUser';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [cmaInfo, setCmaInfo] = useState<TgetCmaIdApiResponse | undefined>();
@@ -51,7 +51,7 @@ const Des = ({ params }: { params: { id: number } }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       {showModal && (
-        <OnlyUser
+        <WithLoginModal
           closeFn={() => {
             setShowModal(false);
           }}

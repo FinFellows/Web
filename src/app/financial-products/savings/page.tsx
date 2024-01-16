@@ -15,7 +15,7 @@ import { getBankApi } from '@/api/financial-productsApi';
 import { getSavingsApi } from '@/api/savingsApi';
 import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
-import OnlyUser from '@/components/templates/login/OnlyUser';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
   const router = useRouter();
@@ -222,7 +222,7 @@ const WhatToDoPage = () => {
   return (
     <div className='flex flex-col justify-center items-center'>
       {showModal && (
-        <OnlyUser
+        <WithLoginModal
           closeFn={() => {
             setShowModal(false);
           }}
