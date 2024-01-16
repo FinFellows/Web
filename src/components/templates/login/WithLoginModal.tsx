@@ -11,7 +11,13 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 // 로그인이 필요한 페이지에 사용
-export default function WithLoginModal({ children, closeFn }: { children?: React.ReactNode; closeFn?: () => void }) {
+export default function WithLoginModal({
+  children,
+  closeFn,
+}: {
+  children?: React.ReactNode;
+  closeFn?: () => void;
+}): JSX.Element | null {
   const { user, isLoading, isError } = useUser();
   const [showModal, setShowModal] = useState(true);
   const pathname = usePathname();
@@ -33,7 +39,7 @@ export default function WithLoginModal({ children, closeFn }: { children?: React
     }
   }, [pathname, isError]);
 
-  if (user) return children;
+  if (user) return <>{children}</>;
 
   if (isError && showModal) {
     return (
@@ -52,4 +58,5 @@ export default function WithLoginModal({ children, closeFn }: { children?: React
       </>
     );
   }
+  return null;
 }
