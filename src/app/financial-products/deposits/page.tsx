@@ -11,9 +11,10 @@ import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { getBankApi } from '@/api/financial-productsApi';
 import { getDepositsApi } from '@/api/depositsApi';
 import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();
@@ -158,12 +159,17 @@ const WhatToDoPage = () => {
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
+      let apiResult;
       if (isLiked) {
-        await deleteBankBookmarkApi(id);
+        apiResult = await deleteBankBookmarkApi(id);
       } else {
-        await postBankBookmarkApi(id);
+        apiResult = await postBankBookmarkApi(id);
       }
-      setBankDataDeposit(bankDataDeposit?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      if (apiResult !== undefined) {
+        setBankDataDeposit(bankDataDeposit?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }

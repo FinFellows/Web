@@ -13,6 +13,7 @@ export type TNews = {
   content: string;
   bookmarked: boolean;
   created_at: string;
+  onHeartClick: () => void;
 };
 
 export type TNewsListApiResponse = {
@@ -46,8 +47,6 @@ export type TNewsListApiResponse = {
 const NewsList = () => {
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
 
-  const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
-
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
   const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
@@ -70,12 +69,17 @@ const NewsList = () => {
 
   const onHeartClick = async (id: number, bookmarked: boolean) => {
     try {
+      let apiResult;
       if (bookmarked) {
-        await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
       } else {
-        await postNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await postNewsBookmarkApi(id, 'NEWS_CONTENT');
       }
-      setNewsListData(NewsListData?.map((item) => (item.id === id ? { ...item, bookmarked: !bookmarked } : item)));
+      if (apiResult !== undefined) {
+        setNewsListData(NewsListData?.map((item) => (item.id === id ? { ...item, bookmarked: !bookmarked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
@@ -119,7 +123,10 @@ const NewsList = () => {
             </Link>
             <p
               className='z-10 mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
-              onClick={() => onHeartClick(i.id, i.bookmarked)}
+              onClick={(event) => {
+                event.stopPropagation();
+                onHeartClick(i.id, i.bookmarked);
+              }}
             >
               {i.bookmarked ? <Heartclick /> : <Heartdefault />}
             </p>

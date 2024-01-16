@@ -7,6 +7,7 @@ import ModifiedGlasses_goldtori from '../../../public/icons/modifiedglasses_gold
 import Clickheart2 from '@/public/icons/clickheart2.svg';
 import { getEducationsData } from '@/api/education/educationApi';
 import Pagination from '@/components/molecules/pagination/Pagination';
+import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/education/educationApi';
 
 export type TEducation = {
   id: number;
@@ -60,28 +61,56 @@ const Education = () => {
     }
   };
 
-  const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
-
-  const handleHeartClick = (id: number) => {
-    setHeartStates({
-      ...heartStates,
-      [id]: !heartStates[id],
-    });
+  // onHeartClick는 비동기 함수로, 교육 항목의 북마크 상태를 토글하는 역할을 합니다.
+  const onHeartClick = async (id: number, bookmarked: boolean) => {
+    try {
+      let apiResult;
+      // 만약 해당 교육 항목이 이미 북마크되어 있다면,
+      if (bookmarked) {
+        // 북마크를 제거하는 API를 호출합니다.
+        apiResult = await deleteEducationBookmarkApi(id, 'EDU_CONTENT');
+      } else {
+        // 아니라면, 북마크를 추가하는 API를 호출합니다.
+        apiResult = await postEducationBookmarkApi(id, 'EDU_CONTENT');
+      }
+      // API 호출 결과가 정상적으로 반환되었다면,
+      if (apiResult !== undefined) {
+        // 해당 교육 항목의 북마크 상태를 업데이트합니다.
+        setEducationData(EducationData?.map((item) => (item.id === id ? { ...item, bookmarked: !bookmarked } : item)));
+      } else {
+        // API 호출 결과가 정상적으로 반환되지 않았다면, 사용자에게 로그인하라는 메시지를 출력합니다.
+        console.log('로그인 해주세요');
+      }
+    } catch (error) {
+      // API 호출 중 에러가 발생하면, 콘솔에 에러 메시지를 출력합니다.
+      console.error('Error fetching bankBookmark:', error);
+    }
   };
+
+  // fetchData는 비동기 함수로, 교육 목록 데이터를 API에서 가져오는 역할을 합니다.
   const fetchData = async () => {
     try {
+      // getEducationsData 함수를 호출하여 API에서 데이터를 가져옵니다.
+      // 이 때, 페이지 사이즈를 8로 설정하고, 현재 페이지 번호를 pageNum으로 설정합니다.
       const data = await getEducationsData(`size=8&page=${pageNum}`);
       if (data) {
+        // API 응답에서 총 페이지 수를 가져와 setPageTotalNum에 설정합니다.
         setPageTotalNum(data.totalPages);
+        // API 응답에서 교육 목록 데이터를 가져와 setEducationData에 설정합니다.
         setEducationData(data.content);
       }
     } catch (error) {
+      // API 호출 중 에러가 발생하면, 콘솔에 에러 메시지를 출력합니다.
       console.error('Error fetching bankListFetchData:', error);
     }
   };
+
+  // useEffect는 React의 Hook으로, 컴포넌트가 렌더링될 때 특정 작업을 수행하도록 설정하는 역할을 합니다.
   useEffect(() => {
+    // 컴포넌트가 렌더링될 때 fetchData 함수를 호출하여 교육 목록 데이터를 가져옵니다.
     fetchData();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps는 ESLint 경고를 무시하는 주석입니다.
+    // 이 경우, useEffect의 의존성 배열에 pageNum만 포함되어 있어, pageNum이 바뀔 때만 fetchData가 호출되도록 설정되어 있습니다.
   }, [pageNum]);
 
   return (
@@ -120,9 +149,12 @@ const Education = () => {
               </Link>
               <div
                 className='h-29 w-29 tablet:h-32 tablet:w-32 desktop:h-37 desktop:w-37'
-                onClick={() => handleHeartClick(index)}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onHeartClick(i.id, i.bookmarked);
+                }}
               >
-                {heartStates[index] ? <Clickheart2 /> : <Heartdefault />}
+                {i.bookmarked ? <Clickheart2 /> : <Heartdefault />}
               </div>
             </div>
           </div>

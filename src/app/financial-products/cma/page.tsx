@@ -10,9 +10,10 @@ import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-import { getBankApi, postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { getBankApi } from '@/api/financial-productsApi';
 import { getCmasApi } from '@/api/cmaApi';
 import { TgetBankApiResponse, TgetCmaResponse } from '@/types/financial-productsTypes';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();
@@ -111,12 +112,17 @@ const WhatToDoPage = () => {
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
+      let apiResult;
       if (isLiked) {
-        await deleteBankBookmarkApi(id);
+        apiResult = await deleteBankBookmarkApi(id);
       } else {
-        await postBankBookmarkApi(id);
+        apiResult = await postBankBookmarkApi(id);
       }
-      setBankDataCma(bankDataCma?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      if (apiResult !== undefined) {
+        setBankDataCma(bankDataCma?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }

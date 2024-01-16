@@ -6,7 +6,7 @@ import Heartdefault from '../../../public/icons/grayheart2.svg';
 import Heartclick from '@/public/icons/clickheart2.svg';
 import SearchFieldForPolicy from '../SearchFieldForPolicy';
 import Default_goldtoriv1 from '@/public/icons/default_goldtoriv1.svg';
-import { getPolicysApi } from '@/api/policylistapi/policylistapi';
+import { getPolicysApi, postPolicyBookmarkApi, deletePolicyBookmarkApi } from '@/api/policylistapi/policylistapi';
 import { getPolicydetailApi } from '@/api/policylistapi/policydetail';
 import Pagination from '@/components/molecules/pagination/Pagination';
 
@@ -47,17 +47,27 @@ export type TPolicyApiResponse = {
 };
 const Policy = () => {
   const [policyData, setPolicyData] = useState<TPolicyResponse[] | undefined>([]);
-  const [heartStates, setHeartStates] = useState<Record<number, boolean>>({});
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
   const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
 
-  const handleHeartClick = (index: number) => {
-    setHeartStates({
-      ...heartStates,
-      [index]: !heartStates[index],
-    });
+  const onHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      let apiResult;
+      if (isLiked) {
+        apiResult = await deletePolicyBookmarkApi(id);
+      } else {
+        apiResult = await postPolicyBookmarkApi(id);
+      }
+      if (apiResult !== undefined) {
+        setPolicyData(policyData?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
+    }
   };
   const handleClick = (policyInfoId: number) => {
     // 클릭한 콘테이너의 policyInfoId 값을 fetchPolicyDetail 함수에 전달합니다.
@@ -124,9 +134,12 @@ const Policy = () => {
               </Link>
               <div
                 className='z-0 w-29 h-29 ml-15 mt-2 tablet:w-[32px] tablet:h-32 tablet:ml-[1px] tablet:mt-8 desktop:w-37 desktop:h-37 desktop:mt-6'
-                onClick={() => handleHeartClick(id)}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onHeartClick(item.id, item.isLiked);
+                }}
               >
-                {heartStates[id] ? <Heartclick /> : <Heartdefault />}
+                {item.isLiked ? <Heartclick /> : <Heartdefault />}
               </div>
             </div>
           </div>

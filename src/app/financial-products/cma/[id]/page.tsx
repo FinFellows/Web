@@ -5,7 +5,7 @@ import CmaGuide from '../../_components/CmaGuide';
 import CmaInfoGuide from '../../_components/CmaInfoGuide';
 import { TgetCmaIdApiResponse } from '@/types/financial-productsTypes';
 import { getCmaIdApi } from '@/api/cmaApi';
-import { postBankBookmarkApi, deleteBankBookmarkApi } from '@/api/financial-productsApi';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [cmaInfo, setCmaInfo] = useState<TgetCmaIdApiResponse | undefined>();
@@ -30,12 +30,17 @@ const Des = ({ params }: { params: { id: number } }) => {
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
+      let apiResult;
       if (isLiked) {
-        await deleteBankBookmarkApi(id);
+        apiResult = await deleteBankBookmarkApi(id);
       } else {
-        await postBankBookmarkApi(id);
+        apiResult = await postBankBookmarkApi(id);
       }
-      setIsLiked(!isLiked);
+      if (apiResult !== undefined) {
+        setIsLiked(!isLiked);
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }

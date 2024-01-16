@@ -5,9 +5,9 @@ import PolicyContent from '@/components/molecules/Policy/PolicyContent';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getPolicydetailApi } from '@/api/policylistapi/policydetail';
-
+import { deletePolicyBookmarkApi, postPolicyBookmarkApi } from '@/api/policylistapi/policylistapi';
 export type TPolicy = {
-  isLiked: Boolean;
+  isLiked: boolean;
   polyBizSjNm: string;
   polyItcnCn: string;
   sporCn: string;
@@ -27,14 +27,15 @@ export type TPolicy = {
   rqutUrla: string;
   pstnPaprCn: string;
 };
-
 const Policy = ({ params }: { params: { id: number } }) => {
   const [policyInfo, setpoliyInfo] = useState<TPolicy | undefined>();
+  const [isLiked, setIsLiked] = useState(false);
   const fetchData = async () => {
     try {
       const data = await getPolicydetailApi(params.id);
       if (data) {
         setpoliyInfo(data);
+        setIsLiked(data.isLiked);
       }
     } catch (error) {
       console.error('Error fetching depositsFetchData:', error);
@@ -45,11 +46,36 @@ const Policy = ({ params }: { params: { id: number } }) => {
     fetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      let apiResult;
+      if (isLiked) {
+        apiResult = await deletePolicyBookmarkApi(id);
+      } else {
+        apiResult = await postPolicyBookmarkApi(id);
+      }
+      if (apiResult !== undefined) {
+        setIsLiked(!isLiked);
+      } else {
+        console.log('로그인 해주세요');
+      }
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
+    }
+  };
   console.log(params.id);
   return (
     <div className='w-auto h-full flex flex-col items-center justify-center desktop:mt-[-70px]'>
       <div>
-        {policyInfo && <PolicyHeadLine polyBizSjNm={policyInfo.polyBizSjNm} polyItcnCn={policyInfo.polyItcnCn} />}
+        {policyInfo && (
+          <PolicyHeadLine
+            polyBizSjNm={policyInfo.polyBizSjNm}
+            polyItcnCn={policyInfo.polyItcnCn}
+            isLiked={isLiked}
+            onHeartClick={() => onHeartClick(params.id, policyInfo.isLiked)}
+          />
+        )}
       </div>
       <div>
         {policyInfo && (

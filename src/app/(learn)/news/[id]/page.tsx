@@ -28,19 +28,24 @@ const News = ({ params }: { params: { id: number } }) => {
 
   const onHeartClick = async (id: number, bookmarked: boolean, contentType: 'NEWS_CONTENT') => {
     try {
+      let apiResult;
       if (bookmarked) {
-        await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
       } else {
-        await postNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await postNewsBookmarkApi(id, 'NEWS_CONTENT');
       }
-      setbookmarked(!bookmarked);
+      if (apiResult !== undefined) {
+        setbookmarked(!bookmarked);
+      } else {
+        console.log('로그인 해주세요');
+      }
     } catch (error) {
       console.error('Error fetching NewsBookmark:', error);
     }
   };
 
   return (
-    <div className='w-auto h-full flex flex-col items-center justify-center mt-[-70px]'>
+    <div className='w-auto h-full flex flex-col items-center justify-center mt-[-10px]'>
       <div className=''>
         {NewsInfo && (
           <NewsHeadLine

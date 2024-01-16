@@ -26,10 +26,10 @@ export const getPolicydetailApi = async (policyInfoId: number): Promise<TPolicy 
   }
 };
 
-export const postPolicyBookmarkApi = async (financial_product_id: number) => {
+export const postPolicyBookmarkApi = async (policyInfoId: number) => {
   const accessToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
-  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${financial_product_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${policyInfoId}`;
 
   try {
     const res = await fetch(url, {
@@ -54,10 +54,10 @@ export const postPolicyBookmarkApi = async (financial_product_id: number) => {
   }
 };
 
-export const deletePolicyBookmarkApi = async (financial_product_id: number) => {
+export const deletePolicyBookmarkApi = async (policyInfoId: number) => {
   const accessToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
-  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${financial_product_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${policyInfoId}`;
 
   try {
     const res = await fetch(url, {

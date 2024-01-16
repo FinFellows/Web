@@ -40,7 +40,7 @@ const PolicyContent: React.FC<TPolicy> = ({
   return (
     <div className='w-342 desktop:w-[855px] tablet:w-[438px]'>
       <div className='mb-39 tablet:mb-59'>
-        <div className='border-2 border-color-border01 rounded pt-80 text w-full dark:bg-[#383838] dark:border-[#383838]'>
+        <div className='border-2 border-border01 rounded pt-80 text w-full dark:bg-[#383838] dark:border-[#383838]'>
           <div className='p-15 mt-[-70px] '>
             <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               정책 요약
@@ -92,7 +92,7 @@ const PolicyContent: React.FC<TPolicy> = ({
             </div>
           </div>
           <div className='p-15 my-10 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:text-28 w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
+            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               신청 자격
             </div>
             <div className='flex pb-10 '>
@@ -186,7 +186,7 @@ const PolicyContent: React.FC<TPolicy> = ({
             </div>
           </div>
           <div className='p-15 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:text-28 w-307 font-bold border-b-[2px] text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
+            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               신청 방법
             </div>
             <div className='flex pt-10'>
