@@ -4,6 +4,7 @@ import StudyToggle from '@/components/atom/toggle/StudyToggle';
 import Setting from '@/components/templates/mypage/setting';
 import Favorites from '@/components/templates/mypage/favorites';
 
+<<<<<<< Updated upstream
 import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
@@ -11,6 +12,8 @@ import Login from '@/components/organisms/modal/Login';
 import Script from 'next/script';
 import useUser from '@/hooks/useUser';
 
+=======
+>>>>>>> Stashed changes
 const Page = () => {
   const [toggle, setToggle] = useState(0);
 
