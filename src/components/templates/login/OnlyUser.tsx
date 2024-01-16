@@ -11,7 +11,7 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 // 로그인이 필요한 페이지에 사용
-export default function WithLoginModal({
+export default function OnlyUser({
   children,
   closeFn,
 }: {
@@ -22,7 +22,6 @@ export default function WithLoginModal({
   const [showModal, setShowModal] = useState(true);
   const pathname = usePathname();
 
-  // 카카오 로그인 띄우기
   const loginFn = () => {
     window.Kakao.Auth.authorize({
       redirectUri: process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY,
