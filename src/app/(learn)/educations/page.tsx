@@ -9,17 +9,22 @@ import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
 import { testApiEditor } from '@/api/testApi';
 
 const Educations: any = () => {
-  const [activeToggle, setActiveToggle] = useState(true);
-
+  const [activeToggle, setActiveToggle] = useState(0); // 초기 값을 0으로 설정
   const handleToggleChange = (toggleId: number) => {
-    setActiveToggle(!!toggleId); // activeToggle 값 업데이트
+    setActiveToggle(toggleId); // activeToggle 값 업데이트
   };
 
   return (
     <div className='w-auto h-full flex items-center justify-center'>
       <div className='flex flex-col items-center justify-center '>
-        <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} />
-        {!activeToggle ? <Education /> : <NewsList />}
+        <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
+        {activeToggle === 0 ? (
+          <div className='flex-flow'>
+            <Education />
+          </div>
+        ) : (
+          <NewsList />
+        )}
         <ManageBtns>
           {/* TODO: 글 작성하는 api 연결 (createFn) */}
           <ContentsCreateBtn createFn={testApiEditor} />
