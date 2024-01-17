@@ -107,7 +107,7 @@ export const deleteEducationBookmarkApi = async (post_id: number, contentType: '
 };
 
 export const postPolicyBookmarkApi = async (policy_info_id: number) => {
-  const url = `https://api.finfellows.co.kr/bookmarks/posts/${policy_info_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${policy_info_id}`;
 
   try {
     const res = await fetch(url, {
