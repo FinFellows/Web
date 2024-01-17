@@ -9,6 +9,8 @@ import { getEducationsData } from '@/api/education/educationApi';
 import Pagination from '@/components/molecules/pagination/Pagination';
 import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/education/educationApi';
 import useUser from '@/hooks/useUser';
+import SlateCompiler from '@/libs/editor/slateCompiler';
+import { user } from '@/class/user';
 
 export type TEducation = {
   id: number;
@@ -46,7 +48,8 @@ export type TEducationsApiResponse = {
   empty: boolean;
 };
 const Education = () => {
-  const { user } = useUser();
+  console.log(user.getAccessToken());
+  const slateCompiler = new SlateCompiler();
   const [EducationData, setEducationData] = useState<TEducation[] | undefined>([]);
 
   //페이지
@@ -121,7 +124,7 @@ const Education = () => {
                 }}
               >
                 <div className='w-[240px] desktop:w-[340px] tablet:w-[290px] text-typoPrimary text-[12px] tablet:text-[14px] desktop:text-[16px] desktop:paragraph-medium dark:text-[#D6D6D6]'>
-                  {truncateText(i.content, 59)}
+                  {/* {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 59)} */}
                 </div>
               </Link>
               <div
