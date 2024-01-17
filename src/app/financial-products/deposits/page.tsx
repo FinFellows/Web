@@ -27,6 +27,8 @@ const WhatToDoPage = () => {
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [sort, setSort] = useState('MAX'); //MAX:최고금리순 DEFAULT:기본금리순
 
+  const [dataNull, setDataNull] = useState(false);
+
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
   const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
@@ -99,9 +101,17 @@ const WhatToDoPage = () => {
         `size=10&page=${pageNum}&interestRateType=${sort}${depValueFilter}${depSel}${amountParam}`,
       );
       if (data) {
-        setBankDataDeposit(data.content);
-        setPageTotalNum(data.totalPages);
-        setTotalElements(data.totalElements);
+        if (data.content.length === 0) {
+          setBankDataDeposit([]);
+          setPageTotalNum(0);
+          setTotalElements(null);
+          setDataNull(true);
+        } else {
+          setBankDataDeposit(data.content);
+          setPageTotalNum(data.totalPages);
+          setTotalElements(data.totalElements);
+          setDataNull(false);
+        }
       }
     } catch (error) {
       console.error('Error fetching bankListFetchData:', error);
@@ -276,44 +286,52 @@ const WhatToDoPage = () => {
         plusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
-      {totalElements && (
-        <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
-          <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
-            {totalElements}개
-          </div>
-          {sort === 'MAX' ? (
-            <button className='flex' onClick={() => setSort('DEFAULT')}>
-              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
-                최고 금리 순
-              </span>
-              <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
-            </button>
-          ) : (
-            <button className='flex' onClick={() => setSort('MAX')}>
-              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
-                기본 금리 순
-              </span>
-              <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
-            </button>
-          )}
+      {dataNull ? (
+        <div className='text-typoSecondary label-medium mt-100 tablet:label-large tablet:mt-130 desktop:label-xl desktop:mt-[300px]'>
+          찾는 내용이 없습니다.
         </div>
+      ) : (
+        <>
+          {totalElements && (
+            <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
+              <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
+                {totalElements}개
+              </div>
+              {sort === 'MAX' ? (
+                <button className='flex' onClick={() => setSort('DEFAULT')}>
+                  <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+                    최고 금리 순
+                  </span>
+                  <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+                </button>
+              ) : (
+                <button className='flex' onClick={() => setSort('MAX')}>
+                  <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+                    기본 금리 순
+                  </span>
+                  <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+                </button>
+              )}
+            </div>
+          )}
+          {bankDataDeposit?.map((data, index) => {
+            return (
+              <DepositSaving
+                key={index}
+                isLiked={data.isLiked}
+                bankLogoUrl={data.bankLogoUrl}
+                productName={data.productName}
+                bankName={data.bankName}
+                maxInterestRate={data.maxInterestRate}
+                interestRate={data.interestRate}
+                onHeartClick={() => onHeartClick(data.id, data.isLiked)}
+                onClick={() => router.push(`/financial-products/deposits/${data.id}`)}
+              />
+            );
+          })}
+          <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />
+        </>
       )}
-      {bankDataDeposit?.map((data, index) => {
-        return (
-          <DepositSaving
-            key={index}
-            isLiked={data.isLiked}
-            bankLogoUrl={data.bankLogoUrl}
-            productName={data.productName}
-            bankName={data.bankName}
-            maxInterestRate={data.maxInterestRate}
-            interestRate={data.interestRate}
-            onHeartClick={() => onHeartClick(data.id, data.isLiked)}
-            onClick={() => router.push(`/financial-products/deposits/${data.id}`)}
-          />
-        );
-      })}
-      <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />
       {isOpen && (
         <BackDrop>
           <MoreBankModal
