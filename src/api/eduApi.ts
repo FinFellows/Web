@@ -1,5 +1,9 @@
 import { user } from '@/class/user';
 
+export const getAllEuesApi = async () => {
+  const apiEndPoint = `https://api.finfellows.co.kr/api/learn/edu`;
+};
+
 export const getEduDetailApi = async (id: number) => {
   const apiEndPoint = `https://api.finfellows.co.kr/api/learn/edu/${id}`;
 
@@ -38,7 +42,7 @@ export const postEduApi = async ({ title, content }: { title: string; content: s
   return res;
 };
 
-export const deleteEducationApi = async (id: number): Promise<Response> => {
+export const deleteEduApi = async (id: number): Promise<Response> => {
   const apiEndPoint = `https://api.finfellows.co.kr/api/learn/edu/${id}`;
 
   const res = await fetch(apiEndPoint, {
