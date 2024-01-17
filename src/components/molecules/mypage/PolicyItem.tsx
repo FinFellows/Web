@@ -4,6 +4,7 @@ import Image from 'next/image';
 import HeartClick from '@/public/icons/heartdefaultclick.svg';
 import Heart from '@/public/icons/heart.svg';
 import Link from 'next/link';
+import EditorRenderer from '@/components/templates/editor/EditorRenderer';
 
 type TPolicyItemProps = {
   img: string;
@@ -14,6 +15,7 @@ type TPolicyItemProps = {
   like: boolean;
   maxInterestRate?: string;
   interestRate?: string;
+  isEditor?: boolean;
   onClick?: () => void;
 };
 
@@ -27,6 +29,7 @@ const PolicyItem = ({
   onClick,
   id,
   link,
+  isEditor,
 }: TPolicyItemProps) => {
   return (
     <div className='hover:border-main transition-all hover:cursor-pointer mb-10 bg-secondary dark:bg-dark-secondary dark:border-dark-border01 w-342 tablet:w-438 desktop:w-855 px-20 py-16 tablet:py-20 tablet:px-19 desktop:px-30 desktop:py-25 flex items-center border-2 rounded-10 border-border01 box-border '>
@@ -53,8 +56,8 @@ const PolicyItem = ({
           >
             <div className='flex flex-col text-primary  dark:text-dark-primary'>
               <h1 className=' label-small tablet:font-15 desktop:label-large mb-[4.92px]  tablet:mb-6'>{name}</h1>
-              <h2 className='h-20 desktop:h-34 paragraph-small tablet:font-15  desktop:paragraph-large overflow-hidden'>
-                {description}
+              <h2 className='h-20 desktop:h-34 paragraph-small tablet:font-15  desktop:paragraph-large overflow-hidden  '>
+                {isEditor ? <EditorRenderer contents={description} /> : description}
               </h2>
             </div>
             <div className='flex items-center'>

@@ -87,6 +87,7 @@ const Educations = () => {
                 id={i.educationInfoId}
                 link={`/educations`}
                 onClick={() => onEduHeartClick(i.educationInfoId)}
+                isEditor={true}
               />
             </ul>
           ))}
@@ -120,6 +121,7 @@ const Educations = () => {
                 id={i.newsContentId}
                 link={`/news`}
                 onClick={() => onEduHeartClick(i.newsContentId)}
+                isEditor={true}
               />
             </ul>
           ))}
