@@ -159,7 +159,7 @@ export const deleteEducationBookmarkApi = async (post_id: number) => {
 };
 
 export const postPolicyBookmarkApi = async (policy_info_id: number) => {
-  const url = `https://api.finfellows.co.kr/bookmarks/posts/${policy_info_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${policy_info_id}`;
 
   try {
     const res = await fetch(url, {
@@ -185,7 +185,7 @@ export const postPolicyBookmarkApi = async (policy_info_id: number) => {
 };
 
 export const deletePolicyBookmarkApi = async (post_id: number) => {
-  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${post_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${post_id}`;
 
   try {
     const res = await fetch(url, {
