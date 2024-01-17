@@ -54,6 +54,7 @@ const Policy = () => {
 
   useEffect(() => {
     fetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNum, searchValue]);
 
   return (
