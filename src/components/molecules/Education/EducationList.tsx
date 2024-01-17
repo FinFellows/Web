@@ -8,6 +8,7 @@ import Clickheart2 from '@/public/icons/clickheart2.svg';
 import { getEducationsData } from '@/api/education/educationApi';
 import Pagination from '@/components/molecules/pagination/Pagination';
 import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/education/educationApi';
+import useUser from '@/hooks/useUser';
 
 export type TEducation = {
   id: number;
@@ -45,6 +46,7 @@ export type TEducationsApiResponse = {
   empty: boolean;
 };
 const Education = () => {
+  const { user } = useUser();
   const [EducationData, setEducationData] = useState<TEducation[] | undefined>([]);
 
   //페이지
@@ -61,25 +63,6 @@ const Education = () => {
     }
   };
 
-  const onHeartClick = async (id: number, bookmarked: boolean) => {
-    try {
-      let apiResult;
-      if (bookmarked) {
-        apiResult = await deleteEducationBookmarkApi(id, 'EDU_CONTENT');
-        console.log('a :  ', bookmarked);
-      } else {
-        apiResult = await postEducationBookmarkApi(id, 'EDU_CONTENT');
-      }
-      if (apiResult !== undefined) {
-        setEducationData(EducationData?.map((item) => (item.id === id ? { ...item, bookmarked: !bookmarked } : item)));
-      } else {
-        console.log('로그인 해주세요');
-      }
-    } catch (error) {
-      console.error('Error fetching bankBookmark:', error);
-    }
-    console.log('b :  ', bookmarked);
-  };
 
   const fetchData = async () => {
     try {
