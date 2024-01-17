@@ -4,51 +4,18 @@ import React, { useEffect, useState } from 'react';
 import Heartdefault from '../../../public/icons/grayheart2.svg';
 import Heartclick from '@/public/icons/clickheart2.svg';
 import Link from 'next/link';
-import { deleteNewsBookmarkApi, getNewsListData, postNewsBookmarkApi } from '@/api/newslistapi/newslistapi';
+
 import Pagination from '@/components/molecules/pagination/Pagination';
 import useUser from '@/hooks/useUser';
+import { getNewsListData } from '@/api/newsApi';
+import { TNews } from '@/types/newsTypes';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
+import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/bookmarkApi';
 
-export type TNews = {
-  id: number;
-  title: string;
-  content: string;
-  bookmarked: boolean;
-  created_at: string;
-  onHeartClick: () => void;
-};
-
-export type TNewsListApiResponse = {
-  content: TNews[];
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    offset: number;
-    paged: boolean;
-    unpaged: boolean;
-  };
-  last: boolean;
-  totalElements: number;
-  totalPages: number;
-  size: number;
-  number: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  first: boolean;
-  numberOfElements: number;
-  empty: boolean;
-};
 const NewsList = () => {
   const { user } = useUser();
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
-
+  const [showModal, setShowModal] = useState(false);
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
   const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
@@ -59,6 +26,7 @@ const NewsList = () => {
       if (data) {
         setPageTotalNum(data.totalPages);
         setNewsListData(data.content);
+        console.log(NewsListData);
       }
     } catch (error) {
       console.error('Error fetching bankListFetchData:', error);
@@ -73,14 +41,14 @@ const NewsList = () => {
     try {
       let apiResult;
       if (bookmarked) {
-        apiResult = await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await deleteEducationBookmarkApi(id, 'NEWS_CONTENT');
       } else {
-        apiResult = await postNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await postEducationBookmarkApi(id, 'NEWS_CONTENT');
       }
       if (apiResult !== undefined) {
         setNewsListData(NewsListData?.map((item) => (item.id === id ? { ...item, bookmarked: !bookmarked } : item)));
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
@@ -89,6 +57,13 @@ const NewsList = () => {
 
   return (
     <div className='desktop:py-39 tablet:py-46 py-20 w-342 tablet:w-[438px] desktop:w-[855px] '>
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}{' '}
       {NewsListData?.map((i, index) => (
         <div
           key={i.id}
