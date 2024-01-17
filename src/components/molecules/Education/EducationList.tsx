@@ -61,16 +61,13 @@ const Education = () => {
     }
   };
 
-  // onHeartClick는 비동기 함수로, 교육 항목의 북마크 상태를 토글하는 역할을 합니다.
   const onHeartClick = async (id: number, bookmarked: boolean) => {
     try {
       let apiResult;
-      // 만약 해당 교육 항목이 이미 북마크되어 있다면,
       if (bookmarked) {
-        // 북마크를 제거하는 API를 호출합니다.
         apiResult = await deleteEducationBookmarkApi(id, 'EDU_CONTENT');
+        console.log('a :  ', bookmarked);
       } else {
-        // 아니라면, 북마크를 추가하는 API를 호출합니다.
         apiResult = await postEducationBookmarkApi(id, 'EDU_CONTENT');
       }
       // API 호출 결과가 정상적으로 반환되었다면,
@@ -85,6 +82,7 @@ const Education = () => {
       // API 호출 중 에러가 발생하면, 콘솔에 에러 메시지를 출력합니다.
       console.error('Error fetching bankBookmark:', error);
     }
+    console.log('b :  ', bookmarked);
   };
 
   // fetchData는 비동기 함수로, 교육 목록 데이터를 API에서 가져오는 역할을 합니다.
@@ -109,7 +107,7 @@ const Education = () => {
   useEffect(() => {
     // 컴포넌트가 렌더링될 때 fetchData 함수를 호출하여 교육 목록 데이터를 가져옵니다.
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps는 ESLint 경고를 무시하는 주석입니다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // 이 경우, useEffect의 의존성 배열에 pageNum만 포함되어 있어, pageNum이 바뀔 때만 fetchData가 호출되도록 설정되어 있습니다.
   }, [pageNum]);
 

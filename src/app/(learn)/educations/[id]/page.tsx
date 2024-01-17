@@ -21,6 +21,7 @@ const Education = ({ params }: { params: { id: number } }) => {
       if (data) {
         setEducationInfo(data);
         setbookmarked(data.bookmarked);
+        console.log('a :  ', data.bookmarked);
       }
     } catch (error) {
       console.error('Error fetching savingFetchData:', error);
@@ -33,8 +34,10 @@ const Education = ({ params }: { params: { id: number } }) => {
     try {
       let apiResult;
       if (bookmarked) {
+        console.log('b :  ', bookmarked);
         apiResult = await deleteEducationBookmarkApi(id, 'EDU_CONTENT');
       } else {
+        console.log('c :  ', bookmarked);
         apiResult = await postEducationBookmarkApi(id, 'EDU_CONTENT');
       }
       if (apiResult !== undefined) {
