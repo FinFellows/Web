@@ -39,8 +39,8 @@ const Des = ({ params }: { params: { id: number } }) => {
     try {
       const data = await getDepositIdCalculateApi(params.id, `amount=${amount}`);
       if (data) {
-        setDefaultCal(data.defaultInterestCalculation.toLocaleString());
-        setMaxCal(data.maxInterestCalculation.toLocaleString());
+        setDefaultCal(Number(data.defaultInterestCalculation).toLocaleString());
+        setMaxCal(Number(data.maxInterestCalculation).toLocaleString());
       }
     } catch (error) {
       console.error('Error fetching depositsFetchData:', error);
