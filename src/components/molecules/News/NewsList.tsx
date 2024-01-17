@@ -100,9 +100,7 @@ const NewsList = () => {
               pathname: `news/${i.id}`,
             }}
           >
-            <div className='bg-[#6C6C6C] w-87 h-full tablet:w-[112px] desktop:w-[167px] border-border-02 rounded-l-[10px]  '>
-              이미지칸
-            </div>
+            <div className='bg-[#6C6C6C] w-87 h-full tablet:w-[112px] desktop:w-[167px] border-border-02 rounded-l-[10px]  '></div>
           </Link>
           <div className='flex justify-evenly '>
             <Link
@@ -116,15 +114,15 @@ const NewsList = () => {
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className='w-150 pb-29 tablet:w-180 tablet:h-[26px] desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
+                  <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
                     {i.content}
                   </div>
-                  <div className='pb-10 pt-5'>{i.created_at}</div>
+                  <div className='pb-10'>{i.created_at}</div>
                 </div>
               </div>
             </Link>
             <p
-              className='z-10 mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
+              className='mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
               onClick={(event) => {
                 event.stopPropagation();
                 onHeartClick(i.id, i.bookmarked);
