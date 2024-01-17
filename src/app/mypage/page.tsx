@@ -6,6 +6,7 @@ import Favorites from '@/components/templates/mypage/favorites';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
 import { useRouter } from 'next/navigation';
 
+
 const Page = () => {
   const router = useRouter();
   const [toggle, setToggle] = useState(0);
