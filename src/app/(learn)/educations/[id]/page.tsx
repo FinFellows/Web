@@ -11,56 +11,28 @@ import { getEducationIdApi } from '@/api/education/educationDetailApi';
 import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/education/educationApi';
 
 import { testApi, testApiEditor } from '@/api/testApi';
+import useEduDetail from '@/hooks/useEduDetail';
+import { patchEduApi } from '@/api/eduApi';
 
 const Education = ({ params }: { params: { id: number } }) => {
-  const [EducationInfo, setEducationInfo] = useState<TEducation | undefined>();
-  const [bookmarked, setbookmarked] = useState(false);
-  const fetchdata = async () => {
-    try {
-      const data = await getEducationIdApi(params.id);
-      if (data) {
-        setEducationInfo(data);
-        setbookmarked(data.bookmarked);
-      }
-    } catch (error) {
-      console.error('Error fetching savingFetchData:', error);
-    }
-  };
-  useEffect(() => {
-    fetchdata();
-  }, []);
-  const onHeartClick = async (id: number, bookmarked: boolean, contentType: 'EDU_CONTENT') => {
-    try {
-      let apiResult;
-      if (bookmarked) {
-        apiResult = await deleteEducationBookmarkApi(id, 'EDU_CONTENT');
-      } else {
-        apiResult = await postEducationBookmarkApi(id, 'EDU_CONTENT');
-      }
-      if (apiResult !== undefined) {
-        setbookmarked(!bookmarked);
-      } else {
-        console.log('로그인 해주세요');
-      }
-    } catch (error) {
-      console.error('Error fetching NewsBookmark:', error);
-    }
-  };
+  const { eduData } = useEduDetail(params.id);
+
+  const onHeartClick = async (id: number, bookmarked: boolean, contentType: 'EDU_CONTENT') => {};
   return (
     <div className='flex items-center justify-center mt-[-70px] '>
       <div className='flex-col flex'>
-        {EducationInfo && (
+        {eduData && (
           <EducationHeadLine
-            title={EducationInfo.title}
-            bookmarked={EducationInfo.bookmarked}
-            onHeartClick={() => onHeartClick(params.id, EducationInfo.bookmarked, 'EDU_CONTENT')}
+            title={eduData.title}
+            bookmarked={eduData.bookmarked}
+            onHeartClick={() => onHeartClick(params.id, eduData.bookmarked, 'EDU_CONTENT')}
           />
         )}
-        {EducationInfo && <EducationContent content={EducationInfo.content} />}
+        {eduData && <EducationContent content={eduData.content} />}
         <ManageBtns>
           {/* TODO: 글 수정/삭제하는 api 연결 (editFn, deleteFn) TODO: title, content 실제 값으로 수정 */}
-          {EducationInfo && (
-            <ContentsEditBtn title={EducationInfo.title} content={EducationInfo.content} editFn={testApiEditor} />
+          {eduData && (
+            <ContentsEditBtn id={eduData.id} title={eduData.title} content={eduData.content} editFn={patchEduApi} />
           )}
           <ContentsDeleteBtn deleteFn={testApi} />
         </ManageBtns>
