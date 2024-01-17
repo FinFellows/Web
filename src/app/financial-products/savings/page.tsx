@@ -19,8 +19,9 @@ import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const [amount, setAmount] = useState(0);
-  const [amountStr, setAmoutStr] = useState('');
+  const [amount, setAmount] = useState<number>(0);
+  const [amountStr, setAmountStr] = useState<string | undefined>('');
+  const [amountParam, setAmountParam] = useState('');
 
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
@@ -61,7 +62,6 @@ const WhatToDoPage = () => {
       sub: [
         { text: '전체', value: '' },
         { text: '1개월', value: '&terms=1' },
-        { text: '3개월', value: '&terms=3' },
         { text: '6개월', value: '&terms=6' },
         { text: '12개월', value: '&terms=12' },
         { text: '24개월', value: '&terms=24' },
@@ -72,7 +72,6 @@ const WhatToDoPage = () => {
       filter: '상품 유형',
       sub: [
         { text: '누구나 가입', value: '&types=누구나 가입' },
-        { text: '방문없이 가입', value: '&types=방문없이 가입' },
         { text: '청년적금', value: '&types=청년적금' },
         { text: '주택청약', value: '&types=주택청약' },
         { text: '자유적금', value: '&types=자유적금' },
@@ -98,7 +97,9 @@ const WhatToDoPage = () => {
 
   const bankListFetchData = async () => {
     try {
-      const data = await getSavingsApi(`size=10&page=${pageNum}&interestRateType=${sort}${savValueFilter}${savSel}`);
+      const data = await getSavingsApi(
+        `size=10&page=${pageNum}&interestRateType=${sort}${savValueFilter}${savSel}${amountParam}`,
+      );
       if (data) {
         setBankDataSaving(data.content);
         setPageTotalNum(data.totalPages);
@@ -112,7 +113,7 @@ const WhatToDoPage = () => {
   useEffect(() => {
     bankListFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNum, sort, savValueFilter, savSel]);
+  }, [pageNum, sort, savValueFilter, savSel, amountParam]);
 
   const DepSelect = () => {
     const queryStringArray = savSelFin.map((bankName) => `&bankNames=${bankName}`);
@@ -150,12 +151,31 @@ const WhatToDoPage = () => {
   };
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
+    let inputValue = event.target.value;
     const regex = /^[0-9\b]+$/;
-    let inputValue = event.target.value.replace(/,/g, '');
-    if (inputValue === '' || regex.test(inputValue)) {
-      inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmoutStr(inputValue);
+    let inputReplace = inputValue.replace(/,/g, '');
+
+    if (inputReplace === '') {
+      setAmount(0);
+      setAmountStr('0');
+    } else if (regex.test(inputReplace)) {
+      setAmount(Number(inputReplace));
+      inputReplace = inputReplace.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      setAmountStr(inputReplace);
+    }
+  };
+
+  const onFocusAmountHandler = () => {
+    if (amountStr === '0') {
+      setAmountStr('');
+    }
+  };
+
+  const onButtonClickHandler = () => {
+    if (amount === 0) {
+      setAmountParam('');
+    } else {
+      setAmountParam('&maxLimit=' + amount);
     }
   };
 
@@ -249,6 +269,8 @@ const WhatToDoPage = () => {
       <Filter
         amount={amountStr}
         onInputAmountHandler={onInputAmountHandler}
+        onFocusAmountHandler={onFocusAmountHandler}
+        onButtonClickHandler={onButtonClickHandler}
         activeFilterIndex={savFilterIndex}
         setActiveFilterIndex={setSavFilterIndex}
         subIsOn={savFilter}

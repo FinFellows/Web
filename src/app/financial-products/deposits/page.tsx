@@ -19,8 +19,9 @@ import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const [amount, setAmount] = useState(0);
-  const [amountStr, setAmoutStr] = useState('');
+  const [amount, setAmount] = useState<number>(0);
+  const [amountStr, setAmountStr] = useState<string | undefined>('');
+  const [amountParam, setAmountParam] = useState('');
 
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
@@ -60,7 +61,6 @@ const WhatToDoPage = () => {
       filter: '기간 및 금액',
       sub: [
         { text: '전체', value: '' },
-        { text: '1개월', value: '&terms=1' },
         { text: '3개월', value: '&terms=3' },
         { text: '6개월', value: '&terms=6' },
         { text: '12개월', value: '&terms=12' },
@@ -95,7 +95,9 @@ const WhatToDoPage = () => {
 
   const bankListFetchData = async () => {
     try {
-      const data = await getDepositsApi(`size=10&page=${pageNum}&interestRateType=${sort}${depValueFilter}${depSel}`);
+      const data = await getDepositsApi(
+        `size=10&page=${pageNum}&interestRateType=${sort}${depValueFilter}${depSel}${amountParam}`,
+      );
       if (data) {
         setBankDataDeposit(data.content);
         setPageTotalNum(data.totalPages);
@@ -109,7 +111,7 @@ const WhatToDoPage = () => {
   useEffect(() => {
     bankListFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNum, sort, depValueFilter, depSel]);
+  }, [pageNum, sort, depValueFilter, depSel, amountParam]);
 
   const DepSelect = () => {
     const queryStringArray = depSelFin.map((bankName) => `&bankNames=${bankName}`);
@@ -147,12 +149,31 @@ const WhatToDoPage = () => {
   };
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
+    let inputValue = event.target.value;
     const regex = /^[0-9\b]+$/;
-    let inputValue = event.target.value.replace(/,/g, '');
-    if (inputValue === '' || regex.test(inputValue)) {
-      inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmoutStr(inputValue);
+    let inputReplace = inputValue.replace(/,/g, '');
+
+    if (inputReplace === '') {
+      setAmount(0);
+      setAmountStr('0');
+    } else if (regex.test(inputReplace)) {
+      setAmount(Number(inputReplace));
+      inputReplace = inputReplace.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      setAmountStr(inputReplace);
+    }
+  };
+
+  const onFocusAmountHandler = () => {
+    if (amountStr === '0') {
+      setAmountStr('');
+    }
+  };
+
+  const onButtonClickHandler = () => {
+    if (amount === 0) {
+      setAmountParam('');
+    } else {
+      setAmountParam('&maxLimit=' + amount);
     }
   };
 
@@ -246,6 +267,8 @@ const WhatToDoPage = () => {
       <Filter
         amount={amountStr}
         onInputAmountHandler={onInputAmountHandler}
+        onFocusAmountHandler={onFocusAmountHandler}
+        onButtonClickHandler={onButtonClickHandler}
         activeFilterIndex={depFilterIndex}
         setActiveFilterIndex={setDepFilterIndex}
         subIsOn={depFilter}
