@@ -112,7 +112,7 @@ const Policy = () => {
               onClick={() => handleClick(item.policyInfoId)}
             >
               <div className='flex-wrap flex w-full rounded-t-lg h-166  tablet:h-212 desktop:h-[208px] bg-mainLevel300 border-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838] '>
-                <h2 className='heading-xl desktop:text-[34px] tablet:text-34 tablet:w-220 desktop:w-230 text-typoTertiary font-bold p-[10px] flex-wrap w-190'>
+                <h2 className='heading-large desktop:text-29 tablet:text-29 tablet:w-260 desktop:w-260 text-typoTertiary font-bold p-[10px] flex-wrap w-200'>
                   {item.policyName}
                 </h2>
                 <div className='absolute h-171 w-171 ml-[180px] mt-[35.5px]  tablet:ml-[230px] tablet:mt-[44.7px] tablet:w-219 tablet:h-219 desktop:ml-[225px] desktop:mt-[44px] desktop:w-215 desktop:h-215'>

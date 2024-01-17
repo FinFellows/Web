@@ -114,7 +114,7 @@ const NewsList = () => {
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className='w-150 pb-29 tablet:w-180 tablet:h-[26px] desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
+                  <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
                     {i.content}
                   </div>
                   <div className='pb-10 pt-5'>{i.created_at}</div>
@@ -122,7 +122,7 @@ const NewsList = () => {
               </div>
             </Link>
             <p
-              className='z-10 mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
+              className='mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
               onClick={(event) => {
                 event.stopPropagation();
                 onHeartClick(i.id, i.bookmarked);
