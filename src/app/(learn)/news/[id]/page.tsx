@@ -5,10 +5,13 @@ import NewsContent from '@/components/molecules/News/NewsContent';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { getNewsIdApi } from '@/api/newsApi';
+import { deleteNewsApi, getNewsIdApi, patchNewsApi } from '@/api/newsApi';
 import { TNews } from '@/types/newsTypes';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
 import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/bookmarkApi';
+import ManageBtns from '@/components/molecules/manage/ManageBtns';
+import ContentsDeleteBtn from '@/components/molecules/manage/ContentsDeleteBtn';
+import ContentsEditBtn from '@/components/molecules/manage/ContentsEditBtn';
 
 const News = ({ params }: { params: { id: number } }) => {
   const [NewsInfo, setNewsInfo] = useState<TNews | undefined>();
@@ -18,7 +21,11 @@ const News = ({ params }: { params: { id: number } }) => {
     try {
       const data = await getNewsIdApi(params.id);
       if (data) {
+        let date = new Date(data.created_at);
+        let dateOnly = date.toISOString().split('T')[0];
+        data.created_at = dateOnly;
         setNewsInfo(data);
+
         setIsLiked(data.bookmarked);
         console.log(isLiked);
       }
@@ -32,7 +39,7 @@ const News = ({ params }: { params: { id: number } }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onHeartClick = async (id: number, bookmarked: boolean, contentType: 'NEWS_CONTENT') => {
+  const onHeartClick = async (id: number, bookmarked: boolean) => {
     try {
       let apiResult;
       if (bookmarked) {
@@ -59,17 +66,23 @@ const News = ({ params }: { params: { id: number } }) => {
           }}
         />
       )}
-      <div className=''>
-        {NewsInfo && (
+
+      {NewsInfo && (
+        <div>
           <NewsHeadLine
             bookmarked={NewsInfo.bookmarked}
             title={NewsInfo.title}
             created_at={NewsInfo.created_at}
-            onHeartClick={() => onHeartClick(params.id, NewsInfo.bookmarked, 'NEWS_CONTENT')}
+            onHeartClick={() => onHeartClick(params.id, NewsInfo.bookmarked)}
           />
-        )}
-      </div>
-      <div>{NewsInfo && <NewsContent content={NewsInfo.content} />}</div>
+
+          <div className='desktop:mb-[-150px] mb-0'>{NewsInfo && <NewsContent content={NewsInfo.content} />}</div>
+          <ManageBtns>
+            <ContentsEditBtn id={NewsInfo.id} title={NewsInfo.title} content={NewsInfo.content} editFn={patchNewsApi} />
+            <ContentsDeleteBtn deleteFn={() => deleteNewsApi(params.id)} />
+          </ManageBtns>
+        </div>
+      )}
     </div>
   );
 };
