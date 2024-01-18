@@ -25,9 +25,7 @@ const News = ({ params }: { params: { id: number } }) => {
         let dateOnly = date.toISOString().split('T')[0];
         data.created_at = dateOnly;
         setNewsInfo(data);
-
         setIsLiked(data.bookmarked);
-        console.log(isLiked);
       }
     } catch (error) {
       console.error('Error fetching savingFetchData:', error);
@@ -39,21 +37,21 @@ const News = ({ params }: { params: { id: number } }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onHeartClick = async (id: number, bookmarked: boolean) => {
+  const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
       let apiResult;
-      if (bookmarked) {
+      if (isLiked) {
         apiResult = await deleteEducationBookmarkApi(id, 'NEWS_CONTENT');
       } else {
         apiResult = await postEducationBookmarkApi(id, 'NEWS_CONTENT');
       }
       if (apiResult !== undefined) {
-        setIsLiked(!bookmarked);
+        setIsLiked(!isLiked);
       } else {
         setShowModal(true);
       }
     } catch (error) {
-      console.error('Error fetching NewsBookmark:', error);
+      console.error('Error fetching bankBookmark:', error);
     }
   };
   return (
@@ -68,10 +66,10 @@ const News = ({ params }: { params: { id: number } }) => {
       {NewsInfo && (
         <div>
           <NewsHeadLine
-            bookmarked={NewsInfo.bookmarked}
             title={NewsInfo.title}
             created_at={NewsInfo.created_at}
-            onHeartClick={() => onHeartClick(params.id, NewsInfo.bookmarked)}
+            bookmarked={isLiked}
+            onHeartClick={() => onHeartClick(params.id, isLiked)}
           />
 
           <div className='desktop:mb-[-150px] mb-0'>{NewsInfo && <NewsContent content={NewsInfo.content} />}</div>

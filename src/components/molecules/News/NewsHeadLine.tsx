@@ -27,8 +27,11 @@ const NewsHeadLine: React.FC<TNewsHeadLineProps> = ({ title, created_at, bookmar
             </div>
           </div>
           <button
-            className='z-5 h-26 w-26 tablet:w-33 tablet:h-33 tablet:mr-10 desktop:mr-25 desktop:w-37 desktop:h-37 '
-            onClick={onHeartClick}
+            className='h-26 w-26 tablet:w-33 tablet:h-33 tablet:mr-10 desktop:mr-25 desktop:w-37 desktop:h-37 '
+            onClick={(event) => {
+              event.stopPropagation();
+              onHeartClick();
+            }}
           >
             {bookmarked ? <Heartclick /> : <Heartdefault />}
           </button>

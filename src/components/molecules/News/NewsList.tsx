@@ -16,7 +16,8 @@ import ContentsCreateBtn from '../manage/ContentsCreateBtn';
 import ManageBtns from '../manage/ManageBtns';
 import EditorRenderer from '@/components/templates/editor/EditorRenderer';
 import { useRouter } from 'next/navigation';
-
+import Image from 'next/image';
+import NewsImage from '@/public/icons/newsthumbnail/Untitled.jpeg';
 const NewsList = () => {
   const { user } = useUser();
   const router = useRouter();
@@ -79,14 +80,22 @@ const NewsList = () => {
             className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838]'
             onClick={() => router.push(`/news/${i.id}`)}
           >
-            <div className='bg-[#6C6C6C] w-87 tablet:w-[112px] desktop:w-[167px] border-border-02 rounded-l-[10px] '></div>
+            <div className=' border-border-02 rounded-l-[10px] '>
+              <Image
+                src={NewsImage}
+                width='500'
+                height='500'
+                className='w-87 tablet:w-[112px] desktop:w-[167px] h-full'
+                alt={'뉴스썸네일'}
+              />
+            </div>
             <div className='flex justify-between items-center'>
               <div className='flex-col bg-secondary px-12 w-[210px] tablet:w-[300px] desktop:w-[630px] dark:bg-[#343434]'>
                 <h2 className='heading-small tablet:heading-medium desktop:heading-xl font-bold mt-[5px] pb-14 dark:text-[#D6D6D6]'>
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
+                  <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-578 overflow-hidden text-ellipsis whitespace-nowrap'>
                     <EditorRenderer contents={i.content} />
                   </div>
                   <div className='pb-10 text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>

@@ -59,7 +59,7 @@ const PolicyContent: React.FC<TPolicyProps> = ({
   const POLICY_DATA3 = [
     { title: '신청 절차', content: rqutProcCn },
     { title: '심사 및 발표', content: jdgnPresCn },
-    { title: '신청 사이트', content: <a href={rqutUrla}>{rqutUrla}</a> },
+    { title: '신청 사이트', content: rqutUrla },
     { title: '제출 서류', content: pstnPaprCn },
   ];
 
