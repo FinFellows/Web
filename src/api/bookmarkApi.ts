@@ -161,7 +161,7 @@ export const deletePolicyBookmarkApi = async (post_id: number) => {
 };
 
 export const postCmaBookmarkApi = async (cma_id: number) => {
-  const url = `https://api.finfellows.co.kr/bookmarks/posts/${cma_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/cma/${cma_id}`;
 
   try {
     const res = await fetch(url, {
@@ -187,7 +187,7 @@ export const postCmaBookmarkApi = async (cma_id: number) => {
 };
 
 export const deleteCmaBookmarkApi = async (cma_id: number) => {
-  const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${cma_id}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/cma/${cma_id}`;
 
   try {
     const res = await fetch(url, {
