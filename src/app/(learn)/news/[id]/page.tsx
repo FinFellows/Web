@@ -56,7 +56,6 @@ const News = ({ params }: { params: { id: number } }) => {
       console.error('Error fetching NewsBookmark:', error);
     }
   };
-
   return (
     <div className='w-auto h-full flex flex-col items-center justify-center mt-[-10px]'>
       {showModal && (
@@ -66,7 +65,6 @@ const News = ({ params }: { params: { id: number } }) => {
           }}
         />
       )}
-
       {NewsInfo && (
         <div>
           <NewsHeadLine

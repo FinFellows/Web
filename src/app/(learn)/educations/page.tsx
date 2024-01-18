@@ -8,7 +8,7 @@ import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
 import { testApiEditor } from '@/api/testApi';
 import useUser from '@/hooks/useUser';
-import { postEduApi } from '@/api/eduApi';
+import { postNewsApi } from '@/api/newsApi';
 
 const Educations: any = () => {
   const [activeToggle, setActiveToggle] = useState(0); // 초기 값을 0으로 설정
@@ -27,10 +27,12 @@ const Educations: any = () => {
         ) : (
           <NewsList />
         )}
-        <ManageBtns>
-          {/* TODO: 글 작성하는 api 연결 (createFn) */}
-          <ContentsCreateBtn createFn={postEduApi} />
-        </ManageBtns>
+        <div className=''>
+          <ManageBtns>
+            {/* TODO: 글 작성하는 api 연결 (createFn) */}
+            <ContentsCreateBtn createFn={postNewsApi} />
+          </ManageBtns>
+        </div>
       </div>
     </div>
   );
