@@ -15,9 +15,11 @@ import { postNoticeApi } from '@/api/noticeApi';
 import ContentsCreateBtn from '../manage/ContentsCreateBtn';
 import ManageBtns from '../manage/ManageBtns';
 import EditorRenderer from '@/components/templates/editor/EditorRenderer';
+import SlateCompiler from '@/libs/editor/slateCompiler';
+import truncateText from '@/utils/truncateText';
 
 const NewsList = () => {
-  const { user } = useUser();
+  const slateCompiler = new SlateCompiler();
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
   const [showModal, setShowModal] = useState(false);
   //페이지
@@ -85,9 +87,8 @@ const NewsList = () => {
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className=' tablet:h-26 desktop:h-29 overflow-hidden text-ellipsis whitespace-nowrap'>
-                    <EditorRenderer contents={i.content} />
-                  </div>
+                  {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 50)}
+
                   <div className='pb-10'>{dateOnly}</div>
                 </div>
               </div>
