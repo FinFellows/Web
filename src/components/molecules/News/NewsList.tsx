@@ -69,7 +69,7 @@ const NewsList = () => {
             setShowModal(false);
           }}
         />
-      )}{' '}
+      )}
       {NewsListData?.map((i, index) => {
         let date = new Date(i.created_at);
         let dateOnly = date.toISOString().split('T')[0];
@@ -87,7 +87,7 @@ const NewsList = () => {
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  {/* {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 50)} */}
+                  {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 50)}
 
                   <div className='pb-10'>{dateOnly}</div>
                 </div>
