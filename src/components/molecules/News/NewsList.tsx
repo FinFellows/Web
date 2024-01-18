@@ -69,7 +69,7 @@ const NewsList = () => {
             setShowModal(false);
           }}
         />
-      )}{' '}
+      )}
       {NewsListData?.map((i, index) => {
         let date = new Date(i.created_at);
         let dateOnly = date.toISOString().split('T')[0];
