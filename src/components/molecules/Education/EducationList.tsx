@@ -10,6 +10,7 @@ import Pagination from '@/components/molecules/pagination/Pagination';
 import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/bookmarkApi';
 import SlateCompiler from '@/libs/editor/slateCompiler';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
+import truncateText from '@/utils/truncateText';
 
 export type TEducation = {
   id: number;
@@ -56,16 +57,6 @@ const Education = () => {
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
   const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
-
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) {
-      return text;
-    } else {
-      let truncatedText = text.slice(0, maxLength) + '...';
-      let modifiedText = truncatedText.slice(0, 29) + '\n' + truncatedText.slice(29);
-      return modifiedText;
-    }
-  };
 
   const fetchData = async () => {
     try {
