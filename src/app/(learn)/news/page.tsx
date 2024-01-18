@@ -22,10 +22,6 @@ const LearnWithUs: any = () => {
       ) : (
         <NewsList />
       )}
-      <ManageBtns>
-        {/* TODO: 글 작성하는 api 연결 (createFn) */}
-        <ContentsCreateBtn createFn={postNewsApi} />
-      </ManageBtns>
     </div>
   );
 };

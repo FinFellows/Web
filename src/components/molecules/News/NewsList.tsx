@@ -80,12 +80,12 @@ const NewsList = () => {
             className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838]'
             onClick={() => router.push(`/news/${i.id}`)}
           >
-            <div className=' border-border-02 rounded-l-[10px] '>
+            <div className=' border-border-02  '>
               <Image
                 src={NewsImage}
                 width='500'
                 height='500'
-                className='w-87 tablet:w-[112px] desktop:w-[167px] h-full'
+                className='w-87 tablet:w-[112px] desktop:w-[167px] h-full rounded-l-[10px]'
                 alt={'뉴스썸네일'}
               />
             </div>
@@ -95,7 +95,7 @@ const NewsList = () => {
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-578 overflow-hidden text-ellipsis whitespace-nowrap'>
+                  <div className='w-150 tablet:w-180 h-25 tablet:h-26 desktop:h-29 desktop:w-578 overflow-hidden text-ellipsis whitespace-nowrap'>
                     <EditorRenderer contents={i.content} />
                   </div>
                   <div className='pb-10 text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
