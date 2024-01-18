@@ -59,6 +59,8 @@ class SlateCompiler {
         return `<p><hr/>${children}</p>`;
       case 'code-block':
         return this.highlightCodeBlock(node);
+      case 'image':
+        return `<img src="${node.url}" alt="${'이미지'}"/>`;
 
       case 'link':
         return `<a href="${escapeHtml(node.url)}">${children}</a>`;
@@ -75,6 +77,9 @@ class SlateCompiler {
   toPlainTextChild(node: CustomElement | CustomText): string {
     if (Text.isText(node)) {
       return node.text;
+    }
+    if (!node.children?.length) {
+      return '';
     }
 
     return node.children.map((n) => this.toPlainTextChild(n)).join(' ');

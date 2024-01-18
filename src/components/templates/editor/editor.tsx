@@ -63,6 +63,7 @@ export default function Editor({
       return;
     }
 
+    // const content = JSON.stringify(editorValue);
     const content = JSON.stringify(editorValue);
 
     console.log('title', title);
