@@ -75,7 +75,7 @@ const Policy = () => {
         {policyData?.map((item, index) => (
           <div
             key={index}
-            className='w-342 tablet:w-full desktop:w-430'
+            className='w-342 tablet:w-full desktop:w-430 cursor-pointer'
             onClick={() => router.push(`/policies/${item.policyInfoId}`)}
           >
             <div className='flex justify-between rounded-t-lg h-166 tablet:h-212 desktop:h-208 bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838]'>
