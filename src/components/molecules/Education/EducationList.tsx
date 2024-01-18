@@ -49,7 +49,6 @@ export type TEducationsApiResponse = {
   empty: boolean;
 };
 const Education = () => {
-  console.log(user.getAccessToken());
   const slateCompiler = new SlateCompiler();
   const [EducationData, setEducationData] = useState<TEducation[] | undefined>([]);
 
@@ -72,12 +71,15 @@ const Education = () => {
       const data = await getEducationsData(`size=8&page=${pageNum}`);
       if (data) {
         setPageTotalNum(data.totalPages);
-
         setEducationData(data.content);
       }
     } catch (error) {
       console.error('Error fetching bankListFetchData:', error);
     }
+  };
+
+  const onHeartClick = (id: number, bookmarked: boolean) => {
+    // TODO: 북마크 api 연결 @이가은
   };
 
   useEffect(() => {
@@ -107,26 +109,25 @@ const Education = () => {
                 </div>
               </div>
             </Link>
-            <div className='flex bg-[#CDE7DA] h-[71px] tablet:h-79 desktop:h-92 p-10 pt-[25px] gap-[25px] dark:bg-[#343434] '>
+            <div className='flex py-20 px-8 bg-[#CDE7DA] h-[71px] tablet:h-79 desktop:h-92 p-10 pt-[25px] gap-[25px] dark:bg-[#343434] overflow-hidden'>
               <Link
                 key={i.id}
                 href={{
                   pathname: `/education/${i.id}`,
                 }}
               >
-                <div className='w-[240px] desktop:w-[340px] tablet:w-[290px] text-typoPrimary text-[12px] tablet:text-[14px] desktop:text-[16px] desktop:paragraph-medium dark:text-[#D6D6D6]'>
-                  {/* {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 59)} */}
+                <div className='text-typoPrimary text-12 tablet:text-14 desktop:text-16 desktop:paragraph-medium dark:text-[#D6D6D6]'>
+                  {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 50)}
                 </div>
               </Link>
-              <div
-                className='h-29 w-29 tablet:h-32 tablet:w-32 desktop:h-37 desktop:w-37'
+              <button
                 onClick={(event) => {
                   event.stopPropagation();
-                  // onHeartClick(i.id, i.bookmarked);
+                  onHeartClick(i.id, i.bookmarked);
                 }}
               >
                 {i.bookmarked ? <Clickheart2 /> : <Heartdefault />}
-              </div>
+              </button>
             </div>
           </div>
         ))}

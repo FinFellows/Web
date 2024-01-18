@@ -12,13 +12,7 @@ const LearnWithUs: any = () => {
   return (
     <div className='w-auto h-full flex flex-col items-center justify-center'>
       <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
-      {activeToggle === 0 ? (
-        <div className='flex-flow'>
-          <Education />
-        </div>
-      ) : (
-        <NewsList />
-      )}
+      {activeToggle === 0 ? <Education /> : <NewsList />}
     </div>
   );
 };

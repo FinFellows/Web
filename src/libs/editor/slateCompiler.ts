@@ -68,9 +68,17 @@ class SlateCompiler {
     }
   }
 
-  // toPlainText(node: Descendant[]) {
-  //   return node.map((n) => Node.string(n)).join('\n');
-  // }
+  toPlainText(node: Descendant[]) {
+    return node.map((n) => this.toPlainTextChild(n)).join(' ');
+  }
+
+  toPlainTextChild(node: CustomElement | CustomText): string {
+    if (Text.isText(node)) {
+      return node.text;
+    }
+
+    return node.children.map((n) => this.toPlainTextChild(n)).join(' ');
+  }
 }
 
 export default SlateCompiler;
