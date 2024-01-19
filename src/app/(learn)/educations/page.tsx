@@ -5,6 +5,7 @@ import NewsList from '@/components/molecules/News/NewsList';
 import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
+
 import { postEduApi } from '@/api/eduApi';
 
 const Educations: any = () => {

@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Education from '../../../components/molecules/Education/EducationList';
 import NewsList from '../../../components/molecules/News/NewsList';
 import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
+import ManageBtns from '@/components/molecules/manage/ManageBtns';
+import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
+import { postNewsApi } from '@/api/newsApi';
 const LearnWithUs: any = () => {
   const [activeToggle, setActiveToggle] = useState(1); // 초기 값을 0으로 설정
   const handleToggleChange = (toggleId: number) => {
