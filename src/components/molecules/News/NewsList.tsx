@@ -15,12 +15,11 @@ import { postNoticeApi } from '@/api/noticeApi';
 import ContentsCreateBtn from '../manage/ContentsCreateBtn';
 import ManageBtns from '../manage/ManageBtns';
 import EditorRenderer from '@/components/templates/editor/EditorRenderer';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import NewsImage from '@/public/icons/newsthumbnail/Untitled.jpeg';
+import SlateCompiler from '@/libs/editor/slateCompiler';
+import truncateText from '@/utils/truncateText';
+
 const NewsList = () => {
-  const { user } = useUser();
-  const router = useRouter();
+  const slateCompiler = new SlateCompiler();
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
   const [showModal, setShowModal] = useState(false);
   //페이지
@@ -70,51 +69,40 @@ const NewsList = () => {
             setShowModal(false);
           }}
         />
-      )}{' '}
-      {NewsListData?.map((i) => {
+      )}
+      {NewsListData?.map((i, index) => {
         let date = new Date(i.created_at);
         let dateOnly = date.toISOString().split('T')[0];
         return (
-          <div
-            key={i.id}
-            className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838]'
-            onClick={() => router.push(`/news/${i.id}`)}
+          <Link
+            key={index}
+            href={{
+              pathname: `news/${i.id}`,
+            }}
+            className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838] cursor-pointer'
           >
-            <div className=' border-border-02  '>
-              <Image
-                src={NewsImage}
-                width='500'
-                height='500'
-                className='w-87 tablet:w-[112px] desktop:w-[167px] h-full rounded-l-[10px]'
-                alt={'뉴스썸네일'}
-              />
-            </div>
-            <div className='flex justify-between items-center'>
-              <div className='flex-col bg-secondary px-12 w-[210px] tablet:w-[300px] desktop:w-[630px] dark:bg-[#343434]'>
+            <div className='flex justify-between w-full px-20 py-10'>
+              <div className='flex-col bg-secondary px-12  dark:bg-[#343434]'>
                 <h2 className='heading-small tablet:heading-medium desktop:heading-xl font-bold mt-[5px] pb-14 dark:text-[#D6D6D6]'>
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                  <div className='w-150 tablet:w-180 h-25 tablet:h-26 desktop:h-29 desktop:w-578 overflow-hidden text-ellipsis whitespace-nowrap'>
-                    <EditorRenderer contents={i.content} />
-                  </div>
-                  <div className='pb-10 text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                    {dateOnly}
-                  </div>
+                  {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 50)}
+
+                  <div className='pb-10'>{dateOnly}</div>
                 </div>
               </div>
-
-              <p
-                className='h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] desktop:h-37'
+              <button
+                className='mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
                 onClick={(event) => {
                   event.stopPropagation();
                   onHeartClick(i.id, i.bookmarked);
                 }}
               >
                 {i.bookmarked ? <Heartclick /> : <Heartdefault />}
-              </p>
+              </button>
             </div>
-          </div>
+          </Link>
         );
       })}
       <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />

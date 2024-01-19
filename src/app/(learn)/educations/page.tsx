@@ -1,14 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Education from '@/components/molecules/Education/EducationList';
 import NewsList from '@/components/molecules/News/NewsList';
 import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
-import { testApiEditor } from '@/api/testApi';
-import useUser from '@/hooks/useUser';
-import { postNewsApi } from '@/api/newsApi';
+
 import { postEduApi } from '@/api/eduApi';
 
 const Educations: any = () => {
