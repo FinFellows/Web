@@ -24,11 +24,11 @@ const EducationHeadLine: React.FC<TEducationHeadLineProps> = ({ title, bookmarke
             onHeartClick();
           }}
         >
-          {bookmarked ? (
+          {/* {bookmarked ? (
             <Heartclick className='w-25 h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
           ) : (
             <Heartdefault className='w-25 h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
-          )}
+          )} */}
         </button>
       </div>
     </div>
