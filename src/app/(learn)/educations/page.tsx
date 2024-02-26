@@ -16,7 +16,7 @@ const Educations: any = () => {
 
   return (
     <div className='w-auto h-full flex items-center justify-center'>
-      <div className='flex flex-col items-center justify-center '>
+      <div className='flex flex-col items-center justify-center'>
         <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
         {activeToggle === 0 ? <Education /> : <NewsList />}
         <ManageBtns>
