@@ -24,11 +24,17 @@ export default function WithLoginModal({
 
   // 카카오 로그인 띄우기
   const loginFn = () => {
-    const redirectUri =
-      process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY;
+    // const redirectUri =
+    //   process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY;
+    const redirectUri = 'https://api.finfellows.co.kr/oauth2/authorization/kakao';
     console.log(redirectUri);
-    window.Kakao.Auth.authorize({ redirectUri });
+    window.location.href = redirectUri;
   };
+
+  // const loginFn = () => {
+  //   const redirectUri = 'https://api.finfellows.co.kr/oauth2/authorization/kakao';
+  //   window.location.href = redirectUri;x
+  // };
 
   const handleClose = () => {
     setShowModal(false);
@@ -51,12 +57,7 @@ export default function WithLoginModal({
             <Login loginFn={loginFn} closeFn={handleClose} />
           </ModalView>
         </BackDrop>
-        <Script
-          src='https://developers.kakao.com/sdk/js/kakao.js'
-          onLoad={() => {
-            window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
-          }}
-        />
+        <Script src='https://api.finfellows.co.kr/oauth2/authorization/kakao' />
       </>
     );
   }

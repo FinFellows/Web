@@ -7,37 +7,35 @@ class User {
   private _isAdmin: boolean;
 
   constructor() {
-    this._accessToken = Cookies.get('accessToken') || null;
-    this._refreshToken = Cookies.get('refreshToken') || null;
+    this._accessToken = Cookies.get('Authorization') || null;
+    this._refreshToken = Cookies.get('Refresh_Token') || null;
     this._isAdmin = false;
   }
-
   getAccessToken() {
-    // return this._accessToken;
-    return GOD_TOKEN;
+    return this._accessToken ? this._accessToken.replace('Bearer_', '') : null;
+  }
+
+  getRefreshToken() {
+    return this._refreshToken ? this._refreshToken.replace('Bearer_', '') : null;
   }
 
   setAccessToken(newAccessToken: string) {
-    Cookies.set('accessToken', newAccessToken);
+    Cookies.set('Authorization', newAccessToken);
     this._accessToken = newAccessToken;
   }
 
   deleteAccessToken() {
-    Cookies.remove('accessToken');
+    Cookies.remove('Authorization');
     this._accessToken = null;
   }
 
-  getRefreshToken() {
-    return this._refreshToken;
-  }
-
   setRefreshToken(newRefreshToken: string) {
-    Cookies.set('refreshToken', newRefreshToken);
+    Cookies.set('Refresh_Token', newRefreshToken);
     this._refreshToken = newRefreshToken;
   }
 
   deleteRefreshToken() {
-    Cookies.remove('refreshToken');
+    Cookies.remove('Refresh_Token');
     this._refreshToken = null;
   }
 
