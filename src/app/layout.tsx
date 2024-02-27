@@ -41,7 +41,7 @@ const GA_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning lang='ko'>
+    <html lang='ko'>
       <Head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
         <script
@@ -60,21 +60,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Head>
       {/* h-full -> scroll to top */}
       <body className='h-full bg-bg dark:bg-dark-bg'>
-        {' '}
-        <QueryProvider>
-          {' '}
-          <NextThemeProvider>
+        <NextThemeProvider>
+          <QueryProvider>
             <Header />
             <main className='mt-100 tablet:mt-110 desktop:mt-200 min-h-screen px-24 tablet:px-0 box-border'>
               {children}
             </main>
             <Chatbot />
-            <footer className='relative  w-full mt-200'>
+            <footer className='relative w-screen  mt-200'>
               <Footer />
             </footer>
-            <Chatbot />{' '}
-          </NextThemeProvider>
-        </QueryProvider>{' '}
+            <Chatbot />
+          </QueryProvider>
+        </NextThemeProvider>
       </body>
     </html>
   );
